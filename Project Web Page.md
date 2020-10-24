@@ -1,4 +1,4 @@
-Project Web Page (under development)
+Project Web Page (Under Development)
 
 Link: http://scoin.site/express/
 
