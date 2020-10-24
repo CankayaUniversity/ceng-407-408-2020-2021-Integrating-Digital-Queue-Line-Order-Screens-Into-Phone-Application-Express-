@@ -1,3 +1,3 @@
-Project Work Plan
+Project Work Plan (Updated)
 
-![Alt text](https://user-images.githubusercontent.com/49036494/97014544-24df1280-1553-11eb-9a35-e49ba2679d6a.png)
+![Project Work Plan 2](https://user-images.githubusercontent.com/49036494/97088509-ee2ff780-1639-11eb-80d1-03035e0997d1.png)
