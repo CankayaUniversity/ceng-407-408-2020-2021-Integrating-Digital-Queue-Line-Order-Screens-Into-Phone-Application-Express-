@@ -1,4 +1,4 @@
-Project Web Page (Updated).
+Project Web Page (Updated 02.11.2020).
 
 Link: http://scoin.site/express/
 
