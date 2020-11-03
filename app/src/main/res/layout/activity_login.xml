@@ -44,18 +44,6 @@
         app:layout_constraintVertical_bias="0.831" />
 
     <ImageView
-        android:id="@+id/imageView_toRegister"
-        android:layout_width="37dp"
-        android:layout_height="45dp"
-        android:tint="#B4C22121"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89"
-        app:srcCompat="@drawable/ic_arrow_right_alt_24px" />
-
-    <ImageView
         android:id="@+id/imageView_Copyright"
         android:layout_width="36dp"
         android:layout_height="30dp"
@@ -71,10 +59,11 @@
         android:id="@+id/textView_Label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fooder™"
+        android:text="Express™"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977" />
@@ -84,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember Me"
-        android:textColor="#B4C22121"
+        android:textColor="#4287f5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.346"
@@ -107,13 +96,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="161dp"
-        android:layout_height="153dp"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:background="@drawable/picture2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027"
-        app:srcCompat="@drawable/foodertrans" />
+        app:layout_constraintVertical_bias="0.027" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,9 @@
-package com.example.fooder;
+package com.demoversion.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.widget.ImageView;
 
 public class Splash_Activity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.fooder;
+package com.demoversion.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +37,8 @@ public class QR_Activity extends AppCompatActivity implements ZXingScannerView.R
                 .withPermission(Manifest.permission.CAMERA)
                 .withListener(new PermissionListener() {
                     @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                    public void onPermissionGranted(PermissionGrantedResponse response)
+                    {
                         scannerView.setResultHandler(QR_Activity.this);
                         scannerView.startCamera();
                     }
@@ -68,6 +69,7 @@ public class QR_Activity extends AppCompatActivity implements ZXingScannerView.R
     public void handleResult(Result rawResult)
     {
            txtResult.setText(rawResult.getText());
+           Toast.makeText(this, "Selected Restaurant:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
            scannerView.resumeCameraPreview(this);
            // scannerView.startCamera(); can be added for prevent frozen after QR scan
     }

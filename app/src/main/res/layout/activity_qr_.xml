@@ -18,10 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#B4C22121"
+        android:background="#4287f5"
         android:orientation="vertical"
         android:padding="8dp">
-
 
         <TextView
             android:id="@+id/txt_result"
@@ -29,8 +28,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="24dp"></TextView>
+            android:textColor="@android:color/white"
+            android:textSize="24sp">
+        </TextView>
     </LinearLayout>
 
     </RelativeLayout>

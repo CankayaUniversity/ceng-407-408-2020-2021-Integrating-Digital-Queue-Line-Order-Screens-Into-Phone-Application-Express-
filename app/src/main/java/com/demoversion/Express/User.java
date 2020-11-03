@@ -1,4 +1,4 @@
-package com.example.fooder;
+package com.demoversion.Express;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class User implements Serializable
     private String RegisterPassword;
     private String RegisterPhone;
 
-    User() // DEFAULT CONSTRUCTOR
+    User() // DEFAULT CONSTRUCTOR REQUIRED FOR DATABASES
     {
         // LOGIN
         this.LoginName = "invalid";

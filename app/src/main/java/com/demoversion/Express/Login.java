@@ -1,15 +1,15 @@
-package com.example.fooder;
+package com.demoversion.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -23,6 +23,7 @@ public class Login extends AppCompatActivity
     EditText editText_LoginPassword;
     ImageView imageView_Login;
     ImageView imageView_toRegister;
+    TextView textView4;
 
 
     @Override
@@ -36,8 +37,8 @@ public class Login extends AppCompatActivity
         final EditText editText_LoginName = findViewById(R.id.editText_LoginName);
         editText_LoginPassword = (EditText) findViewById(R.id.editText_LoginPassword);
         imageView_Login = findViewById(R.id.imageView_Login);
-        imageView_toRegister = (ImageView) findViewById(R.id.imageView_toRegister);
         checkBox_RememberMe = findViewById(R.id.checkBox_RememberMe);
+        textView4 = findViewById(R.id.textView4);
 
 
          // IF USER HAVE AN ALREADY ACCOUNT & WANT TO LOGIN UNTIL DATABASE INTEGRATION
@@ -73,7 +74,7 @@ public class Login extends AppCompatActivity
 
 
         // IF USER PRESS TO_REGISTER ARROW
-        imageView_toRegister.setOnClickListener(new View.OnClickListener()
+        textView4.setOnClickListener(new View.OnClickListener()
         {
            @Override
            public void onClick(View v)
