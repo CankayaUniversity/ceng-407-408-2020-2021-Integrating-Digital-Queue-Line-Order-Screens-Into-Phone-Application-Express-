@@ -1,4 +1,4 @@
-Project Web Page (Updated 02.11.2020).
+Project Web Page (Updated 10.11.2020).
 
 Link: http://scoin.site
 
