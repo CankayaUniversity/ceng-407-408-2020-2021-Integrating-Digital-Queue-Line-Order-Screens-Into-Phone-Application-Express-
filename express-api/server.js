@@ -1,10 +1,18 @@
 const express = require('express');
 
 
+// Route files
+const restaurants = require('./routes/restaurants')
+
+
 const app = express();
 
 // Body parser
 app.use(express.json());
+
+
+
+app.use('/api/v1/restaurant', restaurants);
 
 
 app.use('/api/v1/project-info', (req, res, next) => {
