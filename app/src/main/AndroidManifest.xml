@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demoversion.Express">
+    package="com.prototype.Express">
     <!-- CAMERA PERMISSION FOR QR -->
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -14,12 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.demoversion.Express.Login"></activity>
-        <activity android:name="com.demoversion.Express.Register" />
-        <activity android:name="com.demoversion.Express.MainActivity"/>
-        <activity android:name="com.demoversion.Express.Profile_Activity" />
-        <activity android:name="com.demoversion.Express.QR_Activity" />
-        <activity android:name="com.demoversion.Express.Splash_Activity">
+        <activity android:name="com.prototype.Express.Login"></activity>
+        <activity android:name="com.prototype.Express.Register" />
+        <activity android:name="com.prototype.Express.MainActivity"/>
+        <activity android:name="com.prototype.Express.Profile_Activity" />
+        <activity android:name="com.prototype.Express.QR_Activity" />
+        <activity android:name="com.prototype.Express.Splash_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

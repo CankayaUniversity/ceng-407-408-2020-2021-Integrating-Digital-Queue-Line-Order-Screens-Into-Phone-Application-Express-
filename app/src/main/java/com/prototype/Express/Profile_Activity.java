@@ -1,9 +1,8 @@
-package com.demoversion.Express;
+package com.prototype.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class Profile_Activity extends AppCompatActivity
 {
