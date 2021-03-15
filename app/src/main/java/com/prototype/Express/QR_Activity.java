@@ -69,7 +69,7 @@ public class QR_Activity extends AppCompatActivity implements ZXingScannerView.R
     public void handleResult(Result rawResult)
     {
         txtResult.setText(rawResult.getText());
-        Toast.makeText(this, "Selected Restaurant:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected Restaurant is:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
         scannerView.resumeCameraPreview(this);
         // scannerView.startCamera(); can be added for prevent frozen after QR scan
     }
