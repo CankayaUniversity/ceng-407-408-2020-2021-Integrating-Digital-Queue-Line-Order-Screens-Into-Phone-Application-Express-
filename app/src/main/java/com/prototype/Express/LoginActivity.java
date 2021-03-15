@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Login extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
 {
     // GLOBAL VARIABLES
     String LoginName;
@@ -57,12 +57,12 @@ public class Login extends AppCompatActivity
 
                 if(TextUtils.isEmpty(editText_LoginName.getText().toString().trim()))
                 {
-                    Toast.makeText(Login.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
                 }
 
                 else if(TextUtils.isEmpty(editText_LoginPassword.getText().toString().trim()))
                 {
-                    Toast.makeText(Login.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
                 }
 
                 else
@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity
     // TO_REGISTER ARROW INTENT
     public void openActivity_Register()
     {
-        Intent intent4 = new Intent(this, Register.class);
+        Intent intent4 = new Intent(this, RegisterActivity.class);
         startActivity(intent4);
     }
 

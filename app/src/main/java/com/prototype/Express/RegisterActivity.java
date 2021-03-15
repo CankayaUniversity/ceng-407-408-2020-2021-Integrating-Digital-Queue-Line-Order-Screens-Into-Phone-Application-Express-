@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 
-public class Register extends AppCompatActivity
+public class RegisterActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,50 +80,50 @@ public class Register extends AppCompatActivity
                     //CHECK REGISTER FIELDS
                     if(TextUtils.isEmpty(editText_RegisterName.getText().toString()))
                     {
-                        Toast.makeText(Register.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
 
                     else if(TextUtils.isEmpty(editText_RegisterUserName.getText().toString()))
                     {
-                        Toast.makeText(Register.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
 
                     else if (TextUtils.isEmpty(editText_RegisterEmail.getText().toString()))
                     {
-                        Toast.makeText(Register.this, "E-mail field cannot be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "E-mail field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
 
                     else if(TextUtils.isEmpty(editText_RegisterPassword.getText().toString()))
                     {
-                        Toast.makeText(Register.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
 
                     // REGISTER PROPER CHECK
                     else if(editText_RegisterName.length() <=2 || editText_RegisterName.length() >= 16)
                     {
-                        Toast.makeText(Register.this, "Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
                     }
 
                     else if(editText_RegisterUserName.length() <=2 || editText_RegisterUserName.length() >= 16)
                     {
-                        Toast.makeText(Register.this, "User Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "User Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
                     }
 
                     else if (editText_RegisterPhone.length() != 14)
                     {
-                        Toast.makeText(Register.this, "Enter your phone number without region code", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Enter your phone number without region code", Toast.LENGTH_SHORT).show();
                     }
 
 
                     // REGEX CHECK
                     else if(!Patterns.EMAIL_ADDRESS.matcher(RegisterEmail).matches())
                     {
-                        Toast.makeText(Register.this, "Enter valid E-Mail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Enter valid E-Mail", Toast.LENGTH_SHORT).show();
                     }
 
                     else if (!PASSWORD.matcher(RegisterPassword).matches())
                     {
-                        Toast.makeText(Register.this, "Password should contain at least one: digit, lower case, upper case, special character without blank by having 6 or more character", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Password should contain at least one: digit, lower case, upper case, special character without blank by having 6 or more character", Toast.LENGTH_LONG).show();
                     }
 
 
@@ -136,7 +136,7 @@ public class Register extends AppCompatActivity
 
                 else
                 {
-                    Toast.makeText(Register.this, "Check Boxes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Check Boxes", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -144,7 +144,7 @@ public class Register extends AppCompatActivity
 
     public void open_Login()
     {
-        Intent intent6 = new Intent(this, Login.class);
+        Intent intent6 = new Intent(this, LoginActivity.class);
         startActivity(intent6);
     }
 

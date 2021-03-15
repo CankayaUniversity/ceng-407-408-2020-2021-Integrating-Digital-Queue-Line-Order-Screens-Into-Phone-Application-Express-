@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity
 
     public void openProfilePage()
     {
-        Intent intent3 = new Intent(this, Profile_Activity.class);
+        Intent intent3 = new Intent(this, ProfileActivity.class);
         startActivity(intent3);
     }
 
     public void openQR_Activity()
     {
-        Intent intent = new Intent(this, QR_Activity.class);
+        Intent intent = new Intent(this, QRActivity.class);
         startActivity(intent);
     }
 }

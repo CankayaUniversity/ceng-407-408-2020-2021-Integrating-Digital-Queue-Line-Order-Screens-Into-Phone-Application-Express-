@@ -17,14 +17,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
+
 import java.net.URLConnection;
 
 
-public class QR_Activity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class QRActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView scannerView;
     private TextView txtResult;
 
@@ -46,13 +43,13 @@ public class QR_Activity extends AppCompatActivity implements ZXingScannerView.R
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response)
                     {
-                        scannerView.setResultHandler(QR_Activity.this);
+                        scannerView.setResultHandler(QRActivity.this);
                         scannerView.startCamera();
                     }
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        Toast.makeText(QR_Activity.this, "CAMERA ACCESS REQUIRED", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QRActivity.this, "CAMERA ACCESS REQUIRED", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

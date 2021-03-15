@@ -18,12 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.prototype.Express.Login"></activity>
-        <activity android:name="com.prototype.Express.Register" />
+        <activity android:name="com.prototype.Express.LoginActivity"></activity>
+        <activity android:name="com.prototype.Express.RegisterActivity" />
         <activity android:name="com.prototype.Express.MainActivity"/>
-        <activity android:name="com.prototype.Express.Profile_Activity" />
-        <activity android:name="com.prototype.Express.QR_Activity" />
-        <activity android:name="com.prototype.Express.Splash_Activity">
+        <activity android:name="com.prototype.Express.ProfileActivity" />
+        <activity android:name="com.prototype.Express.QRActivity" />
+        <activity android:name="com.prototype.Express.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
