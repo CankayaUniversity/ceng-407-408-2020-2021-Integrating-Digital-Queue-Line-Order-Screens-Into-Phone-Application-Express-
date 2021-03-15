@@ -1,6 +1,6 @@
 # Express Prototype VP 1.0
 
-This is a prototype version 1.0 for Android Systems.
+This is a prototype version 1.0 for Android Systems
 
 - Login Page,
 - Register Page,

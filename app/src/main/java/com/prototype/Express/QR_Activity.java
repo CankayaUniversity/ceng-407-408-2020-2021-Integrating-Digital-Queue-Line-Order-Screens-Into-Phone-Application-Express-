@@ -1,12 +1,10 @@
 package com.prototype.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -15,7 +13,16 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 public class QR_Activity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView scannerView;
@@ -64,13 +71,37 @@ public class QR_Activity extends AppCompatActivity implements ZXingScannerView.R
     }
 
 
+
     // To-Do: RESULT WILL BE SENDED TO DATABASE IN FUTURE
     @Override
     public void handleResult(Result rawResult)
     {
         txtResult.setText(rawResult.getText());
-        Toast.makeText(this, "Selected Restaurant is:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected Restaurant:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
+        String result = rawResult.getText();
         scannerView.resumeCameraPreview(this);
         // scannerView.startCamera(); can be added for prevent frozen after QR scan
+
+
+        String url_address = "http://104.248.207.133:5000/api/v1/project-info";
+
+        try
+        {
+            URL url = new URL(url_address);
+            URLConnection connection = url.openConnection();
+            connection.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            writer.write(result);
+            writer.flush();
+
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+
+
+
     }
+
 }

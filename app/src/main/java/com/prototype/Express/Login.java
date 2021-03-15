@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity
     public void open_HomePage()
     {
         Intent intent5 = new Intent(getApplicationContext(), MainActivity.class);
-        // SEND LOGINNAME TO MAIN PAGE
+        // SEND LOGIN NAME TO MAIN PAGE
         intent5.putExtra("LoginName", LoginName);
         startActivity(intent5);
     }
