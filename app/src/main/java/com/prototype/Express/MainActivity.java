@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
+    
     public void jsonParse(final String key)
     {
         String url_address = "http://104.248.207.133:5000/restaurants";
