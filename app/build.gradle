@@ -28,6 +28,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     android.defaultConfig.vectorDrawables.useSupportLibrary = true
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.android.volley:volley:1.2.0'
+
 
     // QR LIBRARIES ZXING
 
