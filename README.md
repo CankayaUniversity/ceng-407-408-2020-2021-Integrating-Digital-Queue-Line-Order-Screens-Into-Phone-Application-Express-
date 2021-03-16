@@ -1,6 +1,6 @@
-# Express Prototype VP 1.1
+# Express Prototype VP 1.2
 
-This is a prototype version 1.1 for Android Systems
+This is a prototype version 1.2 for Android Systems
 
 - LoginActivity.java
 
@@ -9,7 +9,7 @@ This is a prototype version 1.1 for Android Systems
 - ProfileActivity.java
 
 - QRActivity.java
-    # GET method added from API
+    GET method updated with specific key search.
 
 - RegisterActivity.java
 

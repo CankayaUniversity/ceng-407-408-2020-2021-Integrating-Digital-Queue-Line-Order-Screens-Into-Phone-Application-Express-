@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    
+
 
     public void jsonParse(final String key)
     {
@@ -111,16 +111,26 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(JSONObject response)
             {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("data");
 
+                    JSONArray jsonArray = response.getJSONArray("data");
                     for(int i = 0; i < jsonArray.length(); i++)
                     {
                         JSONObject restaurant = jsonArray.getJSONObject(i);
                         String restaurant_name = restaurant.getString("name");
+
                         if(key.equals(restaurant_name))
                         {
-                            int id = restaurant.getInt("id");
-                            textView3.append(String.valueOf(id));
+                            JSONArray jsonArray2 = restaurant.getJSONArray("menus");
+
+                            for(int j = 0; j < jsonArray2.length(); j++)
+                            {
+                                JSONObject menus = jsonArray2.getJSONObject(j);
+                                String name = menus.getString("name");
+                                int price = menus.getInt("price");
+                                String type = menus.getString("type");
+                                textView3.append("Name of the menu: " + name + ": " + String.valueOf(price) + "$" + " type: " + type + "\n");
+                            }
+
                         }
                     }
 
