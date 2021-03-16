@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.StrictMode;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,17 +19,16 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.io.IOException;
+
 
 
 public class MainActivity extends AppCompatActivity
@@ -121,7 +119,6 @@ public class MainActivity extends AppCompatActivity
                         if(key.equals(restaurant_name))
                         {
                             JSONArray jsonArray2 = restaurant.getJSONArray("menus");
-
                             for(int j = 0; j < jsonArray2.length(); j++)
                             {
                                 JSONObject menus = jsonArray2.getJSONObject(j);
