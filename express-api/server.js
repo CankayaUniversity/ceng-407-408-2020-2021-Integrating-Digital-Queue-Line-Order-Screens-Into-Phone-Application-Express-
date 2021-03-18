@@ -1,7 +1,17 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
+const connectDB = require('./config/db');
+
+// Load env vars
+dotenv.config({
+    path: './config/config.env'
+});
+
+// Connect to database
+connectDB();
 
 const options = {
     definition: {
