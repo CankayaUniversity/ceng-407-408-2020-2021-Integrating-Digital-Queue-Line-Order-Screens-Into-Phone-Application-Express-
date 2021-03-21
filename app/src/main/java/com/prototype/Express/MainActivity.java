@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity
         textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
         TextView textView_ProfileName = findViewById(R.id.textView_ProfileName);
-        button = findViewById(R.id.button);
-        textView3 = findViewById(R.id.textView3);
 
 
         // GETS PROFILE NAME FROM LOGIN PAGE
@@ -80,77 +78,7 @@ public class MainActivity extends AppCompatActivity
                 openQR_Activity();
             }
         });
-
-
-        // TODO POST-GET TEST
-        requestQueue = Volley.newRequestQueue(this);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                jsonParse("pizzajungle");
-            }
-        });
-
     }
-
-
-
-
-
-
-
-    public void jsonParse(final String key)
-    {
-        String url_address = "http://104.248.207.133:5000/restaurants";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url_address, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response)
-            {
-                try {
-
-                    JSONArray jsonArray = response.getJSONArray("data");
-                    for(int i = 0; i < jsonArray.length(); i++)
-                    {
-                        JSONObject restaurant = jsonArray.getJSONObject(i);
-                        String restaurant_name = restaurant.getString("name");
-
-                        if(key.equals(restaurant_name))
-                        {
-                            JSONArray jsonArray2 = restaurant.getJSONArray("menus");
-                            for(int j = 0; j < jsonArray2.length(); j++)
-                            {
-                                JSONObject menus = jsonArray2.getJSONObject(j);
-                                String name = menus.getString("name");
-                                int price = menus.getInt("price");
-                                String type = menus.getString("type");
-                                textView3.append("Name of the menu: " + name + ": " + String.valueOf(price) + "$" + " type: " + type + "\n");
-                            }
-
-                        }
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener()
-        {
-            @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
-    }
-
-
-
-
-
 
 
     public void openProfilePage()

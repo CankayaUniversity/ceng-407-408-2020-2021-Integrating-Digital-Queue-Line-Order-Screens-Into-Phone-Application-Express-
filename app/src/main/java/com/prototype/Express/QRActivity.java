@@ -2,6 +2,7 @@ package com.prototype.Express;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,31 +75,16 @@ public class QRActivity extends AppCompatActivity implements ZXingScannerView.Re
     public void handleResult(Result rawResult)
     {
         txtResult.setText(rawResult.getText());
-        Toast.makeText(this, "Selected Restaurant:" + rawResult.getText(), Toast.LENGTH_SHORT).show();
         String result = rawResult.getText();
+        open_RestaurantsActivity(result);
         scannerView.resumeCameraPreview(this);
         // scannerView.startCamera(); can be added for prevent frozen after QR scan
-
-
-        String url_address = "http://104.248.207.133:5000/api/v1/project-info";
-
-        try
-        {
-            URL url = new URL(url_address);
-            URLConnection connection = url.openConnection();
-            connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(result);
-            writer.flush();
-
-        } catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-
-
-
-
     }
 
+    public void open_RestaurantsActivity(String key)
+    {
+        Intent intent = new Intent(QRActivity.this, RestaurantsActivity.class);
+        intent.putExtra("key", key);
+        startActivity(intent);
+    }
 }
