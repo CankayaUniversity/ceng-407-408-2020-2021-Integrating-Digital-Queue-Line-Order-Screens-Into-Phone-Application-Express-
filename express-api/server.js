@@ -20,6 +20,11 @@ const options = {
             title: "Express API",
             version: "1.0.0",
             description: "Documentation for front-end and mobile developers who will use the Express API",
+            contact: {
+                //name: "Can Özal",
+                url: "https://github.com/CankayaUniversity/ceng-407-408-2020-2021-Integrating-Digital-Queue-Line-Order-Screens-Into-Phone-Application-Express-/wiki",
+                email: "cannozall@gmail.com"
+            }
         },
         servers: [{
             url: "http://104.248.207.133:5000",
