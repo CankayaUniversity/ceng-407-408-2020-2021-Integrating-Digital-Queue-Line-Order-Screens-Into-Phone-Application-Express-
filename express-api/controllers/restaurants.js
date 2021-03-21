@@ -1,5 +1,6 @@
 const Restaurant = require('../models/Restaurant');
-
+const ErrorResponse = require('../utils/errorResponse');
+const asyncHandler = require('../middleware/async');
 
 
 
@@ -139,24 +140,18 @@ const Restaurant = require('../models/Restaurant');
  *       500:
  *         description: Some server error 
  */
-exports.getRestaurants = async (req, res, next) => {
-    try {
-        const restaurants = await Restaurant.find();
+exports.getRestaurants = asyncHandler(async (req, res, next) => {
 
-        res.status(200).json({
-            success: true,
-            data: restaurants
-        })
+    const restaurants = await Restaurant.find();
 
-    } catch (error) {
+    res.status(200).json({
+        success: true,
+        data: restaurants
+    })
 
-        res.status(500).json({
-            success: false,
-            data: error
-        })
-    }
 
-}
+
+});
 
 
 // @desc            Get single restaurant
@@ -195,33 +190,24 @@ exports.getRestaurants = async (req, res, next) => {
  *       500:
  *         description: Some server error
  */
-exports.getRestaurant = async (req, res, next) => {
+exports.getRestaurant = asyncHandler(async (req, res, next) => {
 
-    try {
-        const restaurant = await Restaurant.findById(req.params.id);
 
-        if (!restaurant) {
-            return res.status(404).json({
-                success: false,
-                data: `Restaurant not found with id of ${req.params.id}`
-            });
-        }
+    const restaurant = await Restaurant.findById(req.params.id);
 
-        res.status(200).json({
-            success: true,
-            data: restaurant
-        })
-
-    } catch (error) {
-
-        res.status(500).json({
-            success: false,
-            data: error
-        })
+    if (!restaurant) {
+        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
     }
 
+    res.status(200).json({
+        success: true,
+        data: restaurant
+    })
 
-}
+
+
+
+});
 
 
 
@@ -252,26 +238,18 @@ exports.getRestaurant = async (req, res, next) => {
  *       500:
  *         description: Some server error
  */
-exports.createRestaurant = async (req, res, next) => {
-
-    try {
-        const restaurant = await Restaurant.create(req.body);
+exports.createRestaurant = asyncHandler(async (req, res, next) => {
 
 
-        res.status(201).json({
-            success: true,
-            data: restaurant
-        })
+    const restaurant = await Restaurant.create(req.body);
 
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            data: err
-        })
 
-    }
+    res.status(201).json({
+        success: true,
+        data: restaurant
+    })
 
-}
+});
 
 
 // @desc            Update restaurant
@@ -311,40 +289,28 @@ exports.createRestaurant = async (req, res, next) => {
  *      500:
  *        description: Some error happened
  */
-exports.updateRestaurant = async (req, res, next) => {
-
-    try {
-
-        delete req.body.photo;
-
-        restaurant = await Restaurant.findOneAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        });
-
-
-        if (!restaurant) {
-            res.status(404).json({
-                success: false,
-                data: `Restaurant not found with id of ${req.params.id}`
-            })
-        }
-
-
-        res.status(200).json({
-            success: true,
-            data: restaurant
-        });
+exports.updateRestaurant = asyncHandler(async (req, res, next) => {
 
 
 
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            data: error
-        })
+    restaurant = await Restaurant.findOneAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    });
+
+
+    if (!restaurant) {
+        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
     }
-}
+
+
+    res.status(200).json({
+        success: true,
+        data: restaurant
+    });
+
+
+});
 
 
 // @desc            Delete restaurant
@@ -373,25 +339,17 @@ exports.updateRestaurant = async (req, res, next) => {
  *       500:
  *         description: Some error happened
  */
-exports.deleteRestaurant = async (req, res, next) => {
+exports.deleteRestaurant = asyncHandler(async (req, res, next) => {
 
-    try {
-        const restaurant = await Restaurant.findByIdAndDelete(req.params.id);
+    const restaurant = await Restaurant.findByIdAndDelete(req.params.id);
 
-        if (!restaurant) {
-            return res.status(400).json({
-                success: false,
-                data: `Restaurant not found with id of ${req.params.id}`
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            data: restaurant
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false
-        });
+    if (!restaurant) {
+        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
     }
-}
+
+    res.status(200).json({
+        success: true,
+        data: restaurant
+    });
+
+});

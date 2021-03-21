@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
+const errorHandler = require('./middleware/error')
 const connectDB = require('./config/db');
 
 // Load env vars
@@ -66,6 +67,8 @@ app.use('/api/v1/project-info', (req, res, next) => {
         project_members: ["can", "suhan", "talha"]
     })
 });
+
+app.use(errorHandler);
 
 
 const server = app.listen(5000, () => {
