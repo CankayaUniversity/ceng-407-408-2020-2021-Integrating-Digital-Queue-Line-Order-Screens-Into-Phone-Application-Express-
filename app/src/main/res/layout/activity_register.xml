@@ -34,9 +34,11 @@
 
     <EditText
         android:id="@+id/editText_RegisterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_rounded"
         android:ems="10"
+        android:maxLength="20"
         android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,8 +49,10 @@
 
     <EditText
         android:id="@+id/editText_RegisterUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:maxLength="20"
+        android:background="@drawable/button_rounded"
         android:ems="10"
         android:hint="User Name"
         android:inputType="textPersonName"
@@ -98,8 +102,9 @@
 
     <EditText
         android:id="@+id/editText_RegisterEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_rounded"
         android:ems="10"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
@@ -111,12 +116,14 @@
 
     <EditText
         android:id="@+id/editText_RegisterPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_rounded"
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="phone"
-        android:text="+90 "
+        android:text="+90"
+        android:maxLength="13"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,8 +132,9 @@
 
     <EditText
         android:id="@+id/editText_RegisterPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_rounded"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
