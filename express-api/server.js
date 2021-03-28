@@ -43,8 +43,8 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 
 // Route files
-const restaurants = require('./routes/restaurants')
-
+const restaurants = require('./routes/restaurants');
+const menus = require('./routes/menus');
 
 
 // Body parser
@@ -57,6 +57,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/v1/restaurants', restaurants);
+app.use('/api/v1/menus', menus);
 
 
 

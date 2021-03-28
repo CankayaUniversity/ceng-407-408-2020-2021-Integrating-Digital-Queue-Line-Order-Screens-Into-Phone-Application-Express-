@@ -142,7 +142,14 @@ const asyncHandler = require('../middleware/async');
  */
 exports.getRestaurants = asyncHandler(async (req, res, next) => {
 
-    const restaurants = await Restaurant.find();
+    const restaurants = await Restaurant.find().populate({
+        path: 'menus',
+        populate: {
+            path: 'restaurant',
+            model: 'Restaurant',
+            select: 'name description'
+        }
+    });
 
     res.status(200).json({
         success: true,
@@ -341,11 +348,13 @@ exports.updateRestaurant = asyncHandler(async (req, res, next) => {
  */
 exports.deleteRestaurant = asyncHandler(async (req, res, next) => {
 
-    const restaurant = await Restaurant.findByIdAndDelete(req.params.id);
+    const restaurant = await Restaurant.findById(req.params.id);
 
     if (!restaurant) {
         return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
     }
+
+    restaurant.remove();
 
     res.status(200).json({
         success: true,
