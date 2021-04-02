@@ -4,93 +4,65 @@ import java.io.Serializable;
 
 public class User implements Serializable
 {
-    // LOGIN
-    private String LoginName;
-    private String LoginPassword;
-
     // REGISTER
-    private String RegisterName;
-    private String RegisterEmail;
-    private String RegisterUserName;
-    private String RegisterPassword;
-    private String RegisterPhone;
+    private String name;
+    private String email;
+    private String userName;
+    private String password;
+    private String phone;
 
-    User() // DEFAULT CONSTRUCTOR REQUIRED FOR DATABASES
+    public User()
     {
-        // LOGIN
-        this.LoginName = "invalid";
-        this.LoginPassword = "invalid";
 
-        // REGISTER
-        this.RegisterName = "invalid";
-        this.RegisterEmail = "invalid";
-        this.RegisterUserName = "invalid";
-        this.RegisterPassword = "invalid";
-        this.RegisterPhone = "invalid";
     }
 
-    // SETTERS
-    public void setLoginName(String LoginName)
+    public User(String name, String email, String userName, String password, String phone)
     {
-        this.LoginName = LoginName;
+        this.name = name;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
     }
 
-    public void setLoginPassword(String LoginPassword)
-    {
-        this.LoginPassword = LoginPassword;
+    public String getName() {
+        return name;
     }
 
-    public void setRegisterName(String registerName) {
-        this.RegisterName = registerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setRegisterEmail(String registerEmail) {
-        this.RegisterEmail = registerEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRegisterUserName(String registerUserName) {
-        this.RegisterUserName = registerUserName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setRegisterPassword(String registerPassword) {
-        this.RegisterPassword = registerPassword;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setRegisterPhone(String registerPhone) {
-        this.RegisterPhone = registerPhone;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-
-    // GETTERS
-    public String getRegisterName() {
-        return RegisterName;
+    public String getPassword() {
+        return password;
     }
 
-    public String getRegisterEmail() {
-        return RegisterEmail;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRegisterUserName() {
-        return RegisterUserName;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getRegisterPassword() {
-        return RegisterPassword;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-
-    public String getRegisterPhone() {
-        return RegisterPhone;
-    }
-
-    public String getLoginName()
-    {
-        return LoginName;
-    }
-
-    public String getLoginPassword()
-    {
-        return LoginPassword;
-    }
-
 }
 
