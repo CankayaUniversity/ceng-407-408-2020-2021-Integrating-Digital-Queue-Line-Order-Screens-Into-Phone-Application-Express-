@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -45,7 +46,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 // Route files
 const restaurants = require('./routes/restaurants');
 const menus = require('./routes/menus');
-
+const menuItems = require('./routes/menuItems');
 
 // Body parser
 app.use(express.json());
@@ -54,11 +55,14 @@ app.use(express.json());
 // Enable CORS
 app.use(cors());
 
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 // Routes
 app.use('/api/v1/restaurants', restaurants);
 app.use('/api/v1/menus', menus);
-
+app.use('/api/v1/menuitems', menuItems)
 
 
 

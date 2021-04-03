@@ -145,9 +145,8 @@ exports.getRestaurants = asyncHandler(async (req, res, next) => {
     const restaurants = await Restaurant.find().populate({
         path: 'menus',
         populate: {
-            path: 'restaurant',
-            model: 'Restaurant',
-            select: 'name description'
+            path: 'menuitems',
+            model: 'MenuItem'
         }
     });
 
@@ -200,7 +199,13 @@ exports.getRestaurants = asyncHandler(async (req, res, next) => {
 exports.getRestaurant = asyncHandler(async (req, res, next) => {
 
 
-    const restaurant = await Restaurant.findById(req.params.id);
+    const restaurant = await Restaurant.findById(req.params.id).populate({
+        path: 'menus',
+        populate: {
+            path: 'menuitems',
+            model: 'MenuItem'
+        }
+    });
 
     if (!restaurant) {
         return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
