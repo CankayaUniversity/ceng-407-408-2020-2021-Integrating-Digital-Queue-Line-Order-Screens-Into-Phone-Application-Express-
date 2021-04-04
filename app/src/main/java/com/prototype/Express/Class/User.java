@@ -1,4 +1,4 @@
-package com.prototype.Express;
+package com.prototype.Express.Class;
 
 import java.io.Serializable;
 

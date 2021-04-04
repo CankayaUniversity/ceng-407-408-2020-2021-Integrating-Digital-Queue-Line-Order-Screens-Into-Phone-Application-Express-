@@ -18,14 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".RestaurantsActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".QRActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.prototype.Express.Activity.MenuActivity"></activity>
+        <activity android:name="com.prototype.Express.Activity.RestaurantsActivity" />
+        <activity android:name="com.prototype.Express.Activity.LoginActivity" />
+        <activity android:name="com.prototype.Express.Activity.RegisterActivity" />
+        <activity android:name="com.prototype.Express.Activity.MainActivity" />
+        <activity android:name="com.prototype.Express.Activity.ProfileActivity" />
+        <activity android:name="com.prototype.Express.Activity.QRActivity" />
+        <activity android:name="com.prototype.Express.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

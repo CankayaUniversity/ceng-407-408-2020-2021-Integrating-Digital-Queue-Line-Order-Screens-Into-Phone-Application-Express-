@@ -1,4 +1,4 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.prototype.Express.R;
 
 
 public class MainActivity extends AppCompatActivity

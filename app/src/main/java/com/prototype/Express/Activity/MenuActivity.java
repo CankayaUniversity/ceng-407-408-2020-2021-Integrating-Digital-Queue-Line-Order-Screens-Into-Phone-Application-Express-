@@ -1,4 +1,4 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

@@ -1,15 +1,13 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,14 +15,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.net.URL;
 
 public class RestaurantsActivity extends AppCompatActivity
 {
@@ -75,9 +71,8 @@ public class RestaurantsActivity extends AppCompatActivity
 
                         if(key.equals(_id))
                         {
-                            Picasso.get().load("http://104.248.207.133:5000/uploads/test.png").into(imageView2);
-
                             String photo = restaurant.getString("photo");
+                            Picasso.get().load(photo).into(imageView2);
                             String description = restaurant.getString("description");
                             String address = restaurant.getString("address");
                             String name = restaurant.getString("name");

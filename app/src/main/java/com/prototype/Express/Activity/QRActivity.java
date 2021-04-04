@@ -1,4 +1,4 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
@@ -13,13 +13,9 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.prototype.Express.R;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.URL;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
-import java.net.URLConnection;
 
 
 public class QRActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {

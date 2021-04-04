@@ -1,4 +1,4 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.prototype.Express.R;
 
 
 public class LoginActivity extends AppCompatActivity

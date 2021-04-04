@@ -1,8 +1,8 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import com.prototype.Express.R;
 
 public class ProfileActivity extends AppCompatActivity
 {

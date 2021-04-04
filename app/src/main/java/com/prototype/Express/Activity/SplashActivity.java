@@ -1,9 +1,10 @@
-package com.prototype.Express;
+package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.prototype.Express.R;
 
 
 public class SplashActivity extends AppCompatActivity {
