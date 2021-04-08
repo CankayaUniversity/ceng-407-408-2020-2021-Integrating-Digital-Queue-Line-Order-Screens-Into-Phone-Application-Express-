@@ -1,0 +1,83 @@
+[
+    {
+        "photo": "https://www.burgerking.com.tr/cmsfiles/products/bk-steakhouse-burger-menu.png?v=173",
+        "_id": "606eb96d70a4c309609d1e30",
+        "name": "Steakhouse Menu",
+        "description": "Steakhouse burger, chips, drink",
+        "price": 45.5,
+        "menu": "606eb96d70a4c309609d1e07",
+        "type": "menuitem"
+    },
+    {
+        "photo": "https://d3vkdqr0qjxhag.cloudfront.net/burger-king/Chicken_Royale_Menue_c9372181cc",
+        "_id": "606eb96d70a4c309609d1e31",
+        "name": "Chicken Royal Menu",
+        "description": "Chicken Royal burger, chips, drink",
+        "price": 15,
+        "menu": "606eb96d70a4c309609d1e07",
+        "type": "menuitem"
+    },
+    {
+        "photo": "https://www.burgerking.com.tr/cmsfiles/products/fish-royale-menu-1.png?v=173",
+        "_id": "606eb96d70a4c309609d1e32",
+        "name": "Fish Burger Menu",
+        "description": "Fish burger, chips, drinks",
+        "menu": "606eb96d70a4c309609d1e09",
+        "price": 35,
+        "type": "menuitem"
+    },
+    {
+        "photo": "https://www.burgerking.com.tr/cmsfiles/products/whopper-menu-1.png?v=173",
+        "_id": "606eb96d70a4c309609d1e33",
+        "name": "Hamburger Menu",
+        "description": "Hamburger, chips, drinks",
+        "menu": "606eb96d70a4c309609d1e09",
+        "price": 25,
+        "type": "menuitem"
+    },
+    {
+        "photo": "https://d3vkdqr0qjxhag.cloudfront.net/burger-king/Chicken_Royale_Menue_c9372181cc",
+        "_id": "606eb96d70a4c309609d1e34",
+        "name": "Chicken Royal Menu",
+        "description": "Chicken Royal burger, chips, drink",
+        "price": 15,
+        "menu": "606eb96d70a4c309609d1e08",
+        "type": "menuitem"
+    },
+    {
+        "photo": "https://www.kackalori.com.tr/Uploads/Kaloriler/1-adet-fish-burger-kac-kalori_94_2.jpg?width=300",
+        "_id": "606eb96d70a4c309609d1e35",
+        "name": "Fish Burger",
+        "description": "Fish burger",
+        "menu": "606eb96d70a4c309609d1e10",
+        "price": 20,
+        "type": "singleitem"
+    },
+    {
+        "photo": "https://www.burgerking.com.tr/cmsfiles/products/hamburger.png?v=173",
+        "_id": "606eb96d70a4c309609d1e36",
+        "name": "Hamburger",
+        "description": "Hamburger",
+        "menu": "606eb96d70a4c309609d1e10",
+        "price": 15,
+        "type": "singleitem"
+    },
+    {
+        "photo": "https://cdn.shopify.com/s/files/1/2141/9909/products/Coke_Zero_330mL.png?v=1591901397",
+        "_id": "606eb96d70a4c309609d1e37",
+        "name": "Cola",
+        "description": "Cola",
+        "menu": "606eb96d70a4c309609d1e10",
+        "price": 5,
+        "type": "drink"
+    },
+    {
+        "photo": "https://nebilcdn.blob.core.windows.net/citygross/Images/510/0003500_fuse-tea-ice-tea-mango-ananas-aromali-330-cc_510.jpg",
+        "_id": "606eb96d70a4c309609d1e38",
+        "name": "IceTea",
+        "description": "Ice Tea",
+        "menu": "606eb96d70a4c309609d1e10",
+        "price": 5,
+        "type": "drink"
+    }
+]

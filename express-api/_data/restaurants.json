@@ -1,0 +1,9 @@
+[
+    {
+        "_id": "5d713995b721c3bb38c1f5d0",
+        "name": "Burger King",
+        "description": "Be Your Way!",
+        "address": "327 West 42nd St Frnt 1, New York City, NY 10036",
+        "photo": "http://104.248.207.133:5000/uploads/test.png"
+    }
+]

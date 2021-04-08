@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const MenuSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
         trim: true,
-        required: [true, 'Please add a menu title']
+        required: [true, 'Please add a menu name']
     },
     description: {
         type: String,
@@ -14,6 +14,18 @@ const MenuSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Restaurant',
         required: true
+    },
+    type: {
+        type: String,
+        required: [true, 'Please add menu type'],
+        enum: [
+            'standard',
+            'special',
+        ]
+    },
+    photo: {
+        type: String,
+        default: 'no-photo.jpg'
     }
 }, {
     toJSON: {

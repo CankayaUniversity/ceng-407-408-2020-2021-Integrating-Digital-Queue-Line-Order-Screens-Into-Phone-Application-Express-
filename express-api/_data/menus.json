@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "606eb96d70a4c309609d1e07",
+        "photo": "https://cdn2.downdetector.com/static/uploads/logo/Vodafonelogo_7rkCyEY.png",
+        "name": "Vodofone Menu",
+        "description": "Eat super meals if you have vodofone account",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "special"
+    },
+    {
+        "_id": "606eb96d70a4c309609d1e08",
+        "photo": "https://images.theconversation.com/files/59580/original/dss8rngv-1411128291.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip",
+        "name": "Child Menus",
+        "description": "For the little heroes!!",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "standard"
+    },
+    {
+        "_id": "606eb96d70a4c309609d1e09",
+        "photo": "https://cdn.mos.cms.futurecdn.net/8KN8TbF3pk8zv2NuhAcZn3.jpg",
+        "name": "Adult Menus",
+        "description": "feeds even giants",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "standard"
+    },
+    {
+        "_id": "606eb96d70a4c309609d1e10",
+        "photo": "https://images.ofix.com/product-image/Erikli-Su-500-Ml-12-Li-Paket_RI23495FT1MF130547.jpg",
+        "name": "Items",
+        "description": "standalone items",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "standard" 
+    }
+]
