@@ -14,7 +14,7 @@ exports.getMenus = asyncHandler(async (req, res, next) => {
         query = Menu.find({
             restaurant: req.params.restaurantId,
             type: queryStr.type
-        });
+        }).populate('menuitems');
     } else {
         query = Menu.find();
     }
