@@ -5,7 +5,20 @@ const asyncHandler = require('../middleware/async');
 
 exports.getMenuItems = asyncHandler(async (req, res, next) => {
 
-    const menuItems = await MenuItem.find();
+    let query;
+
+    let queryStr = req.query;
+
+    if (req.params.restaurantId) {
+        query = MenuItem.find({
+            restaurant: req.params.restaurantId,
+            type: queryStr.type
+        });
+    } else {
+        query = MenuItem.find();
+    }
+
+    const menuItems = await query;
 
     res.status(200).json({
         success: true,
@@ -64,7 +77,7 @@ exports.deleteMenuItem = asyncHandler(async (req, res, next) => {
 
     const menuItem = await MenuItem.findById(req.params.id);
 
-    if (!menuItem){
+    if (!menuItem) {
         return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
     }
 

@@ -6,6 +6,7 @@
         "description": "Steakhouse burger, chips, drink",
         "price": 45.5,
         "menu": "606eb96d70a4c309609d1e07",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "type": "menuitem"
     },
     {
@@ -15,6 +16,7 @@
         "description": "Chicken Royal burger, chips, drink",
         "price": 15,
         "menu": "606eb96d70a4c309609d1e07",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "type": "menuitem"
     },
     {
@@ -23,6 +25,7 @@
         "name": "Fish Burger Menu",
         "description": "Fish burger, chips, drinks",
         "menu": "606eb96d70a4c309609d1e09",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 35,
         "type": "menuitem"
     },
@@ -32,6 +35,7 @@
         "name": "Hamburger Menu",
         "description": "Hamburger, chips, drinks",
         "menu": "606eb96d70a4c309609d1e09",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 25,
         "type": "menuitem"
     },
@@ -42,6 +46,7 @@
         "description": "Chicken Royal burger, chips, drink",
         "price": 15,
         "menu": "606eb96d70a4c309609d1e08",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "type": "menuitem"
     },
     {
@@ -50,6 +55,7 @@
         "name": "Fish Burger",
         "description": "Fish burger",
         "menu": "606eb96d70a4c309609d1e10",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 20,
         "type": "singleitem"
     },
@@ -59,6 +65,7 @@
         "name": "Hamburger",
         "description": "Hamburger",
         "menu": "606eb96d70a4c309609d1e10",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 15,
         "type": "singleitem"
     },
@@ -68,6 +75,7 @@
         "name": "Cola",
         "description": "Cola",
         "menu": "606eb96d70a4c309609d1e10",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 5,
         "type": "drink"
     },
@@ -77,6 +85,7 @@
         "name": "IceTea",
         "description": "Ice Tea",
         "menu": "606eb96d70a4c309609d1e10",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
         "price": 5,
         "type": "drink"
     }

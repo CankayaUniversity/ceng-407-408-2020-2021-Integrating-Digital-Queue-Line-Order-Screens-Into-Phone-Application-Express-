@@ -8,7 +8,9 @@ const {
 } = require('../controllers/menuItems');
 
 
-const router = express.Router();
+const router = express.Router({
+    mergeParams: true
+});
 
 router.route('/').get(getMenuItems).post(createMenuItem);
 

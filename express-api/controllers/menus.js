@@ -6,7 +6,20 @@ const asyncHandler = require('../middleware/async');
 
 exports.getMenus = asyncHandler(async (req, res, next) => {
 
-    const menus = await Menu.find();
+    let query;
+
+    let queryStr = req.query;
+
+    if (req.params.restaurantId) {
+        query = Menu.find({
+            restaurant: req.params.restaurantId,
+            type: queryStr.type
+        });
+    } else {
+        query = Menu.find();
+    }
+
+    const menus = await query;
 
     res.status(200).json({
         success: true,

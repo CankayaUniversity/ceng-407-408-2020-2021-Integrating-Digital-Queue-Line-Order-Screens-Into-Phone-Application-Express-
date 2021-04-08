@@ -18,6 +18,11 @@ const MenuItemSchema = mongoose.Schema({
         ref: 'Menu',
         required: true
     },
+    restaurant: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Restaurant',
+        required: true
+    },
     type: {
         type: String,
         required: [true, 'Please add menuItem type'],

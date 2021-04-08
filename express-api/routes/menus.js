@@ -1,9 +1,17 @@
 const express = require('express');
-const {getMenus, getMenu, createMenu, updateMenu, deleteMenu} = require('../controllers/menus');
+const {
+    getMenus,
+    getMenu,
+    createMenu,
+    updateMenu,
+    deleteMenu
+} = require('../controllers/menus');
 
 
 
-const router = express.Router();
+const router = express.Router({
+    mergeParams: true
+});
 
 router.route('/').get(getMenus).post(createMenu);
 
