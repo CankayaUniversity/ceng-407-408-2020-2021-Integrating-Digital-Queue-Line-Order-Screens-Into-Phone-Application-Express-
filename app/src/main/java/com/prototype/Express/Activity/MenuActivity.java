@@ -1,34 +1,35 @@
 package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
+import android.os.Handler;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.prototype.Express.Adapter.MenuAdapter;
+import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.ArrayList;
+
 
 public class MenuActivity extends AppCompatActivity
 {
     // XML VARIABLES
-    TextView textView6;
+    RecyclerView recyclerView;
 
-    // VARIABLES
-    RequestQueue requestQueue;
+    // VOLLEY
+    RequestQueue requestQueue_special;
+    RequestQueue requestQueue_singleitem;
+    RequestQueue requestQueue_menuitem;
+    RequestQueue requestQueue_drinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,56 +37,254 @@ public class MenuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // XML VARIABLES CASTING
-        textView6 = findViewById(R.id.textView6);
+        // XML INITIALIZING
+        recyclerView = findViewById(R.id.recylerview);
 
-        // Restaurant Key
+        // RESTAURANT KEY
         String key = getIntent().getStringExtra("key");
-        requestQueue = Volley.newRequestQueue(this);
+
         jsonParse(key);
     }
 
-    public void jsonParse(final String key)
+    public void jsonParse(String key)
     {
-        String url_address = "http://104.248.207.133:5000/api/v1/restaurants";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url_address, null, new Response.Listener<JSONObject>() {
+        // URL ADDRESSES
+        final String url_special = "http://104.248.207.133:5000/api/v1/restaurants/" + key + "/menus?type=special";
+        final String url_singleitem = "http://104.248.207.133:5000/api/v1/restaurants/" + key + "/menuitems?type=singleitem";
+        final String url_menuitem = "http://104.248.207.133:5000/api/v1/restaurants/" + key + "/menuitems?type=menuitem";
+        final String url_drinks = "http://104.248.207.133:5000/api/v1/restaurants/" + key + "/menuitems?type=drink";
 
-            @Override
-            public void onResponse(JSONObject response)
-            {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("data");
-                    for(int i = 0; i < jsonArray.length(); i++)
-                    {
-                        JSONObject restaurant = jsonArray.getJSONObject(i);
-                        final String _id = restaurant.getString("_id");
+        // TOTAL DATA SET
+        final ArrayList<Item> mData;
+        mData = new ArrayList<>();
 
-                        if(key.equals(_id))
-                        {
-                            JSONArray jsonArrayMenu = restaurant.getJSONArray("menus");
-                            for(int j = 0; j < jsonArrayMenu.length(); j++)
-                            {
-                                JSONObject menu = jsonArrayMenu.getJSONObject(j);
-                                String title = menu.getString("title");
-                                String description = menu.getString("description");
-                                textView6.setText(title);
-                            }
+
+        if(true)
+        {
+            // SPECIAL
+            requestQueue_special = Volley.newRequestQueue(getApplicationContext());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url_special, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Item item = new Item();
+
+                            String photo = jsonObject.getString("photo");
+                            String _id = jsonObject.getString("_id");
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String restaurant = jsonObject.getString("restaurant");
+                            int price = jsonObject.getInt("price");
+                            String type = jsonObject.getString("type");
+                            String createdAt = jsonObject.getString("createdAt");
+                            String updatedAt = jsonObject.getString("updatedAt");
+                            int __v = jsonObject.getInt("__v");
+
+                            item.setPhoto(photo);
+                            item.set_id(_id);
+                            item.setName(name);
+                            item.setDescription(description);
+                            item.setRestaurant(restaurant);
+                            item.setPrice(price);
+                            item.setType(type);
+                            item.setCreatedAt(createdAt);
+                            item.setUpdatedAt(updatedAt);
+                            item.set__v(__v);
+
+                            mData.add(item);
                         }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue_special.add(jsonObjectRequest);
 
-            }
-        }, new Response.ErrorListener()
+
+            // SINGLEITEM
+            requestQueue_singleitem = Volley.newRequestQueue(getApplicationContext());
+            JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.GET, url_singleitem, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Item item = new Item();
+
+                            String photo = jsonObject.getString("photo");
+                            String _id = jsonObject.getString("_id");
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String restaurant = jsonObject.getString("restaurant");
+                            int price = jsonObject.getInt("price");
+                            String type = jsonObject.getString("type");
+                            String createdAt = jsonObject.getString("createdAt");
+                            String updatedAt = jsonObject.getString("updatedAt");
+                            int __v = jsonObject.getInt("__v");
+
+                            item.setPhoto(photo);
+                            item.set_id(_id);
+                            item.setName(name);
+                            item.setDescription(description);
+                            item.setRestaurant(restaurant);
+                            item.setPrice(price);
+                            item.setType(type);
+                            item.setCreatedAt(createdAt);
+                            item.setUpdatedAt(updatedAt);
+                            item.set__v(__v);
+
+                            mData.add(item);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue_singleitem.add(jsonObjectRequest2);
+
+
+            // MENUITEM
+            requestQueue_menuitem = Volley.newRequestQueue(getApplicationContext());
+            JsonObjectRequest jsonObjectRequest3 = new JsonObjectRequest(Request.Method.GET, url_menuitem, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Item item = new Item();
+
+                            String photo = jsonObject.getString("photo");
+                            String _id = jsonObject.getString("_id");
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String restaurant = jsonObject.getString("restaurant");
+                            int price = jsonObject.getInt("price");
+                            String type = jsonObject.getString("type");
+                            String createdAt = jsonObject.getString("createdAt");
+                            String updatedAt = jsonObject.getString("updatedAt");
+                            int __v = jsonObject.getInt("__v");
+
+                            item.setPhoto(photo);
+                            item.set_id(_id);
+                            item.setName(name);
+                            item.setDescription(description);
+                            item.setRestaurant(restaurant);
+                            item.setPrice(price);
+                            item.setType(type);
+                            item.setCreatedAt(createdAt);
+                            item.setUpdatedAt(updatedAt);
+                            item.set__v(__v);
+
+                            mData.add(item);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue_menuitem.add(jsonObjectRequest3);
+
+
+
+            // DRINKS
+            requestQueue_drinks = Volley.newRequestQueue(getApplicationContext());
+            JsonObjectRequest jsonObjectRequest4 = new JsonObjectRequest(Request.Method.GET, url_drinks, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Item item = new Item();
+
+                            String photo = jsonObject.getString("photo");
+                            String _id = jsonObject.getString("_id");
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String restaurant = jsonObject.getString("restaurant");
+                            int price = jsonObject.getInt("price");
+                            String type = jsonObject.getString("type");
+                            String createdAt = jsonObject.getString("createdAt");
+                            String updatedAt = jsonObject.getString("updatedAt");
+                            int __v = jsonObject.getInt("__v");
+
+                            item.setPhoto(photo);
+                            item.set_id(_id);
+                            item.setName(name);
+                            item.setDescription(description);
+                            item.setRestaurant(restaurant);
+                            item.setPrice(price);
+                            item.setType(type);
+                            item.setCreatedAt(createdAt);
+                            item.setUpdatedAt(updatedAt);
+                            item.set__v(__v);
+
+                            mData.add(item);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue_drinks.add(jsonObjectRequest4);
+        }
+
+        // WAIT FOR ASYNC VOLLEY TO FINISH
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable()
         {
-            @Override
-            public void onErrorResponse(VolleyError error)
+            public void run()
             {
-                error.printStackTrace();
+                display(mData);
             }
-        });
-        requestQueue.add(jsonObjectRequest);
+        }, 5000);   // 1 second
+    }
+
+    public void display(ArrayList<Item> mData)
+    {
+        recyclerView.setHasFixedSize(true);
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        MenuAdapter menuAdapter;
+
+        menuAdapter = new MenuAdapter(getApplicationContext(), mData);
+        recyclerView.setAdapter(menuAdapter);
+
+        menuAdapter.notifyDataSetChanged();
     }
 }

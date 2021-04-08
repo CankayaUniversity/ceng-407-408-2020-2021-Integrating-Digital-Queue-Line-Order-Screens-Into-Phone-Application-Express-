@@ -70,7 +70,7 @@ public class QRActivity extends AppCompatActivity implements ZXingScannerView.Re
     @Override
     public void handleResult(Result rawResult)
     {
-        txtResult.setText(rawResult.getText());
+        txtResult.setText("Loading...");
         String result = rawResult.getText();
         open_RestaurantsActivity(result);
         scannerView.resumeCameraPreview(this);

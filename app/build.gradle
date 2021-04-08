@@ -32,6 +32,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.android.volley:volley:1.2.0'
 
+    // JACKSON
+    //implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+
 
     //  QR LIBRARIES ZXING
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'

@@ -52,7 +52,7 @@
 
     <!--Image, description and basket icon-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/decriptionLayout"
+        android:id="@+id/descriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
