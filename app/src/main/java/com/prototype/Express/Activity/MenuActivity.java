@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.prototype.Express.Adapter.MenuAdapter;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +32,6 @@ public class MenuActivity extends AppCompatActivity
     // XML VARIABLES
     RecyclerView recyclerView;
     ImageView button_profile, button_scan, button_basket;
-    TextView itemcounter;
 
     // VOLLEY
     RequestQueue requestQueue_special;
@@ -54,7 +50,6 @@ public class MenuActivity extends AppCompatActivity
         button_profile = findViewById(R.id.button_profile);
         button_scan = findViewById(R.id.button_scan);
         button_basket = findViewById(R.id.button_basket);
-        itemcounter = findViewById(R.id.itemcounter);
 
         // RESTAURANT KEY
         String key = getIntent().getStringExtra("key");
@@ -351,10 +346,6 @@ public class MenuActivity extends AppCompatActivity
 
     public void display(ArrayList<Item> mData)
     {
-        // BASKET LIST
-        ArrayList<Item> mBasket;
-        mBasket = new ArrayList<>();
-
         recyclerView.setHasFixedSize(true);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -362,7 +353,7 @@ public class MenuActivity extends AppCompatActivity
 
         MenuAdapter menuAdapter;
 
-        menuAdapter = new MenuAdapter(getApplicationContext(), mData, mBasket, button_basket, itemcounter);
+        menuAdapter = new MenuAdapter(getApplicationContext(), mData, button_basket);
         recyclerView.setAdapter(menuAdapter);
 
         menuAdapter.notifyDataSetChanged();

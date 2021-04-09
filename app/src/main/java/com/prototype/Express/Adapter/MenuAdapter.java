@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.prototype.Express.Activity.AddActivity;
+import com.prototype.Express.Class.GlobalVariables;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
@@ -25,22 +25,17 @@ public class MenuAdapter extends RecyclerView.Adapter
     // VARIABLES
     Context context;
     ArrayList<Item> mData;
-    ArrayList<Item> mBasket;
     ImageView button_basket;
-    TextView itemcounter;
-    int counter = 0;
 
     // VIEWHOLDERS
     MyViewHolder myViewHolder;
     MyViewHolder2 myViewHolder2;
 
-    public MenuAdapter(Context context, ArrayList<Item> mData, ArrayList<Item> mBasket, ImageView button_basket, TextView itemcounter)
+    public MenuAdapter(Context context, ArrayList<Item> mData, ImageView button_basket)
     {
         this.context = context;
         this.mData = mData;
-        this.mBasket = mBasket;
         this.button_basket = button_basket;
-        this.itemcounter = itemcounter;
     }
 
     // DECISION MAKER
@@ -119,7 +114,6 @@ public class MenuAdapter extends RecyclerView.Adapter
                     context.getApplicationContext().startActivity(intent);
                 }
             });
-
         }
 
         button_basket.setOnClickListener(new View.OnClickListener()
@@ -127,7 +121,7 @@ public class MenuAdapter extends RecyclerView.Adapter
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(context, "BASKET PRESSED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, String.valueOf(GlobalVariables.getInstance().encounters.size()), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -177,7 +171,6 @@ public class MenuAdapter extends RecyclerView.Adapter
             name = itemView.findViewById(R.id.name);
         }
     }
-
 
 
 

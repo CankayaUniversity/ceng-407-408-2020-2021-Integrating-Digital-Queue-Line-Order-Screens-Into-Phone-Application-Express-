@@ -13,13 +13,14 @@ public class Item
     private String createdAt;
     private String updatedAt;
     private int __v;
+    private int quantity;
 
     public Item()
     {
 
     }
 
-    public Item(String photo, String _id, String name, String description, String menu, String restaurant, int price, String type, String createdAt, String updatedAt, int __v) {
+    public Item(String photo, String _id, String name, String description, String menu, String restaurant, int price, String type, String createdAt, String updatedAt, int __v, int quantity) {
         this.photo = photo;
         this._id = _id;
         this.name = name;
@@ -31,6 +32,7 @@ public class Item
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.__v = __v;
+        this.quantity = quantity;
     }
 
     public String getPhoto() {
@@ -119,5 +121,13 @@ public class Item
 
     public void set__v(int __v) {
         this.__v = __v;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

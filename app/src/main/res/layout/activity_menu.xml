@@ -8,7 +8,6 @@
 
     <FrameLayout
         android:id="@+id/frame"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,17 +75,6 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="0dp" />
 
-        <TextView
-            android:id="@+id/itemcounter"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:text="0"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

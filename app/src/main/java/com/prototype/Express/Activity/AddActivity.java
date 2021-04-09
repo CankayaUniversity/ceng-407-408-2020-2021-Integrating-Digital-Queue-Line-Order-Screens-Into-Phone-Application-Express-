@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,8 +12,13 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prototype.Express.Adapter.MenuAdapter;
+import com.prototype.Express.Class.GlobalVariables;
+import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class AddActivity extends AppCompatActivity
 {
@@ -96,6 +102,15 @@ public class AddActivity extends AppCompatActivity
 
     public void open_MenuActivity(String sname, String sdescription, int sprice, int counter, String sphoto)
     {
+        Item item = new Item();
+        item.setName(sname);
+        item.setDescription(sdescription);
+        item.setPrice(sprice);
+        item.setQuantity(counter);
+        item.setPhoto(sphoto);
+
+        GlobalVariables.getInstance().encounters.add(item);
+
         this.finish();
     }
 }
