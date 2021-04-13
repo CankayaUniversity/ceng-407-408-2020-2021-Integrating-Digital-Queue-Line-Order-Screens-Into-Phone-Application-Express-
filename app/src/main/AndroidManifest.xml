@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.AddActivity"></activity>
+        <activity android:name=".Activity.BasketActivity"></activity>
+        <activity android:name=".Activity.AddActivity" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.RestaurantsActivity" />
         <activity android:name=".Activity.LoginActivity" />

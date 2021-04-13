@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.prototype.Express.Activity.AddActivity;
-import com.prototype.Express.Class.GlobalVariables;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
@@ -25,17 +25,15 @@ public class MenuAdapter extends RecyclerView.Adapter
     // VARIABLES
     Context context;
     ArrayList<Item> mData;
-    ImageView button_basket;
 
     // VIEWHOLDERS
     MyViewHolder myViewHolder;
     MyViewHolder2 myViewHolder2;
 
-    public MenuAdapter(Context context, ArrayList<Item> mData, ImageView button_basket)
+    public MenuAdapter(Context context, ArrayList<Item> mData)
     {
         this.context = context;
         this.mData = mData;
-        this.button_basket = button_basket;
     }
 
     // DECISION MAKER
@@ -114,16 +112,19 @@ public class MenuAdapter extends RecyclerView.Adapter
                     context.getApplicationContext().startActivity(intent);
                 }
             });
-        }
 
-        button_basket.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            myViewHolder.descriptionLayout.setOnClickListener(new View.OnClickListener()
             {
-                Toast.makeText(context, String.valueOf(GlobalVariables.getInstance().encounters.size()), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onClick(View v)
+                {
+                    if(mData.get(holder.getAdapterPosition()).getType().equals("special"))
+                    {
+                        Toast.makeText(context, "Special menu clicked", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
 
@@ -171,9 +172,4 @@ public class MenuAdapter extends RecyclerView.Adapter
             name = itemView.findViewById(R.id.name);
         }
     }
-
-
-
-
-    // FUNCTIONS
 }

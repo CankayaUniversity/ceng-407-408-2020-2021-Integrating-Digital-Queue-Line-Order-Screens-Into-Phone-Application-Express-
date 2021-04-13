@@ -1,15 +1,20 @@
 package com.prototype.Express.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.prototype.Express.Adapter.MenuAdapter;
+import com.prototype.Express.Class.GlobalVariables;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 
@@ -67,6 +73,15 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
+        button_basket.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                open_BasketActivity();
+            }
+        });
+
         button_scan.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -89,6 +104,22 @@ public class MenuActivity extends AppCompatActivity
         final ArrayList<Item> mData;
         mData = new ArrayList<>();
 
+        // DATA SET FOR SPECIALS
+        final ArrayList<Item> dataset_special;
+        dataset_special = new ArrayList<>();
+
+        // DATA SET FOR SINGLEITEM
+        final ArrayList<Item> dataset_singleitem;
+        dataset_singleitem = new ArrayList<>();
+
+        // DATA SET FOR MENUITEM
+        final ArrayList<Item> dataset_menuitem;
+        dataset_menuitem = new ArrayList<>();
+
+        // DATA SET FOR DRINKS
+        final ArrayList<Item> dataset_drinks;
+        dataset_drinks= new ArrayList<>();
+
 
         if(true)
         {
@@ -106,7 +137,7 @@ public class MenuActivity extends AppCompatActivity
                                 Item indicator_special = new Item();
                                 indicator_special.setType("separator");
                                 indicator_special.setName("ÖZEL MENÜLER");
-                                mData.add(indicator_special);
+                                dataset_special.add(indicator_special);
                             }
 
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -134,8 +165,15 @@ public class MenuActivity extends AppCompatActivity
                             item.setUpdatedAt(updatedAt);
                             item.set__v(__v);
 
-                            mData.add(item);
+                            if(item.getName() != null)
+                            {
+                                dataset_special.add(item);
+                            }
 
+                            if(dataset_special.size() == 1)
+                            {
+                                dataset_special.remove(0);
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -166,7 +204,7 @@ public class MenuActivity extends AppCompatActivity
                                 Item indicator_singleitem = new Item();
                                 indicator_singleitem.setType("separator");
                                 indicator_singleitem.setName("ÜRÜNLER");
-                                mData.add(indicator_singleitem);
+                                dataset_singleitem.add(indicator_singleitem);
                             }
 
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -194,7 +232,15 @@ public class MenuActivity extends AppCompatActivity
                             item.setUpdatedAt(updatedAt);
                             item.set__v(__v);
 
-                            mData.add(item);
+                            if(item.getName() != null)
+                            {
+                                dataset_singleitem.add(item);
+                            }
+
+                            if(dataset_singleitem.size() == 1)
+                            {
+                                dataset_singleitem.remove(0);
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -225,7 +271,7 @@ public class MenuActivity extends AppCompatActivity
                                 Item indicator_menuitem = new Item();
                                 indicator_menuitem.setType("separator");
                                 indicator_menuitem.setName("MENÜLER");
-                                mData.add(indicator_menuitem);
+                                dataset_menuitem.add(indicator_menuitem);
                             }
 
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -253,7 +299,15 @@ public class MenuActivity extends AppCompatActivity
                             item.setUpdatedAt(updatedAt);
                             item.set__v(__v);
 
-                            mData.add(item);
+                            if(item.getName() != null)
+                            {
+                                dataset_menuitem.add(item);
+                            }
+
+                            if(dataset_menuitem.size() == 1)
+                            {
+                                dataset_menuitem.remove(0);
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -285,7 +339,7 @@ public class MenuActivity extends AppCompatActivity
                                 Item indicator_drinks = new Item();
                                 indicator_drinks.setType("separator");
                                 indicator_drinks.setName("İÇECEKLER");
-                                mData.add(indicator_drinks);
+                                dataset_drinks.add(indicator_drinks);
                             }
 
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -313,7 +367,15 @@ public class MenuActivity extends AppCompatActivity
                             item.setUpdatedAt(updatedAt);
                             item.set__v(__v);
 
-                            mData.add(item);
+                            if(item.getName() != null)
+                            {
+                                dataset_drinks.add(item);
+                            }
+
+                            if(dataset_drinks.size() == 1)
+                            {
+                                dataset_drinks.remove(0);
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -336,6 +398,11 @@ public class MenuActivity extends AppCompatActivity
         {
             public void run()
             {
+                // MERGE DATA SETS
+                mData.addAll(dataset_special);
+                mData.addAll(dataset_menuitem);
+                mData.addAll(dataset_singleitem);
+                mData.addAll(dataset_drinks);
                 display(mData);
             }
         }, 5000);   // 1 second
@@ -353,7 +420,7 @@ public class MenuActivity extends AppCompatActivity
 
         MenuAdapter menuAdapter;
 
-        menuAdapter = new MenuAdapter(getApplicationContext(), mData, button_basket);
+        menuAdapter = new MenuAdapter(getApplicationContext(), mData);
         recyclerView.setAdapter(menuAdapter);
 
         menuAdapter.notifyDataSetChanged();
@@ -371,4 +438,11 @@ public class MenuActivity extends AppCompatActivity
         Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
+
+    public void open_BasketActivity()
+    {
+        Intent intent = new Intent(MenuActivity.this, BasketActivity.class);
+        startActivity(intent);
+    }
+
 }

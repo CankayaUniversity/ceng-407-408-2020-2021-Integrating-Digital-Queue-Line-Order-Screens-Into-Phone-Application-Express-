@@ -49,6 +49,10 @@ public class AddActivity extends AppCompatActivity
         description = findViewById(R.id.description);
         button_approve = findViewById(R.id.button_approve);
 
+        // BUTTON START STATE
+        button_approve.setVisibility(View.INVISIBLE);
+
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null)
         {
@@ -70,6 +74,7 @@ public class AddActivity extends AppCompatActivity
             {
                 counter = counter + 1;
                 number.setText(String.valueOf(counter));
+                button_approve.setVisibility(View.VISIBLE);
             }
         });
 
@@ -84,8 +89,9 @@ public class AddActivity extends AppCompatActivity
                     number.setText(String.valueOf(counter));
                 }
 
-                else{
-                    Toast.makeText(AddActivity.this, "Olmaz :D", Toast.LENGTH_SHORT).show();
+                if(counter == 0)
+                {
+                    button_approve.setVisibility(View.INVISIBLE);
                 }
             }
         });
