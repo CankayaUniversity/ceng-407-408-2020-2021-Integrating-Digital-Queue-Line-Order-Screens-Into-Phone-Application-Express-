@@ -8,6 +8,14 @@
         "type": "special"
     },
     {
+        "_id": "606eb96d70a4c309609d1e11",
+        "photo": "https://user-images.githubusercontent.com/49036494/97118087-2e19dc00-1719-11eb-8140-d5f85514d1e0.jpg",
+        "name": "Express Menu",
+        "description": "Campaign menus for those who use our application",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "special"
+    },
+    {
         "_id": "606eb96d70a4c309609d1e08",
         "photo": "https://images.theconversation.com/files/59580/original/dss8rngv-1411128291.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip",
         "name": "Child Menus",

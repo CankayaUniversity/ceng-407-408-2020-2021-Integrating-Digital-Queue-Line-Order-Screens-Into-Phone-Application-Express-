@@ -20,6 +20,16 @@
         "type": "menuitem"
     },
     {
+        "photo": "https://cdn.yemek.com/mnresize/940/940/uploads/2020/04/lahmacun-yeni-one-cikan.jpg",
+        "_id": "606eb96d70a4c309609d1e41",
+        "name": "Seçilmiş Menü (3 Adet Lahmacun)",
+        "description": "3 Adet Lahmacun + drink",
+        "price": 37.75,
+        "menu": "606eb96d70a4c309609d1e11",
+        "restaurant": "5d713995b721c3bb38c1f5d0",
+        "type": "menuitem"
+    },
+    {
         "photo": "https://www.burgerking.com.tr/cmsfiles/products/fish-royale-menu-1.png?v=173",
         "_id": "606eb96d70a4c309609d1e32",
         "name": "Fish Burger Menu",
