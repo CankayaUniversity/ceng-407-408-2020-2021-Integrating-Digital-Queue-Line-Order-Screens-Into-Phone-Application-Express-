@@ -17,7 +17,7 @@
     "mongoose": "^5.11.15",
     "morgan": "^1.10.0",
     "slugify": "^1.4.7",
-    "socket.io": "^4.0.1",
+    "socket.io": "^2.2.0",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   },
