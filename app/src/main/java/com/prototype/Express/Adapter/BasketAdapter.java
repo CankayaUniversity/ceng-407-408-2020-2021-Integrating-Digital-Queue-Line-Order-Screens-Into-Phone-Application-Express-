@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,40 +19,58 @@ import java.util.ArrayList;
 
 
 
-public class BasketAdapter extends RecyclerView.Adapter
+public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>
 {
     // VARIABLES
     Context context;
     ArrayList<Item> mData;
+    Button button_approve;
+    int price_total;
+    int item_quantity;
 
     // VIEWHOLDERS
     MyViewHolder myViewHolder;
 
-    public BasketAdapter(Context context, ArrayList<Item> mData)
+    public BasketAdapter(Context context, ArrayList<Item> mData, Button button_approve)
     {
         this.context = context;
         this.mData = mData;
+        this.button_approve = button_approve;
+        button_approve.setVisibility(View.INVISIBLE);
     }
 
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view;
 
-        view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
-        return new BasketAdapter.MyViewHolder(view);
+        view = LayoutInflater.from(context).inflate(R.layout.basket_item, parent, false);
+
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+
+        return  myViewHolder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position)
     {
-        myViewHolder = (BasketAdapter.MyViewHolder) holder;
+        holder.name.setText(mData.get(holder.getAdapterPosition()).getName());
+        Picasso.get().load(mData.get(holder.getAdapterPosition()).getPhoto()).into(holder.image);
+        holder.description.setText(mData.get(holder.getAdapterPosition()).getDescription());
+        holder.price.setText(String.valueOf(mData.get(holder.getAdapterPosition()).getPrice() * mData.get(holder.getAdapterPosition()).getQuantity()) + "₺");
+        holder.quantity.setText(String.valueOf(mData.get(holder.getAdapterPosition()).getQuantity()));
+        item_quantity = mData.get(holder.getAdapterPosition()).getQuantity();
 
-        myViewHolder.name.setText(mData.get(holder.getAdapterPosition()).getName());
-        Picasso.get().load(mData.get(holder.getAdapterPosition()).getPhoto()).into(myViewHolder.image);
+        price_total = price_total + (mData.get(holder.getAdapterPosition()).getPrice() * mData.get(holder.getAdapterPosition()).getQuantity());
+
+        if(price_total != 0)
+        {
+            button_approve.setVisibility(View.VISIBLE);
+            button_approve.setText("SİPARİŞİ ONAYLA: " + price_total + "₺");
+        }
     }
 
 
@@ -71,8 +90,8 @@ public class BasketAdapter extends RecyclerView.Adapter
         TextView price;
         ConstraintLayout descriptionLayout;
         ImageView image;
-        TextView description;
-        ImageView add;
+        TextView description, quantity;
+        ImageView remove;
 
         public MyViewHolder(@NonNull View itemView)
         {
@@ -84,9 +103,8 @@ public class BasketAdapter extends RecyclerView.Adapter
             descriptionLayout = itemView.findViewById(R.id.descriptionLayout);
             image = itemView.findViewById(R.id.image);
             description = itemView.findViewById(R.id.description);
-            add = itemView.findViewById(R.id.add);
-
-            add.setVisibility(View.INVISIBLE);
+            quantity = itemView.findViewById(R.id.quantity);
+            remove = itemView.findViewById(R.id.remove);
         }
     }
 }

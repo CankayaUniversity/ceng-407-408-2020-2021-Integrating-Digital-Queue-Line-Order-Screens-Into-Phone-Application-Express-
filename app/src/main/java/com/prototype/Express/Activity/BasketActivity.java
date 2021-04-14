@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.prototype.Express.Adapter.BasketAdapter;
 import com.prototype.Express.Adapter.MenuAdapter;
@@ -20,6 +21,7 @@ public class BasketActivity extends AppCompatActivity
 
     // XML VARIABLES
     RecyclerView rw;
+    Button button_approve;
 
 
     @Override
@@ -30,6 +32,7 @@ public class BasketActivity extends AppCompatActivity
 
         // XML INITIALIZING
         rw = findViewById(R.id.rw);
+        button_approve = findViewById(R.id.button_approve);
 
         rw.setHasFixedSize(true);
 
@@ -40,7 +43,7 @@ public class BasketActivity extends AppCompatActivity
         mData = new ArrayList<>();
         mData.addAll(GlobalVariables.getInstance().encounters);
 
-        basketAdapter = new BasketAdapter(getApplicationContext(), mData);
+        basketAdapter = new BasketAdapter(getApplicationContext(), mData, button_approve);
         rw.setAdapter(basketAdapter);
 
         basketAdapter.notifyDataSetChanged();
