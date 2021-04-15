@@ -53,6 +53,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 const restaurants = require('./routes/restaurants');
 const menus = require('./routes/menus');
 const menuItems = require('./routes/menuItems');
+const orders = require('./routes/orders');
 
 // Body parser
 app.use(express.json());
@@ -67,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/restaurants', restaurants);
 app.use('/api/v1/menus', menus);
 app.use('/api/v1/menuitems', menuItems);
+app.use('/api/v1/orders', orders);
 
 app.use('/api/v1/project-info', (req, res, next) => {
   res.json({

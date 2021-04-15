@@ -2,8 +2,6 @@ const Restaurant = require('../models/Restaurant');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
-
-
 /**
  * @swagger
  * components:
@@ -97,20 +95,12 @@ const asyncHandler = require('../middleware/async');
  
  */
 
-
-
-
 /**
  * @swagger
  * tags:
  *   name: Restaurants
  *   description: The restaurants managing API
  */
-
-
-
-
-
 
 // @desc            Get all restaurants
 // @route           GET /api/v1/restaurants
@@ -136,34 +126,28 @@ const asyncHandler = require('../middleware/async');
  *                      type: array
  *                      items:
  *                          $ref: '#/components/schemas/RestaurantResponse'
- * 
+ *
  *       500:
- *         description: Some server error 
+ *         description: Some server error
  */
 exports.getRestaurants = asyncHandler(async (req, res, next) => {
+  const restaurants = await Restaurant.find().populate({
+    path: 'menus',
+    populate: {
+      path: 'menuitems',
+      model: 'MenuItem',
+    },
+  });
 
-    const restaurants = await Restaurant.find().populate({
-        path: 'menus',
-        populate: {
-            path: 'menuitems',
-            model: 'MenuItem'
-        }
-    });
-
-    res.status(200).json({
-        success: true,
-        data: restaurants
-    })
-
-
-
+  res.status(200).json({
+    success: true,
+    data: restaurants,
+  });
 });
-
 
 // @desc            Get single restaurant
 // @route           GET /api/v1/restaurants/:id
 // @access          Public
-
 
 /**
  * @swagger
@@ -189,44 +173,37 @@ exports.getRestaurants = asyncHandler(async (req, res, next) => {
  *                  success:
  *                      type: boolean
  *                  data:
- *                      $ref: '#/components/schemas/RestaurantResponse' 
+ *                      $ref: '#/components/schemas/RestaurantResponse'
  *       404:
  *         description: The Restaurant was not found
- * 
+ *
  *       500:
  *         description: Some server error
  */
 exports.getRestaurant = asyncHandler(async (req, res, next) => {
+  const restaurant = await Restaurant.findById(req.params.id).populate({
+    path: 'menus',
+    populate: {
+      path: 'menuitems',
+      model: 'MenuItem',
+    },
+  });
 
+  if (!restaurant) {
+    return next(
+      new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-    const restaurant = await Restaurant.findById(req.params.id).populate({
-        path: 'menus',
-        populate: {
-            path: 'menuitems',
-            model: 'MenuItem'
-        }
-    });
-
-    if (!restaurant) {
-        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
-    }
-
-    res.status(200).json({
-        success: true,
-        data: restaurant
-    })
-
-
-
-
+  res.status(200).json({
+    success: true,
+    data: restaurant,
+  });
 });
-
-
 
 // @desc            Create new restaurant
 // @route           POST /api/v1/restaurants
 // @access          Private
-
 
 /**
  * @swagger
@@ -251,24 +228,17 @@ exports.getRestaurant = asyncHandler(async (req, res, next) => {
  *         description: Some server error
  */
 exports.createRestaurant = asyncHandler(async (req, res, next) => {
+  const restaurant = await Restaurant.create(req.body);
 
-
-    const restaurant = await Restaurant.create(req.body);
-
-
-    res.status(201).json({
-        success: true,
-        data: restaurant
-    })
-
+  res.status(201).json({
+    success: true,
+    data: restaurant,
+  });
 });
-
 
 // @desc            Update restaurant
 // @route           PUT /api/v1/restaurants/:id
 // @access          Private
-
-
 
 /**
  * @swagger
@@ -302,28 +272,22 @@ exports.createRestaurant = asyncHandler(async (req, res, next) => {
  *        description: Some error happened
  */
 exports.updateRestaurant = asyncHandler(async (req, res, next) => {
+  restaurant = await Restaurant.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
+  if (!restaurant) {
+    return next(
+      new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-
-    restaurant = await Restaurant.findOneAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true
-    });
-
-
-    if (!restaurant) {
-        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
-    }
-
-
-    res.status(200).json({
-        success: true,
-        data: restaurant
-    });
-
-
+  res.status(200).json({
+    success: true,
+    data: restaurant,
+  });
 });
-
 
 // @desc            Delete restaurant
 // @route           DELETE /api/v1/restaurants/:id
@@ -342,7 +306,7 @@ exports.updateRestaurant = asyncHandler(async (req, res, next) => {
  *           type: string
  *         required: true
  *         description: The restaurants id
- * 
+ *
  *     responses:
  *       200:
  *         description: The restaurants was deleted
@@ -352,18 +316,18 @@ exports.updateRestaurant = asyncHandler(async (req, res, next) => {
  *         description: Some error happened
  */
 exports.deleteRestaurant = asyncHandler(async (req, res, next) => {
+  const restaurant = await Restaurant.findById(req.params.id);
 
-    const restaurant = await Restaurant.findById(req.params.id);
+  if (!restaurant) {
+    return next(
+      new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-    if (!restaurant) {
-        return next(new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404));
-    }
+  restaurant.remove();
 
-    restaurant.remove();
-
-    res.status(200).json({
-        success: true,
-        data: restaurant
-    });
-
+  res.status(200).json({
+    success: true,
+    data: restaurant,
+  });
 });
