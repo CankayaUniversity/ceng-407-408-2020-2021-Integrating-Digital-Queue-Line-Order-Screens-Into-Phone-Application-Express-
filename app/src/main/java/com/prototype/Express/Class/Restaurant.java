@@ -5,18 +5,19 @@ public class Restaurant
     private String name;
     private String address;
     private String description;
-    private String ID;
     private String photo;
+    private String key;
 
     public Restaurant(){
     }
 
-    public Restaurant(String name, String address, String description, String ID, String photo) {
+
+    public Restaurant(String name, String address, String description, String photo, String key) {
         this.name = name;
         this.address = address;
         this.description = description;
-        this.ID = ID;
         this.photo = photo;
+        this.key = key;
     }
 
     public String getName() {
@@ -43,19 +44,19 @@ public class Restaurant
         this.description = description;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

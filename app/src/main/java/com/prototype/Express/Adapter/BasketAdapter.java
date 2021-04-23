@@ -2,21 +2,34 @@ package com.prototype.Express.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.prototype.Express.Activity.AddActivity;
 import com.prototype.Express.Class.Item;
+import com.prototype.Express.Class.Order;
 import com.prototype.Express.R;
+import com.prototype.Express.Socket.OrderSocket;
 import com.squareup.picasso.Picasso;
-import java.util.ArrayList;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>
@@ -70,6 +83,18 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
         {
             button_approve.setVisibility(View.VISIBLE);
             button_approve.setText("SİPARİŞİ ONAYLA: " + price_total + "₺");
+
+            button_approve.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Toast.makeText(context, "Siparişiniz Alındı!", Toast.LENGTH_SHORT).show();
+                    Thread myThread = new Thread(new MyServerThread());
+                    myThread.start();
+                    listenSocket("hello");
+                }
+            });
         }
     }
 
@@ -106,5 +131,52 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
             quantity = itemView.findViewById(R.id.quantity);
             remove = itemView.findViewById(R.id.remove);
         }
+    }
+
+    // SERVER THREAD
+    class MyServerThread implements Runnable
+    {
+        Socket socket;
+        ServerSocket serverSocket;
+        InputStreamReader inputStreamReader;
+        BufferedReader bufferedReader;
+        Handler handler = new Handler();
+        String message;
+
+        @Override
+        public void run()
+        {
+           try {
+               serverSocket = new ServerSocket(5000);
+               while(true)
+               {
+                    socket = serverSocket.accept();
+                    inputStreamReader = new InputStreamReader(socket.getInputStream());
+                    bufferedReader = new BufferedReader(inputStreamReader);
+                    message = bufferedReader.readLine();
+
+                    handler.post(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+               }
+
+           }catch (IOException e) {
+                e.printStackTrace();
+           }
+
+        }
+    }
+
+    // SOCKET
+    public void listenSocket(String data)
+    {
+        OrderSocket orderSocket = new OrderSocket();
+        orderSocket.execute(data);
     }
 }

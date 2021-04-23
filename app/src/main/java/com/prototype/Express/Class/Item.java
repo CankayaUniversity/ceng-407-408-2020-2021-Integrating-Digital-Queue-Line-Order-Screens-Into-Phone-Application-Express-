@@ -1,5 +1,7 @@
 package com.prototype.Express.Class;
 
+import java.io.StringWriter;
+
 public class Item
 {
     private String photo;
@@ -14,13 +16,16 @@ public class Item
     private String updatedAt;
     private int __v;
     private int quantity;
+    private int sizes[];
+    private int extras[];
 
     public Item()
     {
 
     }
 
-    public Item(String photo, String _id, String name, String description, String menu, String restaurant, int price, String type, String createdAt, String updatedAt, int __v, int quantity) {
+    public Item(String photo, String _id, String name, String description, String menu, String restaurant, int price, String type, String createdAt, String updatedAt, int __v, int quantity, int[] sizes, int[] extras)
+    {
         this.photo = photo;
         this._id = _id;
         this.name = name;
@@ -33,6 +38,8 @@ public class Item
         this.updatedAt = updatedAt;
         this.__v = __v;
         this.quantity = quantity;
+        this.sizes = sizes;
+        this.extras = extras;
     }
 
     public String getPhoto() {
@@ -129,5 +136,21 @@ public class Item
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int[] getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(int[] sizes) {
+        this.sizes = sizes;
+    }
+
+    public int[] getExtras() {
+        return extras;
+    }
+
+    public void setExtras(int[] extras) {
+        this.extras = extras;
     }
 }
