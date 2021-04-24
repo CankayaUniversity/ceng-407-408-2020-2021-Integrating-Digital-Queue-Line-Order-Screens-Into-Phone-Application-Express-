@@ -1,7 +1,6 @@
 package com.prototype.Express.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,26 +9,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import com.prototype.Express.Activity.AddActivity;
+
+import com.prototype.Express.Activity.BasketActivity;
 import com.prototype.Express.Class.Item;
-import com.prototype.Express.Class.Order;
 import com.prototype.Express.R;
-import com.prototype.Express.Socket.OrderSocket;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>
@@ -90,9 +87,14 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
                 public void onClick(View v)
                 {
                     Toast.makeText(context, "Siparişiniz Alındı!", Toast.LENGTH_SHORT).show();
-                    Thread myThread = new Thread(new MyServerThread());
-                    myThread.start();
-                    listenSocket("hello");
+
+                    // EMIT DATA TO SOCKET SERVER
+                    socket_emit();
+                    System.out.print("\n\n\n EMIT CALLED \n\n\n");
+
+                    socket_receive();
+                    System.out.print("\n\n\n RECEIVE CALLED \n\n\n");
+
                 }
             });
         }
@@ -133,50 +135,57 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
         }
     }
 
-    // SERVER THREAD
-    class MyServerThread implements Runnable
-    {
-        Socket socket;
-        ServerSocket serverSocket;
-        InputStreamReader inputStreamReader;
-        BufferedReader bufferedReader;
-        Handler handler = new Handler();
-        String message;
 
+    // TODO SOCKET
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://104.248.207.133:5000");
+        }catch (URISyntaxException e){}
+    }
+
+    private void socket_emit()
+    {
+        String emit_data = "text message as string";
+
+        mSocket.connect();
+        mSocket.emit("phone-send", emit_data);
+        System.out.print("\n\n\n SOCKET_EMIT FUNCTION \n\n\n");
+    }
+
+    private void socket_receive()
+    {
+        mSocket.on("phone-receive", onNewMessage);
+        mSocket.connect();
+        System.out.print("\n\n\n SOCKET_RECEIVE FUNCTION \n\n\n");
+    }
+
+    private Emitter.Listener onNewMessage = new Emitter.Listener()
+    {
         @Override
-        public void run()
+        public void call(final Object... args)
         {
-           try {
-               serverSocket = new ServerSocket(5000);
-               while(true)
-               {
-                    socket = serverSocket.accept();
-                    inputStreamReader = new InputStreamReader(socket.getInputStream());
-                    bufferedReader = new BufferedReader(inputStreamReader);
-                    message = bufferedReader.readLine();
+            ((BasketActivity)context).runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    JSONObject data = (JSONObject) args[0];
+                    String message;
+                    System.out.print("\n\n\n THREAD \n\n\n");
 
-                    handler.post(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    try {
+                        System.out.print("\n\n\n Emitter.Listener try block \n\n\n");
+                        message = data.getString("phone-receive");
 
-               }
+                    }catch (JSONException e){
+                        System.out.print("\n\n\n Emitter.Listener catch block \n\n\n");
+                        return;
+                    }
 
-           }catch (IOException e) {
-                e.printStackTrace();
-           }
-
+                    Toast.makeText(context, "Received Message: " + message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-    }
-
-    // SOCKET
-    public void listenSocket(String data)
-    {
-        OrderSocket orderSocket = new OrderSocket();
-        orderSocket.execute(data);
-    }
+    };
 }
