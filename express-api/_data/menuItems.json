@@ -4,30 +4,57 @@
         "_id": "606eb96d70a4c309609d1e30",
         "name": "Steakhouse Menu",
         "description": "Steakhouse burger, chips, drink",
-        "price": 45.5,
         "menu": "606eb96d70a4c309609d1e07",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://d3vkdqr0qjxhag.cloudfront.net/burger-king/Chicken_Royale_Menue_c9372181cc",
         "_id": "606eb96d70a4c309609d1e31",
         "name": "Chicken Royal Menu",
         "description": "Chicken Royal burger, chips, drink",
-        "price": 15,
         "menu": "606eb96d70a4c309609d1e07",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":16,
+            "medium":21,
+            "big": 26
+        },
+        "extras": {
+            "lettuce": 8,
+            "onion":11,
+            "more meat!!": 16
+        }
     },
     {
         "photo": "https://cdn.yemek.com/mnresize/940/940/uploads/2020/04/lahmacun-yeni-one-cikan.jpg",
         "_id": "606eb96d70a4c309609d1e41",
         "name": "Seçilmiş Menü (3 Adet Lahmacun)",
         "description": "3 Adet Lahmacun + drink",
-        "price": 37.75,
         "menu": "606eb96d70a4c309609d1e11",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://www.burgerking.com.tr/cmsfiles/products/fish-royale-menu-1.png?v=173",
@@ -36,8 +63,17 @@
         "description": "Fish burger, chips, drinks",
         "menu": "606eb96d70a4c309609d1e09",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 35,
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":17,
+            "medium":21,
+            "big": 28
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://www.burgerking.com.tr/cmsfiles/products/whopper-menu-1.png?v=173",
@@ -46,18 +82,36 @@
         "description": "Hamburger, chips, drinks",
         "menu": "606eb96d70a4c309609d1e09",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 25,
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://d3vkdqr0qjxhag.cloudfront.net/burger-king/Chicken_Royale_Menue_c9372181cc",
         "_id": "606eb96d70a4c309609d1e34",
         "name": "Chicken Royal Menu",
         "description": "Chicken Royal burger, chips, drink",
-        "price": 15,
         "menu": "606eb96d70a4c309609d1e08",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "type": "menuitem"
+        "type": "menuitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://www.kackalori.com.tr/Uploads/Kaloriler/1-adet-fish-burger-kac-kalori_94_2.jpg?width=300",
@@ -66,8 +120,17 @@
         "description": "Fish burger",
         "menu": "606eb96d70a4c309609d1e10",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 20,
-        "type": "singleitem"
+        "type": "singleitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://www.burgerking.com.tr/cmsfiles/products/hamburger.png?v=173",
@@ -76,8 +139,17 @@
         "description": "Hamburger",
         "menu": "606eb96d70a4c309609d1e10",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 15,
-        "type": "singleitem"
+        "type": "singleitem",
+        "sizes": {
+            "default":15,
+            "medium":20,
+            "big": 25
+        },
+        "extras": {
+            "lettuce": 7,
+            "onion":10,
+            "more meat!!": 15
+        }
     },
     {
         "photo": "https://cdn.shopify.com/s/files/1/2141/9909/products/Coke_Zero_330mL.png?v=1591901397",
@@ -86,8 +158,12 @@
         "description": "Cola",
         "menu": "606eb96d70a4c309609d1e10",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 5,
-        "type": "drink"
+        "type": "drink",
+        "sizes": {
+            "default":5,
+            "medium":10,
+            "big": 15
+        }
     },
     {
         "photo": "https://nebilcdn.blob.core.windows.net/citygross/Images/510/0003500_fuse-tea-ice-tea-mango-ananas-aromali-330-cc_510.jpg",
@@ -96,7 +172,11 @@
         "description": "Ice Tea",
         "menu": "606eb96d70a4c309609d1e10",
         "restaurant": "5d713995b721c3bb38c1f5d0",
-        "price": 5,
-        "type": "drink"
+        "type": "drink",
+        "sizes": {
+            "default":7,
+            "medium":9,
+            "big": 10
+        }
     }
 ]

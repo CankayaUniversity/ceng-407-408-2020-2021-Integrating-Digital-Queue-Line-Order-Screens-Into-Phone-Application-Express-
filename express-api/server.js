@@ -13,6 +13,19 @@ const io = require('socket.io')(server, {
   pingTimeout: 60000,
 });
 
+
+app.set('views', 'views');
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/socket', (req, res, next) => {
+  res.render('info/socket-info');
+});
+
+
+
+
 // Load env vars
 dotenv.config({
   path: './config/config.env',
@@ -82,7 +95,9 @@ app.use(errorHandler);
 server.listen(5000);
 
 io.on('connection', (socket) => {
-  console.log('someone connected');
+  
+  io.sockets.emit('user', 'someone is connected');
+
   socket.on('pc-send', (data) => {
     io.sockets.emit('phone-receive', data);
   });
