@@ -1,6 +1,7 @@
 package com.prototype.Express.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.prototype.Express.Activity.BasketActivity;
+import com.prototype.Express.Activity.TestActivity;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>
@@ -41,12 +35,25 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
     // VIEWHOLDERS
     MyViewHolder myViewHolder;
 
+    // TODO SOCKET
+    // SOCKET OBJECT
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://104.248.207.133:5000");
+        }catch (URISyntaxException e){}
+    }
+
+
     public BasketAdapter(Context context, ArrayList<Item> mData, Button button_approve)
     {
         this.context = context;
         this.mData = mData;
         this.button_approve = button_approve;
         button_approve.setVisibility(View.INVISIBLE);
+
+        // CONNECT SOCKET
+        mSocket.connect();
     }
 
 
@@ -89,12 +96,9 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
                     Toast.makeText(context, "Siparişiniz Alındı!", Toast.LENGTH_SHORT).show();
 
                     // EMIT DATA TO SOCKET SERVER
-                    socket_emit();
+                    sendOrder();
                     System.out.print("\n\n\n EMIT CALLED \n\n\n");
-
-                    socket_receive();
-                    System.out.print("\n\n\n RECEIVE CALLED \n\n\n");
-
+                    open_TestActivity();
                 }
             });
         }
@@ -136,56 +140,23 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
     }
 
 
-    // TODO SOCKET
-    private Socket mSocket;
+
+
+    // INTENTS
+    public void open_TestActivity()
     {
-        try {
-            mSocket = IO.socket("http://104.248.207.133:5000");
-        }catch (URISyntaxException e){}
+        Intent intent = new Intent(context, TestActivity.class);
+        context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    private void socket_emit()
-    {
-        String emit_data = "text message as string";
 
-        mSocket.connect();
+
+    // FUNCTIONS
+    private void sendOrder()
+    {
+        String emit_data = "test message as string";
+
         mSocket.emit("phone-send", emit_data);
         System.out.print("\n\n\n SOCKET_EMIT FUNCTION \n\n\n");
     }
-
-    private void socket_receive()
-    {
-        mSocket.on("phone-receive", onNewMessage);
-        mSocket.connect();
-        System.out.print("\n\n\n SOCKET_RECEIVE FUNCTION \n\n\n");
-    }
-
-    private Emitter.Listener onNewMessage = new Emitter.Listener()
-    {
-        @Override
-        public void call(final Object... args)
-        {
-            ((BasketActivity)context).runOnUiThread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    JSONObject data = (JSONObject) args[0];
-                    String message;
-                    System.out.print("\n\n\n THREAD \n\n\n");
-
-                    try {
-                        System.out.print("\n\n\n Emitter.Listener try block \n\n\n");
-                        message = data.getString("phone-receive");
-
-                    }catch (JSONException e){
-                        System.out.print("\n\n\n Emitter.Listener catch block \n\n\n");
-                        return;
-                    }
-
-                    Toast.makeText(context, "Received Message: " + message, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    };
 }

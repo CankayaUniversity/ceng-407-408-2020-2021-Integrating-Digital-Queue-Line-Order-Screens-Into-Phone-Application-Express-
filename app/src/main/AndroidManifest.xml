@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prototype.Express">
-    <!-- CAMERA PERMISSION FOR QR -->
+    <!-- PERMISSIONS -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.BasketActivity"></activity>
+        <activity android:name=".Activity.TestActivity"></activity>
+        <activity android:name=".Activity.BasketActivity" />
         <activity android:name=".Activity.AddActivity" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.RestaurantsActivity" />
