@@ -13,10 +13,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.prototype.Express.Activity.OrderReceivedActivity;
 import com.prototype.Express.Activity.TestActivity;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import io.socket.client.IO;
@@ -97,8 +103,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
 
                     // EMIT DATA TO SOCKET SERVER
                     sendOrder();
-                    System.out.print("\n\n\n EMIT CALLED \n\n\n");
-                    open_TestActivity();
                 }
             });
         }
@@ -149,14 +153,36 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
         context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-
+    public void open_OrderReceived()
+    {
+        Intent intent = new Intent(context, OrderReceivedActivity.class);
+        context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
 
     // FUNCTIONS
     private void sendOrder()
     {
-        String emit_data = "test message as string";
+        String name = "TEST";
+        String menuItem =  "606eb96d70a4c309609d1e31";
 
-        mSocket.emit("phone-send", emit_data);
-        System.out.print("\n\n\n SOCKET_EMIT FUNCTION \n\n\n");
+        JSONObject order = new JSONObject();
+
+        try{
+            order.put("name", name);
+            order.put("menuItem", menuItem);
+
+            mSocket.emit("phone-send", order);
+            System.out.print("EMIT SUCCESSFUL");
+
+        }catch (JSONException e){
+            System.out.print(e);
+        }
+
+
+
+        System.out.print("\n\n\n ORDER HAS BEEN SEND \n\n\n");
+
+        // INTENT
+        open_OrderReceived();
     }
 }
