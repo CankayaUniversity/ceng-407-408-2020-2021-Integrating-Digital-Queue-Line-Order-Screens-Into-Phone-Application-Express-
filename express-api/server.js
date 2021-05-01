@@ -7,12 +7,17 @@ const swaggerUI = require('swagger-ui-express');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
+const Order = require('./models/Order');
+const ErrorResponse = require('./utils/errorResponse');
+const asyncHandler = require('./middleware/async');
+
 const app = express();
 const server = require('http').Server(app);
+
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
 });
-
+exports.io = io;
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
@@ -22,9 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/socket', (req, res, next) => {
   res.render('info/socket-info');
 });
-
-
-
 
 // Load env vars
 dotenv.config({
@@ -90,19 +92,30 @@ app.use('/api/v1/project-info', (req, res, next) => {
   });
 });
 
-app.use(errorHandler);
-
-server.listen(5000);
-
 io.on('connection', (socket) => {
-  
-  io.sockets.emit('user', 'someone is connected');
+  io.sockets.emit('user', { data: socket.id });
 
   socket.on('pc-send', (data) => {
     io.sockets.emit('phone-receive', data);
   });
 
-  socket.on('phone-send', (data) => {
-    io.sockets.emit('pc-receive', data);
-  });
+  socket.on(
+    'phone-send',
+    asyncHandler(async (data) => {
+      const orders = await Order.create(data);
+
+      socket.name = socket.id;
+
+      // res.status(200).json({
+      //   success: true,
+      //   data: orders,
+      // });
+
+      io.sockets.emit('pc-receive', orders);
+    })
+  );
 });
+
+app.use(errorHandler);
+
+server.listen(5000);

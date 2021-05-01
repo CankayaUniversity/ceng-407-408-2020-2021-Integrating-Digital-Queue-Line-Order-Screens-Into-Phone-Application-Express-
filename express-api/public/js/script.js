@@ -11,5 +11,5 @@ socket.on('pc-receive', (data) => {
 });
 
 socket.on('user', (data) => {
-  div.innerHTML += '<h1>' + data + '</h1>';
+  div.innerHTML += '<h1>' + data.data + '</h1>';
 });
