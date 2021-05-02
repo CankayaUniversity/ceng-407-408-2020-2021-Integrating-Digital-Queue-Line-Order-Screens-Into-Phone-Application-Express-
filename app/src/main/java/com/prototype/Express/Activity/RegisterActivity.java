@@ -1,10 +1,11 @@
 package com.prototype.Express.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,8 +13,35 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.stream.JsonReader;
 import com.prototype.Express.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -100,38 +128,11 @@ public class RegisterActivity extends AppCompatActivity
                         Toast.makeText(RegisterActivity.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
 
-                    // REGISTER PROPER CHECK
-                    else if(editText_RegisterName.length() <=2 || editText_RegisterName.length() >= 16)
-                    {
-                        Toast.makeText(RegisterActivity.this, "Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(editText_RegisterUserName.length() <=2 || editText_RegisterUserName.length() >= 16)
-                    {
-                        Toast.makeText(RegisterActivity.this, "User Name should between 2 and 16 character", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if (editText_RegisterPhone.length() != 14)
-                    {
-                        Toast.makeText(RegisterActivity.this, "Enter your phone number without region code", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                    // REGEX CHECK
-                    else if(!Patterns.EMAIL_ADDRESS.matcher(RegisterEmail).matches())
-                    {
-                        Toast.makeText(RegisterActivity.this, "Enter valid E-Mail", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if (!PASSWORD.matcher(RegisterPassword).matches())
-                    {
-                        Toast.makeText(RegisterActivity.this, "Password should contain at least one: digit, lower case, upper case, special character without blank by having 6 or more character", Toast.LENGTH_LONG).show();
-                    }
-
 
                     // NAVIGATION TO LOGIN PAGE
                     else
                     {
+                        registerUser();
                         open_Login();
                     }
                 }
@@ -150,4 +151,49 @@ public class RegisterActivity extends AppCompatActivity
         startActivity(intent6);
     }
 
+    private void registerUser()
+    {
+        final String url = "http://104.248.207.133:5000/api/v1/auth/register";
+
+        Map<String, String> params = new HashMap();
+        params.put("name", "test7");
+        params.put("password", "123456");
+        params.put("email", "test7@hotmail.com");
+
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>()
+        {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                //TODO: handle success
+                try
+                {
+                    String register = response.getString("success");
+                    System.out.print("\n\n\n" + register + "\n\n\n");
+
+                    String token = response.getString("token");
+                    System.out.print("\n\n\n" + token + "\n\n\n");
+
+                    Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
+
+
+                }catch (JSONException e){
+                    System.out.print(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                System.out.print("\n\n\n\n\n");
+                error.printStackTrace();
+                System.out.print("\n\n\n\n\n");
+                //TODO: handle failure
+            }
+        });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
+    }
 }

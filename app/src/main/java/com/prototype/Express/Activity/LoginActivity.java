@@ -2,7 +2,9 @@ package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,14 +13,29 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.prototype.Express.R;
+
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
 
 public class LoginActivity extends AppCompatActivity
 {
     // GLOBAL VARIABLES
-    String LoginName;
-    String LoginPassword;
+    String userName;
+    String userPassword;
 
     CheckBox checkBox_RememberMe;
     EditText editText_LoginPassword;
@@ -26,12 +43,13 @@ public class LoginActivity extends AppCompatActivity
     ImageView imageView_toRegister;
     TextView textView4;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
 
         // CASTING TO XML
@@ -48,14 +66,12 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
                 // INPUT
-                LoginPassword = editText_LoginPassword.getText().toString().trim();
-                LoginName = editText_LoginName.getText().toString().trim();
+                userPassword = editText_LoginPassword.getText().toString().trim();
+                userName = editText_LoginName.getText().toString().trim();
 
 
                 // LOGIN FIELD EMPTY CHECK
-
                 if(TextUtils.isEmpty(editText_LoginName.getText().toString().trim()))
                 {
                     Toast.makeText(LoginActivity.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
@@ -68,6 +84,7 @@ public class LoginActivity extends AppCompatActivity
 
                 else
                 {
+                    loginUser();
                     open_HomePage();
                 }
             }
@@ -97,7 +114,12 @@ public class LoginActivity extends AppCompatActivity
     {
         Intent intent5 = new Intent(getApplicationContext(), MainActivity.class);
         // SEND LOGIN NAME TO MAIN PAGE
-        intent5.putExtra("LoginName", LoginName);
+        intent5.putExtra("userName", userName);
         startActivity(intent5);
+    }
+
+    private void loginUser()
+    {
+
     }
 }

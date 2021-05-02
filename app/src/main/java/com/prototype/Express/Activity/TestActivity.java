@@ -2,6 +2,7 @@ package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.Observable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.widget.TextView;
@@ -41,8 +42,20 @@ public class TestActivity extends AppCompatActivity
 
         socket.on("user", onNewMessage);
 
+
+        try {
+            IO.Options mOptions = new IO.Options();
+            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGYwODlkMmMwOGE5OWY2ZjNjNmY2ZCIsImlhdCI6MTYxOTk4NjU4OSwiZXhwIjoxNjIyNTc4NTg5fQ.lwO_ZRr4EOW0vQYNKlsgjFapOrEIBS3Auzx804jSu6g";
+            mOptions.query = "auth_token=" + token;
+            Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
+            msocket.connect();
+        } catch (URISyntaxException e) {
+            System.out.print(e);
+        }
+
+
         // CONNECT
-        socket.connect();
+        //socket.connect();
 
         // EMIT DATA
         //sendMessage();

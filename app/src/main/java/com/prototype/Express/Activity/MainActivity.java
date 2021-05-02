@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 
 
         // GETS PROFILE NAME FROM LOGIN PAGE
-        String profilename = getIntent().getStringExtra("LoginName");
+        String profilename = getIntent().getStringExtra("userName");
         textView_ProfileName.setText(profilename);
 
 
