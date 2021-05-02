@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 const Order = require('./models/Order');
+const User = require('./models/User');
 const ErrorResponse = require('./utils/errorResponse');
 const asyncHandler = require('./middleware/async');
 
@@ -17,7 +19,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
 });
-exports.io = io;
+var jwtAuth = require('socketio-jwt-auth');
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
@@ -69,9 +71,13 @@ const restaurants = require('./routes/restaurants');
 const menus = require('./routes/menus');
 const menuItems = require('./routes/menuItems');
 const orders = require('./routes/orders');
+const auth = require('./routes/auth');
 
 // Body parser
 app.use(express.json());
+
+// Cookie parser
+app.use(cookieParser());
 
 // Enable CORS
 app.use(cors());
@@ -84,6 +90,7 @@ app.use('/api/v1/restaurants', restaurants);
 app.use('/api/v1/menus', menus);
 app.use('/api/v1/menuitems', menuItems);
 app.use('/api/v1/orders', orders);
+app.use('/api/v1/auth', auth);
 
 app.use('/api/v1/project-info', (req, res, next) => {
   res.json({
@@ -92,8 +99,40 @@ app.use('/api/v1/project-info', (req, res, next) => {
   });
 });
 
+io.use(
+  jwtAuth.authenticate(
+    {
+      secret: process.env.JWT_SECRET, // required, used to verify the token's signature
+    },
+    function (payload, done) {
+      // done is a callback, you can use it as follows
+      User.findOne({ id: payload.sub }, function (err, user) {
+        if (err) {
+          // return error
+          return done(err);
+        }
+        if (!user) {
+          // return fail with an error message
+          return done(null, false, 'user does not exist');
+        }
+        // return success with a user info
+        return done(null, user);
+      });
+    }
+  )
+);
+
+let clients = {};
+
 io.on('connection', (socket) => {
-  io.sockets.emit('user', { data: socket.id });
+  //io.sockets.emit('user', { data: socket.id });
+
+  clients[socket.request.user._id] = socket.id;
+
+  socket.emit('success', {
+    message: 'success logged in!',
+    user: socket.request.user,
+  });
 
   socket.on('pc-send', (data) => {
     io.sockets.emit('phone-receive', data);
@@ -117,5 +156,8 @@ io.on('connection', (socket) => {
 });
 
 app.use(errorHandler);
+
+// global.clients = clients;
+// exports.io = io;
 
 server.listen(5000);
