@@ -3,7 +3,6 @@ package com.prototype.Express.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +13,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.prototype.Express.Activity.OrderReceivedActivity;
-import com.prototype.Express.Activity.TestActivity;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import io.socket.client.IO;
 import io.socket.client.Socket;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -136,20 +130,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
 
 
 
-    // INTENTS
-    public void open_TestActivity()
-    {
-        Intent intent = new Intent(context, TestActivity.class);
-        context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-    }
 
+    // INTENTs
     public void open_OrderReceived()
     {
         Intent intent = new Intent(context, OrderReceivedActivity.class);
         context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    // FUNCTIONS
+    // FUNCTIONs
     private void sendOrder()
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_token", MODE_PRIVATE);

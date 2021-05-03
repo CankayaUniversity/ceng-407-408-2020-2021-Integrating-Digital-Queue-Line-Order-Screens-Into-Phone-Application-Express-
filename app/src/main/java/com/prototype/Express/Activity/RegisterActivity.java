@@ -31,14 +31,12 @@ public class RegisterActivity extends AppCompatActivity
         setContentView(R.layout.activity_register);
 
         // XML
-        final EditText editText_RegisterName = (EditText) findViewById(R.id.editText_RegisterName);
-        final EditText editText_RegisterEmail = (EditText) findViewById(R.id.editText_RegisterEmail);
-        final EditText editText_RegisterUserName = (EditText) findViewById(R.id.editText_RegisterUserName);
-        final CheckBox checkBox_Old = (CheckBox) findViewById(R.id.checkBox_Old);
-        final CheckBox checkBox_TermsOfUse = (CheckBox) findViewById(R.id.checkBox_TermsOfUse);
-        final ImageView imageView_Register = (ImageView) findViewById(R.id.imageView_Register);
-        final EditText editText_RegisterPhone = (EditText) findViewById(R.id.editText_RegisterPhone);
-        final EditText editText_RegisterPassword = (EditText) findViewById(R.id.editText_RegisterPassword);
+        final EditText editText_RegisterEmail = findViewById(R.id.editText_RegisterEmail);
+        final EditText editText_RegisterUserName = findViewById(R.id.editText_RegisterUserName);
+        final CheckBox checkBox_Old = findViewById(R.id.checkBox_Old);
+        final CheckBox checkBox_TermsOfUse = findViewById(R.id.checkBox_TermsOfUse);
+        final ImageView imageView_Register = findViewById(R.id.imageView_Register);
+        final EditText editText_RegisterPassword = findViewById(R.id.editText_RegisterPassword);
 
         final Pattern EMAIL_ADRESS;
         final Pattern PASSWORD;
@@ -75,23 +73,16 @@ public class RegisterActivity extends AppCompatActivity
             public void onClick (View v)
             {
                 // INPUT
-                String RegisterName = editText_RegisterName.getText().toString().trim();
+
                 String RegisterEmail = editText_RegisterEmail.getText().toString().trim();
                 String RegisterUserName = editText_RegisterUserName.getText().toString().trim();
                 String RegisterPassword = editText_RegisterPassword.getText().toString().trim();
-                String RegisterPhone = editText_RegisterPhone.getText().toString().trim();
-
 
                 // CHECKING checkBox_Old, checkBox_TermsOfUse
                 if(checkBox_Old.isChecked() && checkBox_TermsOfUse.isChecked())
                 {
                     //CHECK REGISTER FIELDS
-                    if(TextUtils.isEmpty(editText_RegisterName.getText().toString()))
-                    {
-                        Toast.makeText(RegisterActivity.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(TextUtils.isEmpty(editText_RegisterUserName.getText().toString()))
+                    if(TextUtils.isEmpty(editText_RegisterUserName.getText().toString()))
                     {
                         Toast.makeText(RegisterActivity.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
                     }
