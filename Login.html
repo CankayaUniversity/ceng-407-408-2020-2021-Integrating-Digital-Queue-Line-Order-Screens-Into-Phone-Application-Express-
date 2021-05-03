@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sing in & Sign Up Form </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+  
+
+</head>
+
+<body>
+   
+        
+
+    </div>
+    <section>
+       
+
+        <div class="user signupBx">
+            <div class="imgBx"><img src="logo.png" height="15%" width="15%"></div>
+            <div class=form>
+                <form action="./restaurant.html" method="POST">
+                    <h2>Login</h2>
+                    
+                    <input id="password" type="text" name="password" placeholder="password" value="">
+                    
+                    <input id="email" type="text" name="email" placeholder="email">
+                    
+                    
+            
+                    <input type="submit"  value="Login">
+                    
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+   
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    $("form").submit(function(e){
+        e.preventDefault();
+
+        
+        let password = $('#password').val();
+        
+        
+        
+        
+        let email = $('#email').val();
+        
+        
+
+
+        fetch('http://104.248.207.133:5000/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+
+               
+                password : password,
+                email: email,
+                
+
+                
+
+            })
+        })
+        .then(res => res.json())
+        .then((data)=>{
+
+            if(data.success=true){
+            localStorage.setItem("token", data.token);
+            console.log(localStorage.getItem("token"));
+            window.location.replace("ekleme.html");
+            }
+            
+
+
+        })
+        .catch(error => console.log("ERROR"))
+
+       
+
+    }); 
+
+    // fetch('http://104.248.207.133:5000/api/v1/restaurants', {
+    //         method: 'GET',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         }
+           
+    //     })
+    //     .then(res => res.json())
+        
+    //     .then(data => console.log(data))
+        
+        
+    //     .catch(error => console.log("ERROR"))
+
+       
+
+</script>
+
+
+</body>
+</html>
