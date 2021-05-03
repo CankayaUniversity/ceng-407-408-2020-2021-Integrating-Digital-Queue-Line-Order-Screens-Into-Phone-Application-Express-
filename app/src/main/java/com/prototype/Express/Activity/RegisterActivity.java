@@ -1,46 +1,23 @@
 package com.prototype.Express.Activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.stream.JsonReader;
 import com.prototype.Express.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -48,11 +25,12 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity
 {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // INITIALIZING
+        // XML
         final EditText editText_RegisterName = (EditText) findViewById(R.id.editText_RegisterName);
         final EditText editText_RegisterEmail = (EditText) findViewById(R.id.editText_RegisterEmail);
         final EditText editText_RegisterUserName = (EditText) findViewById(R.id.editText_RegisterUserName);
@@ -61,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity
         final ImageView imageView_Register = (ImageView) findViewById(R.id.imageView_Register);
         final EditText editText_RegisterPhone = (EditText) findViewById(R.id.editText_RegisterPhone);
         final EditText editText_RegisterPassword = (EditText) findViewById(R.id.editText_RegisterPassword);
+
         final Pattern EMAIL_ADRESS;
         final Pattern PASSWORD;
 
@@ -75,7 +54,6 @@ public class RegisterActivity extends AppCompatActivity
           "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
           ")+"
         );
-
 
         //PASSWORD REGEX
         PASSWORD = Pattern.compile(
@@ -132,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity
                     // NAVIGATION TO LOGIN PAGE
                     else
                     {
-                        registerUser();
+                        registerUser(RegisterUserName, RegisterEmail, RegisterPassword);
                         open_Login();
                     }
                 }
@@ -145,20 +123,27 @@ public class RegisterActivity extends AppCompatActivity
         });
     }
 
+
+
+
+
+
+    // INTENTS
     public void open_Login()
     {
         Intent intent6 = new Intent(this, LoginActivity.class);
         startActivity(intent6);
     }
 
-    private void registerUser()
+    // FUNCTIONS
+    private void registerUser(String username, String email, String password)
     {
         final String url = "http://104.248.207.133:5000/api/v1/auth/register";
 
         Map<String, String> params = new HashMap();
-        params.put("name", "test7");
-        params.put("password", "123456");
-        params.put("email", "test7@hotmail.com");
+        params.put("name", username);
+        params.put("password", password);
+        params.put("email", email);
 
         JSONObject parameters = new JSONObject(params);
 
@@ -170,13 +155,23 @@ public class RegisterActivity extends AppCompatActivity
                 //TODO: handle success
                 try
                 {
-                    String register = response.getString("success");
-                    System.out.print("\n\n\n" + register + "\n\n\n");
+                    String response_register = response.getString("success");
+                    System.out.print("\n\n\n" + response_register + "\n\n\n");
 
-                    String token = response.getString("token");
-                    System.out.print("\n\n\n" + token + "\n\n\n");
+                    // REGISTER SUCCESSFUL
+                    if(response_register == "true")
+                    {
+                        String token = response.getString("token");
+                        System.out.print("\n\n\n" + token + "\n\n\n");
+                        Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
 
-                    Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
+                    // REGISTER UNSUCCESFULL
+                    else
+                    {
+                        String error = response.getString("error");
+                        System.out.print("\n\n\n" + error + "\n\n\n");
+                    }
 
 
                 }catch (JSONException e){

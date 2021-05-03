@@ -2,6 +2,7 @@ package com.prototype.Express.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHolder>
 {
@@ -41,25 +44,12 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
     // VIEWHOLDERS
     MyViewHolder myViewHolder;
 
-    // TODO SOCKET
-    // SOCKET OBJECT
-    private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("http://104.248.207.133:5000");
-        }catch (URISyntaxException e){}
-    }
-
-
     public BasketAdapter(Context context, ArrayList<Item> mData, Button button_approve)
     {
         this.context = context;
         this.mData = mData;
         this.button_approve = button_approve;
         button_approve.setVisibility(View.INVISIBLE);
-
-        // CONNECT SOCKET
-        mSocket.connect();
     }
 
 
@@ -162,25 +152,36 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
     // FUNCTIONS
     private void sendOrder()
     {
-        String name = "TEST";
-        String menuItem =  "606eb96d70a4c309609d1e31";
+        SharedPreferences sharedPreferences = context.getSharedPreferences("user_token", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
 
-        JSONObject order = new JSONObject();
+        try {
+            IO.Options mOptions = new IO.Options();
+            mOptions.query = "auth_token=" + token;
+            Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
+            msocket.connect();
 
-        try{
-            order.put("name", name);
-            order.put("menuItem", menuItem);
+            String name = "burger";
+            String id =  "606eb96d70a4c309609d1e30";
 
-            mSocket.emit("phone-send", order);
-            System.out.print("EMIT SUCCESSFUL");
+            JSONObject order = new JSONObject();
+            try{
+                order.put("name", name);
+                order.put("menuItem", id);
 
-        }catch (JSONException e){
+                msocket.emit("phone-send", order);
+
+            }catch (JSONException e){
+                System.out.print(e);
+            }
+
+
+        } catch (URISyntaxException e) {
             System.out.print(e);
         }
 
 
 
-        System.out.print("\n\n\n ORDER HAS BEEN SEND \n\n\n");
 
         // INTENT
         open_OrderReceived();

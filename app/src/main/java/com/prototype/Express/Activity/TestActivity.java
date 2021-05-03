@@ -45,7 +45,7 @@ public class TestActivity extends AppCompatActivity
 
         try {
             IO.Options mOptions = new IO.Options();
-            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGYwODlkMmMwOGE5OWY2ZjNjNmY2ZCIsImlhdCI6MTYxOTk4NjU4OSwiZXhwIjoxNjIyNTc4NTg5fQ.lwO_ZRr4EOW0vQYNKlsgjFapOrEIBS3Auzx804jSu6g";
+            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkNjg1NTUyOGE2ZTNmNGM5NzcxNiIsImlhdCI6MTYyMDAzOTMwMSwiZXhwIjoxNjIyNjMxMzAxfQ.Jytm6DpHHdV-kXpMDHwJeFMLbnbRL5cTK2WEh6BCuW0";
             mOptions.query = "auth_token=" + token;
             Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
             msocket.connect();

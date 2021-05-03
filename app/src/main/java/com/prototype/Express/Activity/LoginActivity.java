@@ -1,10 +1,8 @@
 package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,34 +11,29 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.prototype.Express.R;
-
-import java.net.URISyntaxException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 
 public class LoginActivity extends AppCompatActivity
 {
-    // GLOBAL VARIABLES
-    String userName;
-    String userPassword;
+    // VARIABLES
+    String user_email;
+    String user_password;
 
-    CheckBox checkBox_RememberMe;
-    EditText editText_LoginPassword;
+    // XML
+    EditText XML_email;
+    EditText XML_password;
     ImageView imageView_Login;
-    ImageView imageView_toRegister;
     TextView textView4;
 
     @Override
@@ -49,14 +42,10 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
-
         // CASTING TO XML
-        final EditText editText_LoginName = findViewById(R.id.editText_LoginName);
-        editText_LoginPassword = (EditText) findViewById(R.id.editText_LoginPassword);
+        XML_email = findViewById(R.id.XML_email);
+        XML_password = findViewById(R.id.XML_password);
         imageView_Login = findViewById(R.id.imageView_Login);
-        checkBox_RememberMe = findViewById(R.id.checkBox_RememberMe);
         textView4 = findViewById(R.id.textView4);
 
 
@@ -67,31 +56,15 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 // INPUT
-                userPassword = editText_LoginPassword.getText().toString().trim();
-                userName = editText_LoginName.getText().toString().trim();
+                user_email = XML_email.getText().toString().trim();
+                user_password = XML_password.getText().toString().trim();
 
-
-                // LOGIN FIELD EMPTY CHECK
-                if(TextUtils.isEmpty(editText_LoginName.getText().toString().trim()))
-                {
-                    Toast.makeText(LoginActivity.this, "User Name field cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(TextUtils.isEmpty(editText_LoginPassword.getText().toString().trim()))
-                {
-                    Toast.makeText(LoginActivity.this, "Password field cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-
-                else
-                {
-                    loginUser();
-                    open_HomePage();
-                }
+                loginUser(user_email, user_password);
             }
         });
 
 
-        // IF USER PRESS TO_REGISTER ARROW
+        // IF USER PRESS TO_REGISTER
         textView4.setOnClickListener(new View.OnClickListener()
         {
            @Override
@@ -102,24 +75,79 @@ public class LoginActivity extends AppCompatActivity
         });
     }
 
-    // TO_REGISTER ARROW INTENT
+    //INTENTs
     public void openActivity_Register()
     {
         Intent intent4 = new Intent(this, RegisterActivity.class);
         startActivity(intent4);
     }
 
-    // TO HOMEPAGE AFTER LOGIN
-    public void open_HomePage()
+    public void open_MainActivity()
     {
-        Intent intent5 = new Intent(getApplicationContext(), MainActivity.class);
-        // SEND LOGIN NAME TO MAIN PAGE
-        intent5.putExtra("userName", userName);
-        startActivity(intent5);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
-    private void loginUser()
+    private void loginUser(String user_email, String user_password)
     {
+        final String url = "http://104.248.207.133:5000/api/v1/auth/login";
 
+        Map<String, String> params = new HashMap();
+        params.put("email", user_email);
+        params.put("password", user_password);
+
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>()
+        {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                //TODO: handle success
+                try
+                {
+                    String response_login = response.getString("success");
+                    System.out.print("\n\n\n" + response_login+ "\n\n\n");
+
+                    // REGISTER SUCCESSFUL
+                    if(response_login == "true")
+                    {
+                        String token = response.getString("token");
+                        System.out.print("\n\n\n" + token + "\n\n\n");
+
+                        SharedPreferences user_token = getSharedPreferences("user_token", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = user_token.edit();
+                        editor.putString("token", token);
+
+                        editor.apply();
+
+                        open_MainActivity();
+                    }
+
+                    // REGISTER UNSUCCESFULL
+                    else
+                    {
+                        String error = response.getString("error");
+                        System.out.print("\n\n\n" + error + "\n\n\n");
+                    }
+
+
+                }catch (JSONException e){
+                    System.out.print(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                System.out.print("\n\n\n\n\n");
+                error.printStackTrace();
+                System.out.print("\n\n\n\n\n");
+                //TODO: handle failure
+            }
+        });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
     }
+
 }
