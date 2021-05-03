@@ -27,6 +27,15 @@ const OrderSchema = new mongoose.Schema({
     ref: 'MenuItem',
     required: true,
   },
+  size: {
+    type: String,
+    maxlength: [100, 'Size can not be more than 50 characters'],
+    default: 'default',
+  },
+  extra: {
+    type: String,
+    maxlength: [100, 'Extra can not be more than 50 characters'],
+  },
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

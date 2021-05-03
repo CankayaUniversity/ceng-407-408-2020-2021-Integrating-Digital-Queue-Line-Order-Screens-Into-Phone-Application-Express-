@@ -1,12 +1,11 @@
 const socket = io('http://104.248.207.133:5000', {
   query:
-    'auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGRiNzY1MTljOTEzNGUzMmU4ZmUxMyIsImlhdCI6MTYxOTkxMzc4NCwiZXhwIjoxNjIyNTA1Nzg0fQ.g0vKvyzyUV_xMz6uSO4Dz-kHR04QN5Ot6EwtuPrIWX4',
-  transports: ['websocket'],
+    'auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGYxNmE0OTg0MjU2YTI0NTM4ODkxNyIsImlhdCI6MTYxOTk5MDE4MCwiZXhwIjoxNjIyNTgyMTgwfQ.W-TIWArSzO2EGKejapZQqlSarqSdKxnpnzF1GizGjaM',
 });
 
 let div = document.getElementById('income-message');
 
-socket.emit('pc-send', 'can ozzzal');
+//socket.emit('pc-send', 'can ozzzal');
 
 socket.on('phone-receive', (data) => {
   div.innerHTML += '<h1>' + data + '</h1>';
@@ -23,8 +22,9 @@ socket.on('user', (data) => {
 
 socket.on('success', (data) => {
   console.log(data.message);
-  console.log('user info: ' + data.user);
+  //console.log('user info: ' + data.user);
   console.log('logged in: ' + data.user.name);
+  div.innerHTML += '<h1>' + 'logged in: ' + data.user.name + '</h1>';
   //alert(Object.keys(data.user));
 });
 

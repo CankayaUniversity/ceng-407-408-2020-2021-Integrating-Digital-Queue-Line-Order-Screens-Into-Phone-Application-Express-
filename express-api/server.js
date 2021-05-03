@@ -106,7 +106,8 @@ io.use(
     },
     function (payload, done) {
       // done is a callback, you can use it as follows
-      User.findOne({ id: payload.sub }, function (err, user) {
+
+      User.findOne({ _id: payload.id }, function (err, user) {
         if (err) {
           // return error
           return done(err);
@@ -129,21 +130,19 @@ io.on('connection', (socket) => {
 
   clients[socket.request.user._id] = socket.id;
 
-  socket.emit('success', {
-    message: 'success logged in!',
+  io.sockets.emit('success', {
+    message: clients,
     user: socket.request.user,
   });
 
   socket.on('pc-send', (data) => {
-    io.sockets.emit('phone-receive', data);
+    io.emit('phone-receive', data);
   });
 
   socket.on(
     'phone-send',
     asyncHandler(async (data) => {
       const orders = await Order.create(data);
-
-      socket.name = socket.id;
 
       // res.status(200).json({
       //   success: true,
@@ -153,6 +152,11 @@ io.on('connection', (socket) => {
       io.sockets.emit('pc-receive', orders);
     })
   );
+
+  socket.on('disconnect', () => {
+    delete clients[socket.request.user._id];
+    io.sockets.emit('phone-receive', clients);
+  });
 });
 
 app.use(errorHandler);
