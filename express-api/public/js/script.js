@@ -4,8 +4,14 @@ const socket = io('http://104.248.207.133:5000', {
 });
 
 let div = document.getElementById('income-message');
+let order = document.getElementById('send-order');
 
-//socket.emit('pc-send', 'can ozzzal');
+order.addEventListener('click', () => {
+  socket.emit('phone-send', {
+    name: 'burger menu',
+    menuItem: '606eb96d70a4c309609d1e30',
+  });
+});
 
 socket.on('phone-receive', (data) => {
   div.innerHTML += '<h1>' + data + '</h1>';
@@ -13,7 +19,8 @@ socket.on('phone-receive', (data) => {
 });
 
 socket.on('pc-receive', (data) => {
-  div.innerHTML += '<h1>' + data + '</h1>';
+  //div.innerHTML += '<h1>' + data + '</h1>';
+  console.log(data);
 });
 
 socket.on('user', (data) => {

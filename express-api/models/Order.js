@@ -36,6 +36,16 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     maxlength: [100, 'Extra can not be more than 50 characters'],
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  restaurant: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Restaurant',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

@@ -3,7 +3,20 @@ const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
 exports.getOrders = asyncHandler(async (req, res, next) => {
-  const orders = await Order.find().populate('menuItem');
+  let restaurant;
+
+  if (req.query.restaurant) {
+    restaurant = req.query.restaurant;
+  }
+
+  let orders;
+  if (restaurant) {
+    orders = await Order.find({ restaurant: restaurant })
+      .populate('menuItem')
+      .populate('user');
+  } else {
+    orders = await Order.find().populate('menuItem').populate('user');
+  }
 
   res.status(200).json({
     success: true,
@@ -12,7 +25,9 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
 });
 
 exports.getOrder = asyncHandler(async (req, res, next) => {
-  const order = await Order.findById(req.params.id).populate('menuItem');
+  const order = await Order.findById(req.params.id)
+    .populate('menuItem')
+    .populate('user');
 
   if (!order) {
     return next(

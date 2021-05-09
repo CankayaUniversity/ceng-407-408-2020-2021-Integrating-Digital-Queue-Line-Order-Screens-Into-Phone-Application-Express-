@@ -10,6 +10,7 @@ const connectDB = require('./config/db');
 
 const Order = require('./models/Order');
 const User = require('./models/User');
+const MenuItem = require('./models/MenuItem');
 const ErrorResponse = require('./utils/errorResponse');
 const asyncHandler = require('./middleware/async');
 
@@ -142,14 +143,21 @@ io.on('connection', (socket) => {
   socket.on(
     'phone-send',
     asyncHandler(async (data) => {
-      const orders = await Order.create(data);
+      let item = await MenuItem.findById(data.menuItem);
+
+      data.user = socket.request.user._id;
+      data.restaurant = item.restaurant;
+      let order = await Order.create(data);
+      order = await Order.findById(order._id)
+        .populate('menuItem')
+        .populate('user');
 
       // res.status(200).json({
       //   success: true,
       //   data: orders,
       // });
 
-      io.sockets.emit('pc-receive', orders);
+      io.sockets.emit('pc-receive', order);
     })
   );
 
