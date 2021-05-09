@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.prototype.Express.Activity.OrderReceivedActivity;
+import com.prototype.Express.Class.GlobalVariables;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.R;
 import com.squareup.picasso.Picasso;
@@ -150,18 +151,27 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
             Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
             msocket.connect();
 
-            String name = "burger";
-            String id =  "606eb96d70a4c309609d1e30";
+            int numberOfItems = GlobalVariables.getInstance().encounters.size();
 
-            JSONObject order = new JSONObject();
-            try{
-                order.put("name", name);
-                order.put("menuItem", id);
+            for(int i = 0; i < numberOfItems; i++)
+            {
+                String name = GlobalVariables.getInstance().encounters.get(i).getName();
+                String id =  GlobalVariables.getInstance().encounters.get(i).get_id();
 
-                msocket.emit("phone-send", order);
+                JSONObject order = new JSONObject();
+                try{
+                    // Fill Order
+                    order.put("name", name);
+                    order.put("menuItem", id);
 
-            }catch (JSONException e){
-                System.out.print(e);
+                    Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
+
+                    // Send Order
+                    msocket.emit("phone-send", order);
+
+                }catch (JSONException e){
+                    System.out.print(e);
+                }
             }
 
 

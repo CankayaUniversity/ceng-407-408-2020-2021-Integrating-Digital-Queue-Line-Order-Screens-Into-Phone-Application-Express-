@@ -108,6 +108,7 @@ public class MenuAdapter extends RecyclerView.Adapter
                     intent.putExtra("name", mData.get(holder.getAdapterPosition()).getName());
                     intent.putExtra("price", mData.get(holder.getAdapterPosition()).getPrice());
                     intent.putExtra("description", mData.get(holder.getAdapterPosition()).getDescription());
+                    intent.putExtra("id", mData.get(holder.getAdapterPosition()).get_id());
 
                     context.getApplicationContext().startActivity(intent);
                 }

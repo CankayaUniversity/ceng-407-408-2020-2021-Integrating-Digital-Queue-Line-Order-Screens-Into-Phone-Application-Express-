@@ -28,7 +28,7 @@ public class AddActivity extends AppCompatActivity
     Button button_approve;
 
     // VARIABLES
-    String sname, sdescription, sphoto;
+    String sname, sdescription, sphoto, sid;
     int sprice;
     int counter = 0;
 
@@ -60,6 +60,7 @@ public class AddActivity extends AppCompatActivity
             sname = bundle.getString("name");
             sdescription = bundle.getString("description");
             sprice = bundle.getInt("price");
+            sid = bundle.getString("id");
         }
 
         Picasso.get().load(sphoto).into(photo);
@@ -101,12 +102,12 @@ public class AddActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                open_MenuActivity(sname, sdescription, sprice, counter, sphoto);
+                open_MenuActivity(sname, sdescription, sprice, counter, sphoto, sid);
             }
         });
     }
 
-    public void open_MenuActivity(String sname, String sdescription, int sprice, int counter, String sphoto)
+    public void open_MenuActivity(String sname, String sdescription, int sprice, int counter, String sphoto, String sid)
     {
         Item item = new Item();
         item.setName(sname);
@@ -114,6 +115,7 @@ public class AddActivity extends AppCompatActivity
         item.setPrice(sprice);
         item.setQuantity(counter);
         item.setPhoto(sphoto);
+        item.set_id(sid);
 
         GlobalVariables.getInstance().encounters.add(item);
 
