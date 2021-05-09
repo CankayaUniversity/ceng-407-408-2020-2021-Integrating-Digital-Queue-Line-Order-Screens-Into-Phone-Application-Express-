@@ -66,6 +66,16 @@
             tools:layout_editor_absoluteY="0dp" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/proggressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recylerview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </ProgressBar>
 </androidx.constraintlayout.widget.ConstraintLayout>

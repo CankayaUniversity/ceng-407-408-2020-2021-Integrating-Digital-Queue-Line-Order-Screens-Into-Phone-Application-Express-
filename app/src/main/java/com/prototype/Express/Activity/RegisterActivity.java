@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity
         final EditText editText_RegisterUserName = findViewById(R.id.editText_RegisterUserName);
         final CheckBox checkBox_Old = findViewById(R.id.checkBox_Old);
         final CheckBox checkBox_TermsOfUse = findViewById(R.id.checkBox_TermsOfUse);
-        final ImageView imageView_Register = findViewById(R.id.imageView_Register);
+        final Button Button_Register = findViewById(R.id.Button_Register);
         final EditText editText_RegisterPassword = findViewById(R.id.editText_RegisterPassword);
 
         final Pattern EMAIL_ADRESS;
@@ -67,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity
 
 
         // INTENT TO LOGIN PAGE AFTER SUCCESSFUL REGISTER
-        imageView_Register.setOnClickListener(new View.OnClickListener()
+        Button_Register.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick (View v)
@@ -102,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity
                     else
                     {
                         registerUser(RegisterUserName, RegisterEmail, RegisterPassword);
-                        open_Login();
+                        open_LoginActivity();
                     }
                 }
 
@@ -120,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity
 
 
     // INTENTS
-    public void open_Login()
+    public void open_LoginActivity()
     {
         Intent intent6 = new Intent(this, LoginActivity.class);
         startActivity(intent6);
@@ -152,9 +153,8 @@ public class RegisterActivity extends AppCompatActivity
                     // REGISTER SUCCESSFUL
                     if(response_register == "true")
                     {
-                        String token = response.getString("token");
-                        System.out.print("\n\n\n" + token + "\n\n\n");
-                        Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Express'e Hoşgeldiniz!", Toast.LENGTH_SHORT).show();
+                        open_LoginActivity();
                     }
 
                     // REGISTER UNSUCCESFULL

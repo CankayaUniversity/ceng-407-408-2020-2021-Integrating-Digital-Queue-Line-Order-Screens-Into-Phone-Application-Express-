@@ -30,8 +30,6 @@ public class QRActivity extends AppCompatActivity implements ZXingScannerView.Re
 
         // INITIALIZE
         scannerView = (ZXingScannerView) findViewById(R.id.zxscan);
-        txtResult = (TextView) findViewById(R.id.txt_result);
-
 
         // REQUEST PERMISSION & THROW EXPECTATION
         Dexter.withActivity(this)
@@ -70,7 +68,6 @@ public class QRActivity extends AppCompatActivity implements ZXingScannerView.Re
     @Override
     public void handleResult(Result rawResult)
     {
-        txtResult.setText("Loading...");
         String result = rawResult.getText();
         open_RestaurantsActivity(result);
         //scannerView.resumeCameraPreview(this);

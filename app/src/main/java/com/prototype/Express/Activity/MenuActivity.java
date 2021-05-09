@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class MenuActivity extends AppCompatActivity
     // XML VARIABLES
     RecyclerView recyclerView;
     ImageView button_profile, button_scan, button_basket;
+    ProgressBar progressBar;
 
     // VOLLEY
     RequestQueue requestQueue_special;
@@ -57,6 +59,9 @@ public class MenuActivity extends AppCompatActivity
         button_profile = findViewById(R.id.button_profile);
         button_scan = findViewById(R.id.button_scan);
         button_basket = findViewById(R.id.button_basket);
+        progressBar = findViewById(R.id.progressBar);
+
+
 
         // RESTAURANT KEY
         String key = getIntent().getStringExtra("key");
@@ -427,6 +432,7 @@ public class MenuActivity extends AppCompatActivity
             public void run()
             {
                 // MERGE DATA SETS
+                progressBar.setVisibility(View.INVISIBLE);
                 mData.addAll(dataset_special);
                 mData.addAll(dataset_menuitem);
                 mData.addAll(dataset_singleitem);

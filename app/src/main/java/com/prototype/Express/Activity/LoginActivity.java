@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -33,8 +35,9 @@ public class LoginActivity extends AppCompatActivity
     // XML
     EditText XML_email;
     EditText XML_password;
-    ImageView imageView_Login;
+    Button Button_Login;
     TextView textView4;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,12 +48,15 @@ public class LoginActivity extends AppCompatActivity
         // CASTING TO XML
         XML_email = findViewById(R.id.XML_email);
         XML_password = findViewById(R.id.XML_password);
-        imageView_Login = findViewById(R.id.imageView_Login);
+        Button_Login = findViewById(R.id.Button_Login);
         textView4 = findViewById(R.id.textView4);
+        progressBar = findViewById(R.id.progressBar);
+
+        progressBar.setVisibility(View.INVISIBLE);
 
 
          // IF USER HAVE AN ALREADY ACCOUNT & WANT TO LOGIN UNTIL DATABASE INTEGRATION
-        imageView_Login.setOnClickListener(new View.OnClickListener()
+        Button_Login.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -59,6 +65,8 @@ public class LoginActivity extends AppCompatActivity
                 user_email = XML_email.getText().toString().trim();
                 user_password = XML_password.getText().toString().trim();
 
+                Button_Login.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 loginUser(user_email, user_password);
             }
         });
@@ -125,10 +133,13 @@ public class LoginActivity extends AppCompatActivity
                     }
 
                     // REGISTER UNSUCCESFULL
-                    else
+                    if(response_login == "false")
                     {
                         String error = response.getString("error");
                         System.out.print("\n\n\n" + error + "\n\n\n");
+                        Button_Login.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(LoginActivity.this, "Kullanıcı Bilgileri Yanlış", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -144,6 +155,10 @@ public class LoginActivity extends AppCompatActivity
                 error.printStackTrace();
                 System.out.print("\n\n\n\n\n");
                 //TODO: handle failure
+                Button_Login.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(LoginActivity.this, "Kullanıcı Bilgileri Yanlış", Toast.LENGTH_SHORT).show();
+
             }
         });
 

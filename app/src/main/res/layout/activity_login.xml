@@ -11,7 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:background="@drawable/button_rounded"
-        android:hint="User E-Mail"
+        android:hint="E-Mail"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,24 +19,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.288" />
 
-    <ImageView
-        android:id="@+id/imageView_Login"
-        android:layout_width="58dp"
-        android:layout_height="62dp"
-        android:tint="#6EB669"
+    <Button
+        android:id="@+id/Button_Login"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="272dp"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/green"
+        android:gravity="center"
+        android:text="GİRİŞ YAP"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62"
-        app:srcCompat="@drawable/ic_check_circle_black_18dp" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent">
+    </Button>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? "
+        android:text="Hesabınız Yok Mu? "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +80,7 @@
         android:layout_height="40dp"
         android:background="@drawable/button_rounded"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Şifre"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,5 +98,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="416dp"
+        android:background="@drawable/proggressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

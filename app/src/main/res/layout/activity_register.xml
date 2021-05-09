@@ -39,7 +39,7 @@
         android:maxLength="20"
         android:background="@drawable/button_rounded"
         android:ems="10"
-        android:hint="User Name"
+        android:hint="Kullanıcı Adı"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,39 +51,42 @@
         android:id="@+id/checkBox_Old"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I am 18 years old or older"
-        android:textColor="#4287f5"
+        android:text="18 yaş ve üstüyüm"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.668" />
+        app:layout_constraintVertical_bias="0.556" />
 
     <CheckBox
         android:id="@+id/checkBox_TermsOfUse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I accept the terms of use"
-        android:textColor="#4287f5"
+        android:text="Kullanıcı sözleşmesini onaylıyorum"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="0.602" />
 
-    <ImageView
-        android:id="@+id/imageView_Register"
-        android:layout_width="57dp"
-        android:layout_height="84dp"
-        android:tint="#6EB669"
+    <Button
+        android:id="@+id/Button_Register"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/green"
+        android:gravity="center"
+        android:text="KAYIT OL"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884"
-        app:srcCompat="@drawable/ic_check_circle_black_18dp" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent">
+    </Button>
 
     <EditText
         android:id="@+id/editText_RegisterEmail"
@@ -105,7 +108,7 @@
         android:layout_height="40dp"
         android:background="@drawable/button_rounded"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Şifre"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

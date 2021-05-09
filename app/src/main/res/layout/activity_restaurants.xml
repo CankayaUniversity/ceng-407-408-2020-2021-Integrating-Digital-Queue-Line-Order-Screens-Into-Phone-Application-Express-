@@ -37,7 +37,7 @@
         android:layout_height="40dp"
         android:background="@drawable/button_rounded"
         android:backgroundTint="@color/green"
-        android:text="Menus"
+        android:text="Menu"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
