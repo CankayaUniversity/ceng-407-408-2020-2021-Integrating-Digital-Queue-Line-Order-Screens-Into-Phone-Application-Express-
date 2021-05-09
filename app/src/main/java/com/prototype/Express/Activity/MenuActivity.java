@@ -167,7 +167,6 @@ public class MenuActivity extends AppCompatActivity
                             item.setCreatedAt(createdAt);
                             item.setUpdatedAt(updatedAt);
 
-                            // TODO GET OPTION = SIZE
                             try {
                                 JSONObject jsonObject2 = jsonObject.getJSONObject("sizes");
 
@@ -439,7 +438,7 @@ public class MenuActivity extends AppCompatActivity
                 mData.addAll(dataset_drinks);
                 display(mData);
             }
-        }, 5000);   // 1 second
+        }, 5000);   // 5 second
     }
 
 

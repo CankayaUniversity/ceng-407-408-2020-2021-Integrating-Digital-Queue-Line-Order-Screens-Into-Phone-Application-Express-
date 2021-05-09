@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.prototype.Express.R;
 
@@ -15,8 +17,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
-
         // SPLASH SCREEN
         Thread timerThread = new Thread(){
             public void run(){
@@ -26,20 +26,7 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }finally{
 
-                    SharedPreferences data_login = getSharedPreferences("data_login", MODE_PRIVATE);
-                    String userName = data_login.getString("flag", "disconnected");
-
-                    if(userName == "disconnected")
-                    {
-                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-
-                    else
-                    {
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                    open_LoginActivity();
 
 
                 }
@@ -48,5 +35,15 @@ public class SplashActivity extends AppCompatActivity {
         timerThread.start();
     }
 
+    private void open_LoginActivity()
+    {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
+    private void open_MainActivity()
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

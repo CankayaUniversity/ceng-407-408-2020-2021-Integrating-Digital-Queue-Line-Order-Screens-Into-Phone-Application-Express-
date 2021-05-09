@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity
     ImageView QR_imageView;
     TextView textView;
     TextView textView2;
+    ImageView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,7 @@ public class MainActivity extends AppCompatActivity
         textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
         TextView textView_ProfileName = findViewById(R.id.textView_ProfileName);
-
-
-        // GETS PROFILE NAME FROM LOGIN PAGE
-        String profilename = getIntent().getStringExtra("userName");
-        textView_ProfileName.setText(profilename);
-
+        logout = findViewById(R.id.logout);
 
         // OPENS PROFILE PAGE
         profile_imageView.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +51,21 @@ public class MainActivity extends AppCompatActivity
                 openQR_Activity();
             }
         });
+
+        // USER DISCONNECT
+        logout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                SharedPreferences preferences = getSharedPreferences("status", MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = preferences.edit();
+                editor2.putBoolean("status_type", false);
+                editor2.apply();
+
+                open_LoginActivity();
+            }
+        });
     }
 
 
@@ -67,6 +78,12 @@ public class MainActivity extends AppCompatActivity
     public void openQR_Activity()
     {
         Intent intent = new Intent(this, QRActivity.class);
+        startActivity(intent);
+    }
+
+    private void open_LoginActivity()
+    {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 }

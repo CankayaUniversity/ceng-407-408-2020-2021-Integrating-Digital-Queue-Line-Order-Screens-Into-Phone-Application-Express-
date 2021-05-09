@@ -164,8 +164,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
                     order.put("name", name);
                     order.put("menuItem", id);
 
-                    Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
-
                     // Send Order
                     msocket.emit("phone-send", order);
 
@@ -179,10 +177,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
             System.out.print(e);
         }
 
-
-
-
-        // INTENT
         open_OrderReceived();
     }
 }

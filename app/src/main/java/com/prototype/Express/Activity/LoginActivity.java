@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
-
 
 
 public class LoginActivity extends AppCompatActivity
@@ -53,7 +49,6 @@ public class LoginActivity extends AppCompatActivity
         progressBar = findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.INVISIBLE);
-
 
          // IF USER HAVE AN ALREADY ACCOUNT & WANT TO LOGIN UNTIL DATABASE INTEGRATION
         Button_Login.setOnClickListener(new View.OnClickListener()
@@ -123,11 +118,17 @@ public class LoginActivity extends AppCompatActivity
                         String token = response.getString("token");
                         System.out.print("\n\n\n" + token + "\n\n\n");
 
+                        // USER TOKEN
                         SharedPreferences user_token = getSharedPreferences("user_token", MODE_PRIVATE);
                         SharedPreferences.Editor editor = user_token.edit();
                         editor.putString("token", token);
-
                         editor.apply();
+
+                        // TODO USER STATUS
+                        SharedPreferences preferences = getSharedPreferences("status", MODE_PRIVATE);
+                        SharedPreferences.Editor editor2 = preferences.edit();
+                        editor2.putBoolean("status_type", true);
+                        editor2.apply();
 
                         open_MainActivity();
                     }
