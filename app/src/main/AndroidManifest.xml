@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.OrderReceivedActivity"></activity>
+        <activity android:name=".Activity.NotificationActivity"></activity>
+        <activity android:name=".Activity.OrderReceivedActivity" />
         <activity android:name=".Activity.TestActivity" />
         <activity android:name=".Activity.BasketActivity" />
         <activity android:name=".Activity.AddActivity" />

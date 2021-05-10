@@ -21,14 +21,12 @@ public class SplashActivity extends AppCompatActivity {
         Thread timerThread = new Thread(){
             public void run(){
                 try{
-                    sleep(3000);
+                    sleep(1000);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-
-                    open_LoginActivity();
-
-
+                    //open_LoginActivity();
+                    open_NotificationActivity();
                 }
             }
         };
@@ -44,6 +42,13 @@ public class SplashActivity extends AppCompatActivity {
     private void open_MainActivity()
     {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    // TODO
+    private void open_NotificationActivity()
+    {
+        Intent intent = new Intent(SplashActivity.this, NotificationActivity.class);
         startActivity(intent);
     }
 }
