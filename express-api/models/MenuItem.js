@@ -29,8 +29,11 @@ const MenuItemSchema = mongoose.Schema(
       type: String,
       default: 'no-photo.jpg',
     },
-    sizes: {},
-    extras: {},
+    price: {
+      type: Number,
+      required: [true, 'Please add price'],
+      min: 0,
+    },
   },
   {
     timestamps: true,

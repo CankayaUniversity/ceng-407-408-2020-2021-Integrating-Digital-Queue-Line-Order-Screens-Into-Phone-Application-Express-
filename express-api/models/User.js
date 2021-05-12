@@ -33,6 +33,12 @@ const UserSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 
@@ -53,5 +59,13 @@ UserSchema.methods.getSignedJwtToken = function () {
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// Reverse populate with virtuals
+UserSchema.virtual('restaurants', {
+  ref: 'Restaurant',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
+});
 
 module.exports = mongoose.model('User', UserSchema);

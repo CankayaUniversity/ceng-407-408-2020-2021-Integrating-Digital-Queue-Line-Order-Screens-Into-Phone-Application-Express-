@@ -49,8 +49,7 @@ const options = {
         'Documentation for front-end and mobile developers who will use the Express API',
       contact: {
         //name: "Can Özal",
-        url:
-          'https://github.com/CankayaUniversity/ceng-407-408-2020-2021-Integrating-Digital-Queue-Line-Order-Screens-Into-Phone-Application-Express-/wiki',
+        url: 'https://github.com/CankayaUniversity/ceng-407-408-2020-2021-Integrating-Digital-Queue-Line-Order-Screens-Into-Phone-Application-Express-/wiki',
         email: 'cannozall@gmail.com',
       },
     },
@@ -136,9 +135,21 @@ io.on('connection', (socket) => {
     user: socket.request.user,
   });
 
-  socket.on('pc-send', (data) => {
-    io.emit('phone-receive', data);
-  });
+  socket.on(
+    'pc-send',
+    asyncHandler(async (data) => {
+      let order = await Order.findOneAndUpdate(
+        data,
+        { isActive: 1 },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      //io.emit('phone-receive', order);
+      socket.broadcast.to(order.user).emit('phone-receive', order);
+    })
+  );
 
   socket.on(
     'phone-send',
@@ -157,7 +168,8 @@ io.on('connection', (socket) => {
       //   data: orders,
       // });
 
-      io.sockets.emit('pc-receive', order);
+      //io.sockets.emit('pc-receive', order);
+      socket.broadcast.to(clients[order.restaurant]).emit('pc-receive', order);
     })
   );
 

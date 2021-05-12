@@ -4,14 +4,21 @@ const asyncHandler = require('../middleware/async');
 
 exports.getOrders = asyncHandler(async (req, res, next) => {
   let restaurant;
+  let user;
 
   if (req.query.restaurant) {
     restaurant = req.query.restaurant;
+  } else if (req.query.user) {
+    user = req.query.user;
   }
 
   let orders;
   if (restaurant) {
-    orders = await Order.find({ restaurant: restaurant })
+    orders = await Order.find({ restaurant: restaurant, isActive: 0 })
+      .populate('menuItem')
+      .populate('user');
+  } else if (user) {
+    orders = await Order.find({ user: user })
       .populate('menuItem')
       .populate('user');
   } else {

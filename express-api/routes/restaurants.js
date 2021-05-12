@@ -19,7 +19,7 @@ const menuRouter = require('./menus');
 router.use('/:restaurantId/menuitems', menuItemsRouter);
 router.use('/:restaurantId/menus', menuRouter);
 
-router.route('/').get(getRestaurants).post(createRestaurant);
+router.route('/').get(getRestaurants).post(protect, createRestaurant);
 
 router
   .route('/:id')

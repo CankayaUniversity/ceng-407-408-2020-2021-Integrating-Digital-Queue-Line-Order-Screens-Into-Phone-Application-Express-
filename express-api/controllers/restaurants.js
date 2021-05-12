@@ -228,6 +228,7 @@ exports.getRestaurant = asyncHandler(async (req, res, next) => {
  *         description: Some server error
  */
 exports.createRestaurant = asyncHandler(async (req, res, next) => {
+  req.body.user = req.user.id;
   const restaurant = await Restaurant.create(req.body);
 
   res.status(201).json({
