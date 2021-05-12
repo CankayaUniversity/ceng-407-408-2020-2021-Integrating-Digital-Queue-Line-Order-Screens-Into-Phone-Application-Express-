@@ -129,6 +129,7 @@ public class MenuActivity extends AppCompatActivity
 
         if(true)
         {
+            /*
             // SPECIAL
             requestQueue_special = Volley.newRequestQueue(getApplicationContext());
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url_special, null, new Response.Listener<JSONObject>() {
@@ -152,6 +153,7 @@ public class MenuActivity extends AppCompatActivity
                             String photo = jsonObject.getString("photo");
                             String _id = jsonObject.getString("_id");
                             String name = jsonObject.getString("name");
+                            double price = jsonObject.getDouble("price");
                             String description = jsonObject.getString("description");
                             String restaurant = jsonObject.getString("restaurant");
                             String type = jsonObject.getString("type");
@@ -161,20 +163,12 @@ public class MenuActivity extends AppCompatActivity
                             item.setPhoto(photo);
                             item.set_id(_id);
                             item.setName(name);
+                            item.setPrice(price);
                             item.setDescription(description);
                             item.setRestaurant(restaurant);
                             item.setType(type);
                             item.setCreatedAt(createdAt);
                             item.setUpdatedAt(updatedAt);
-
-                            try {
-                                JSONObject jsonObject2 = jsonObject.getJSONObject("sizes");
-
-                                int size_default = jsonObject2.getInt("default");
-                                item.setPrice(size_default);
-                            }catch (Exception e){
-                                System.out.print("Required option is not available for this product.");
-                            }
 
                             if(item.getName() != null)
                             {
@@ -199,6 +193,7 @@ public class MenuActivity extends AppCompatActivity
                 }
             });
             requestQueue_special.add(jsonObjectRequest);
+             */
 
 
             // SINGLEITEM
@@ -224,6 +219,7 @@ public class MenuActivity extends AppCompatActivity
                             String photo = jsonObject.getString("photo");
                             String _id = jsonObject.getString("_id");
                             String name = jsonObject.getString("name");
+                            double price = jsonObject.getDouble("price");
                             String description = jsonObject.getString("description");
                             String restaurant = jsonObject.getString("restaurant");
                             String type = jsonObject.getString("type");
@@ -234,21 +230,12 @@ public class MenuActivity extends AppCompatActivity
                             item.setPhoto(photo);
                             item.set_id(_id);
                             item.setName(name);
+                            item.setPrice(price);
                             item.setDescription(description);
                             item.setRestaurant(restaurant);
                             item.setType(type);
                             item.setCreatedAt(createdAt);
                             item.setUpdatedAt(updatedAt);
-
-                            // TODO GET OPTION = SIZE
-                            try {
-                                JSONObject jsonObject2 = jsonObject.getJSONObject("sizes");
-
-                                int size_default = jsonObject2.getInt("default");
-                                item.setPrice(size_default);
-                            }catch (Exception e){
-                                System.out.print("Required option is not available for this product.");
-                            }
 
                             if(item.getName() != null)
                             {
@@ -298,6 +285,7 @@ public class MenuActivity extends AppCompatActivity
                             String photo = jsonObject.getString("photo");
                             String _id = jsonObject.getString("_id");
                             String name = jsonObject.getString("name");
+                            double price = jsonObject.getDouble("price");
                             String description = jsonObject.getString("description");
                             String restaurant = jsonObject.getString("restaurant");
                             String type = jsonObject.getString("type");
@@ -307,21 +295,13 @@ public class MenuActivity extends AppCompatActivity
                             item.setPhoto(photo);
                             item.set_id(_id);
                             item.setName(name);
+                            item.setPrice(price);
                             item.setDescription(description);
                             item.setRestaurant(restaurant);
                             item.setType(type);
                             item.setCreatedAt(createdAt);
                             item.setUpdatedAt(updatedAt);
 
-                            // TODO GET OPTION = SIZE
-                            try {
-                                JSONObject jsonObject2 = jsonObject.getJSONObject("sizes");
-
-                                int size_default = jsonObject2.getInt("default");
-                                item.setPrice(size_default);
-                            }catch (Exception e){
-                                System.out.print("Required option is not available for this product.");
-                            }
 
                             if(item.getName() != null)
                             {
@@ -372,6 +352,7 @@ public class MenuActivity extends AppCompatActivity
                             String photo = jsonObject.getString("photo");
                             String _id = jsonObject.getString("_id");
                             String name = jsonObject.getString("name");
+                            double price = jsonObject.getDouble("price");
                             String description = jsonObject.getString("description");
                             String restaurant = jsonObject.getString("restaurant");
                             String type = jsonObject.getString("type");
@@ -381,22 +362,12 @@ public class MenuActivity extends AppCompatActivity
                             item.setPhoto(photo);
                             item.set_id(_id);
                             item.setName(name);
+                            item.setPrice(price);
                             item.setDescription(description);
                             item.setRestaurant(restaurant);
                             item.setType(type);
                             item.setCreatedAt(createdAt);
                             item.setUpdatedAt(updatedAt);
-
-
-                            // TODO GET OPTION = SIZE
-                            try {
-                                JSONObject jsonObject2 = jsonObject.getJSONObject("sizes");
-
-                                int size_default = jsonObject2.getInt("default");
-                                item.setPrice(size_default);
-                            }catch (Exception e){
-                                System.out.print("Required option is not available for this product.");
-                            }
 
 
                             if(item.getName() != null)

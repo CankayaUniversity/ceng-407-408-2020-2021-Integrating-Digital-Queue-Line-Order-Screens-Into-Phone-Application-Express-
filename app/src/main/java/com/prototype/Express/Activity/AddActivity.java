@@ -29,7 +29,7 @@ public class AddActivity extends AppCompatActivity
 
     // VARIABLES
     String sname, sdescription, sphoto, sid;
-    int sprice;
+    double sprice;
     int counter = 0;
 
 
@@ -59,7 +59,7 @@ public class AddActivity extends AppCompatActivity
             sphoto = bundle.getString("photo");
             sname = bundle.getString("name");
             sdescription = bundle.getString("description");
-            sprice = bundle.getInt("price");
+            sprice = bundle.getDouble("price");
             sid = bundle.getString("id");
         }
 
@@ -107,7 +107,7 @@ public class AddActivity extends AppCompatActivity
         });
     }
 
-    public void open_MenuActivity(String sname, String sdescription, int sprice, int counter, String sphoto, String sid)
+    public void open_MenuActivity(String sname, String sdescription, double sprice, int counter, String sphoto, String sid)
     {
         Item item = new Item();
         item.setName(sname);

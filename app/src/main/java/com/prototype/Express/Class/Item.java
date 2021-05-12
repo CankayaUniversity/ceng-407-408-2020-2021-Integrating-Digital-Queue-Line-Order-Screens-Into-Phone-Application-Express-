@@ -10,36 +10,16 @@ public class Item
     private String description;
     private String menu;
     private String restaurant;
-    private int price;
+    private double price;
     private String type;
     private String createdAt;
     private String updatedAt;
     private int __v;
     private int quantity;
-    private int sizes[];
-    private int extras[];
 
     public Item()
     {
 
-    }
-
-    public Item(String photo, String _id, String name, String description, String menu, String restaurant, int price, String type, String createdAt, String updatedAt, int __v, int quantity, int[] sizes, int[] extras)
-    {
-        this.photo = photo;
-        this._id = _id;
-        this.name = name;
-        this.description = description;
-        this.menu = menu;
-        this.restaurant = restaurant;
-        this.price = price;
-        this.type = type;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.__v = __v;
-        this.quantity = quantity;
-        this.sizes = sizes;
-        this.extras = extras;
     }
 
     public String getPhoto() {
@@ -90,11 +70,11 @@ public class Item
         this.restaurant = restaurant;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -136,21 +116,5 @@ public class Item
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int[] getSizes() {
-        return sizes;
-    }
-
-    public void setSizes(int[] sizes) {
-        this.sizes = sizes;
-    }
-
-    public int[] getExtras() {
-        return extras;
-    }
-
-    public void setExtras(int[] extras) {
-        this.extras = extras;
     }
 }
