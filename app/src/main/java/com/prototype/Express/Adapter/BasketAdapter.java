@@ -69,7 +69,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
         holder.name.setText(mData.get(holder.getAdapterPosition()).getName());
         Picasso.get().load(mData.get(holder.getAdapterPosition()).getPhoto()).into(holder.image);
         holder.description.setText(mData.get(holder.getAdapterPosition()).getDescription());
-        holder.price.setText(String.valueOf(mData.get(holder.getAdapterPosition()).getPrice()));
+        holder.price.setText(String.valueOf(mData.get(holder.getAdapterPosition()).getPrice()) + "₺");
         holder.quantity.setText(String.valueOf(mData.get(holder.getAdapterPosition()).getQuantity()));
         item_quantity = mData.get(holder.getAdapterPosition()).getQuantity();
 

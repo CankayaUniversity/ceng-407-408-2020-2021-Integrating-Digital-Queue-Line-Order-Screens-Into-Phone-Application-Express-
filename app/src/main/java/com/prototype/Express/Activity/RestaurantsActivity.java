@@ -78,6 +78,9 @@ public class RestaurantsActivity extends AppCompatActivity
                     String description = restaurant.getString("description");
                     String address = restaurant.getString("address");
                     String photo = restaurant.getString("photo");
+                    //String website = restaurant.getString("website");
+                    //String phone = restaurant.getString("phone");
+                    //String email = restaurant.getString("email");
                     final String _id = restaurant.getString("_id");
 
                     textView5.setText(name);
