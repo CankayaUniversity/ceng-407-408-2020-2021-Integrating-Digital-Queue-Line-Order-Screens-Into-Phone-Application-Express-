@@ -37,7 +37,7 @@ const OrderSchema = new mongoose.Schema({
     ref: 'Restaurant',
     required: true,
   },
-  isActive: {
+  isFinished: {
     type: Number,
     enum: [0, 1],
     default: 0,

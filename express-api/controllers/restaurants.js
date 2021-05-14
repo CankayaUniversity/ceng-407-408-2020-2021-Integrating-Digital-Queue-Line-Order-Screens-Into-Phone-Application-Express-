@@ -273,10 +273,18 @@ exports.createRestaurant = asyncHandler(async (req, res, next) => {
  *        description: Some error happened
  */
 exports.updateRestaurant = asyncHandler(async (req, res, next) => {
-  restaurant = await Restaurant.findOneAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  console.log('güncellendi:' + req.params.id);
+
+  restaurant = await Restaurant.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  console.log(restaurant);
 
   if (!restaurant) {
     return next(
@@ -317,6 +325,8 @@ exports.updateRestaurant = asyncHandler(async (req, res, next) => {
  *         description: Some error happened
  */
 exports.deleteRestaurant = asyncHandler(async (req, res, next) => {
+  console.log('silindi ' + req.params.id);
+
   const restaurant = await Restaurant.findById(req.params.id);
 
   if (!restaurant) {

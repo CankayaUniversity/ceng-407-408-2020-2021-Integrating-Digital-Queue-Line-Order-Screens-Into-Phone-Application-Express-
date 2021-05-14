@@ -49,10 +49,14 @@ exports.createMenuItem = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateMenuItem = asyncHandler(async (req, res, next) => {
-  const menuItem = await MenuItem.findOneAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const menuItem = await MenuItem.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   if (!menuItem) {
     return next(
@@ -62,7 +66,7 @@ exports.updateMenuItem = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: menu,
+    data: menuItem,
   });
 });
 

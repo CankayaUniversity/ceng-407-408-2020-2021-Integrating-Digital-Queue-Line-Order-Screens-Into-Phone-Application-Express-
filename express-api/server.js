@@ -139,15 +139,16 @@ io.on('connection', (socket) => {
     'pc-send',
     asyncHandler(async (data) => {
       let order = await Order.findOneAndUpdate(
-        data,
-        { isActive: 1 },
+        { _id: data },
+        { isFinished: 1 },
         {
           new: true,
           runValidators: true,
         }
       );
+      io.to(order.user).emit('phone-receive', order);
       //io.emit('phone-receive', order);
-      socket.broadcast.to(order.user).emit('phone-receive', order);
+      //  socket.broadcast.to(order.user).emit('phone-receive', order);
     })
   );
 
@@ -161,15 +162,18 @@ io.on('connection', (socket) => {
       let order = await Order.create(data);
       order = await Order.findById(order._id)
         .populate('menuItem')
-        .populate('user');
+        .populate('user')
+        .populate('restaurant');
 
       // res.status(200).json({
       //   success: true,
       //   data: orders,
       // });
 
+      console.log(order.restaurant.user);
+      io.to(order.restaurant.user).emit('pc-receive', order);
       //io.sockets.emit('pc-receive', order);
-      socket.broadcast.to(clients[order.restaurant]).emit('pc-receive', order);
+      //socket.broadcast.to(clients[order.restaurant]).emit('pc-receive', order);
     })
   );
 

@@ -47,7 +47,7 @@ exports.createMenu = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateMenu = asyncHandler(async (req, res, next) => {
-  const menu = await Menu.findOneAndUpdate(req.params.id, req.body, {
+  const menu = await Menu.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
     runValidators: true,
   });

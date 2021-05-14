@@ -49,7 +49,7 @@ MenuSchema.virtual('menuitems', {
 
 // Cascade delete courses when a bootcamp is deleted
 MenuSchema.pre('remove', async function (next) {
-    console.log(`Menuitem being removed from Menu ${this._id}`);
+    console.log(`MenuItem being removed from Menu ${this._id}`);
     await this.model('MenuItem').deleteMany({
         menu: this._id
     });

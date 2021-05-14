@@ -73,6 +73,9 @@ RestaurantSchema.pre('remove', async function (next) {
   await this.model('Menu').deleteMany({
     restaurant: this._id,
   });
+  await this.model('MenuItem').deleteMany({
+    restaurant: this._id,
+  });
   next();
 });
 
