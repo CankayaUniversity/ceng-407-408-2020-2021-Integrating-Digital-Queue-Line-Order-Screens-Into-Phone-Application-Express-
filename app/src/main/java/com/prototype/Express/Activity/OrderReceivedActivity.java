@@ -47,6 +47,8 @@ public class OrderReceivedActivity extends AppCompatActivity
         textView_status.setText("Siparişiniz Hazırlanıyor...");
         textView_status.setVisibility(View.INVISIBLE);
 
+        textView_status.setVisibility(View.INVISIBLE);
+
         // USER TOKEN
         SharedPreferences sharedPreferences = this.getSharedPreferences("user_token", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -59,7 +61,6 @@ public class OrderReceivedActivity extends AppCompatActivity
             // SOCKET CHANNEL
             msocket.on("phone-receive", onNewMessage);
             msocket.connect();
-            Toast.makeText(this, "Socket good to go!", Toast.LENGTH_SHORT).show();
         } catch (URISyntaxException e) {
             System.out.print(e);
         }
@@ -97,13 +98,6 @@ public class OrderReceivedActivity extends AppCompatActivity
         };
         timerThread.start();
          */
-    }
-
-    // VISUAL UPDATE
-    private void update()
-    {
-        text_message.setVisibility(View.INVISIBLE);
-        textView_status.setVisibility(View.VISIBLE);
     }
 
     // CREATE NOTIFICATION CHANNEL
@@ -147,7 +141,7 @@ public class OrderReceivedActivity extends AppCompatActivity
 
                     // CREATE NOTIFICATION
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.drawable.picture)
+                            .setSmallIcon(R.drawable.logot)
                             .setContentTitle(contentTitle)
                             .setContentText(name + contentTextBase)
                             .setPriority(NotificationCompat.PRIORITY_HIGH);
@@ -155,6 +149,10 @@ public class OrderReceivedActivity extends AppCompatActivity
                     // TODO SEND NOTIFICATION
                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                     notificationManagerCompat.notify(1, builder.build());
+
+                    textView_status.setVisibility(View.VISIBLE);
+                    text_message.setVisibility(View.INVISIBLE);
+                    textView_status.setText(name + " siparişiniz hazır! Gelip alabilirsiniz.\n");
                 }
             });
         }

@@ -25,8 +25,8 @@ public class SplashActivity extends AppCompatActivity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    //open_LoginActivity();
-                    open_TestActivity();
+                    open_LoginActivity();
+                    //open_TestActivity();
                 }
             }
         };

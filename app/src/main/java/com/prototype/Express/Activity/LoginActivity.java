@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity
                     if(response_login == "true")
                     {
                         String token = response.getString("token");
+                        String id = response.getString("id");
                         System.out.print("\n\n\n" + token + "\n\n\n");
 
                         // USER TOKEN
@@ -124,7 +125,13 @@ public class LoginActivity extends AppCompatActivity
                         editor.putString("token", token);
                         editor.apply();
 
-                        // TODO USER STATUS
+                        // TODO USER ID
+                        SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
+                        SharedPreferences.Editor editor3 = user_id.edit();
+                        editor3.putString("id", id);
+                        editor3.apply();
+                        
+                        // USER STATUS
                         SharedPreferences preferences = getSharedPreferences("status", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = preferences.edit();
                         editor2.putBoolean("status_type", true);

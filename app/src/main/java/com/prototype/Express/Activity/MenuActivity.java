@@ -28,7 +28,6 @@ import com.prototype.Express.Class.GlobalVariables;
 import com.prototype.Express.Class.Item;
 import com.prototype.Express.Class.Restaurant;
 import com.prototype.Express.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -414,7 +413,6 @@ public class MenuActivity extends AppCompatActivity
 
 
     // FUNCTIONS
-
     public void display(ArrayList<Item> mData)
     {
         recyclerView.setHasFixedSize(true);
