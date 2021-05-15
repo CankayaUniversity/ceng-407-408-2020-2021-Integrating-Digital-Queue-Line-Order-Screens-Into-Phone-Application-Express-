@@ -27,14 +27,6 @@ import io.socket.emitter.Emitter;
 
 public class OrderReceivedActivity extends AppCompatActivity
 {
-    // SOCKET CLASS
-    private Socket socket;
-    {
-        try {
-            socket = IO.socket("http://104.248.207.133:5000");
-        } catch (URISyntaxException e) {}
-    }
-
     // XML
     TextView text_message, textView_status;
 
@@ -55,9 +47,6 @@ public class OrderReceivedActivity extends AppCompatActivity
         textView_status.setText("Siparişiniz Hazırlanıyor...");
         textView_status.setVisibility(View.INVISIBLE);
 
-        // SOCKET CHANNEL
-        socket.on("phone-receive", onNewMessage);
-
         // USER TOKEN
         SharedPreferences sharedPreferences = this.getSharedPreferences("user_token", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -67,6 +56,8 @@ public class OrderReceivedActivity extends AppCompatActivity
             IO.Options mOptions = new IO.Options();
             mOptions.query = "auth_token=" + token;
             Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
+            // SOCKET CHANNEL
+            msocket.on("phone-receive", onNewMessage);
             msocket.connect();
             Toast.makeText(this, "Socket good to go!", Toast.LENGTH_SHORT).show();
         } catch (URISyntaxException e) {

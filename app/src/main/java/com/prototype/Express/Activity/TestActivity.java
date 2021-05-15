@@ -65,16 +65,17 @@ public class TestActivity extends AppCompatActivity
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
+                    JSONObject user;
                     String name;
                     try {
-                        name = data.getString("data");
+                        user = data.getJSONObject("user");
+                        name = user.getString("name");
                     } catch (JSONException e)
                     {
                         System.out.println(e);
                         return;
                     }
 
-                    System.out.println("SOCKET: " + data);
                     display.append(name);
                 }
             });
