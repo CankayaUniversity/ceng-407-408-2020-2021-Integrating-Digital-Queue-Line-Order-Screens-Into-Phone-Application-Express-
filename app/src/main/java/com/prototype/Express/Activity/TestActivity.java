@@ -2,6 +2,7 @@ package com.prototype.Express.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Observable;
 import android.os.Bundle;
 import android.os.Looper;
@@ -21,16 +22,6 @@ public class TestActivity extends AppCompatActivity
     // XML
     TextView display;
 
-    // VARIABLES
-
-
-    private Socket socket;
-    {
-        try {
-            socket = IO.socket("http://104.248.207.133:5000");
-        } catch (URISyntaxException e) {}
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,14 +31,15 @@ public class TestActivity extends AppCompatActivity
         // XML
         display = findViewById(R.id.display);
 
-        socket.on("user", onNewMessage);
-
+        // USER TOKEN
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user_token", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
 
         try {
             IO.Options mOptions = new IO.Options();
-            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOGZkNjg1NTUyOGE2ZTNmNGM5NzcxNiIsImlhdCI6MTYyMDAzOTMwMSwiZXhwIjoxNjIyNjMxMzAxfQ.Jytm6DpHHdV-kXpMDHwJeFMLbnbRL5cTK2WEh6BCuW0";
             mOptions.query = "auth_token=" + token;
             Socket msocket = IO.socket("http://104.248.207.133:5000", mOptions);
+            msocket.on("success", onNewMessage);
             msocket.connect();
         } catch (URISyntaxException e) {
             System.out.print(e);
@@ -63,7 +55,7 @@ public class TestActivity extends AppCompatActivity
 
     public void sendMessage()
     {
-        socket.emit("pc-send", "can");
+        //socket.emit("phone-send", "can");
     }
 
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
@@ -73,14 +65,17 @@ public class TestActivity extends AppCompatActivity
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                    String message;
+                    String name;
                     try {
-                        message = data.getString("data");
-                    } catch (JSONException e) {
+                        name = data.getString("data");
+                    } catch (JSONException e)
+                    {
+                        System.out.println(e);
                         return;
                     }
 
-                    display.setText(message);
+                    System.out.println("SOCKET: " + data);
+                    display.append(name);
                 }
             });
         }

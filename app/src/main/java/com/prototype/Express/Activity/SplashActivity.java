@@ -25,8 +25,8 @@ public class SplashActivity extends AppCompatActivity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    open_LoginActivity();
-                    //open_NotificationActivity();
+                    //open_LoginActivity();
+                    open_TestActivity();
                 }
             }
         };
@@ -49,6 +49,12 @@ public class SplashActivity extends AppCompatActivity {
     private void open_NotificationActivity()
     {
         Intent intent = new Intent(SplashActivity.this, NotificationActivity.class);
+        startActivity(intent);
+    }
+
+    private void open_TestActivity()
+    {
+        Intent intent = new Intent(SplashActivity.this, TestActivity.class);
         startActivity(intent);
     }
 }
