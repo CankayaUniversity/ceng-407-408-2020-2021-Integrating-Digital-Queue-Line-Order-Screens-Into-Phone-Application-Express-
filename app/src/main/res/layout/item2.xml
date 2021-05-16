@@ -121,7 +121,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/grey"
         android:gravity="center"
         android:text="GÖNDER"
         android:textColor="@android:color/white"
@@ -135,7 +135,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/black"
+        android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity
     // GLOBAL INITIALIZE
     ImageView profile_imageView;
     ImageView QR_imageView;
-    TextView textView;
     TextView textView2;
     ImageView logout;
 
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity
         // CASTING TO XML
         profile_imageView = (ImageView) findViewById(R.id.Account_imageView);
         QR_imageView = (ImageView) findViewById(R.id.QR_imageView);
-        textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
         TextView textView_ProfileName = findViewById(R.id.textView_ProfileName);
         logout = findViewById(R.id.logout);

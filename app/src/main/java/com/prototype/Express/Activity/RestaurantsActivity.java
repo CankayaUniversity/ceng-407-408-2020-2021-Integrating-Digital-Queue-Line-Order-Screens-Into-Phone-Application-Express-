@@ -33,7 +33,7 @@ public class RestaurantsActivity extends AppCompatActivity
 
     // XML VARIABLES
     TextView textView3, textView5;
-    ImageView imageView2;
+    ImageView imageView2, imageView_history;
     Button button;
 
     // URL BASE
@@ -50,15 +50,32 @@ public class RestaurantsActivity extends AppCompatActivity
         imageView2 = findViewById(R.id.imageView2);
         button = findViewById(R.id.button);
         textView5 = findViewById(R.id.textView5);
+        imageView_history = findViewById(R.id.imageView_history);
 
-        // GET INTENT EXTRA
-        String key = getIntent().getStringExtra("key");
+        // RESTAURANT KEY
+        final String key = getIntent().getStringExtra("key");
+
+        imageView_history.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                open_HistoryActivity(key);
+            }
+        });
 
         // REQUEST NEW VOLLEY
         requestQueue = Volley.newRequestQueue(this);
         jsonParse(key);
     }
 
+    // INTENT
+    private void open_HistoryActivity(String key)
+    {
+        Intent intent = new Intent(RestaurantsActivity.this, HistoryActivity.class);
+        intent.putExtra("key", key);
+        startActivity(intent);
+    }
 
     public void jsonParse(final String key)
     {
