@@ -5,4 +5,4 @@ This is a alpha version 0.1 for Android Systems
 - History of given orders has been added.
 
 
-![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/49036494/97219488-26227080-17db-11eb-8b6a-734a9ec3b93f.gif)
+https://user-images.githubusercontent.com/49036494/118393428-c640c980-b647-11eb-8a60-b028e8449011.mp4
