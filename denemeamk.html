@@ -1,0 +1,19 @@
+<form action="#">
+    Name: <input type="text" 
+        style="margin: 10px;" name="Name">
+        SurName: <input type="text" 
+        style="margin: 10px;" name="Surname">
+    <br>
+    <button>Submit</button>
+</form>
+<script></script>
+$(document).ready(function() {
+    $("button").click(function() {
+        var x = $("form").serializeArray();
+        $.each(x, function(i, field) {
+            $("#output").append(field.name + ":"
+                    + field.value + " ");
+        });
+    });
+});
+</script>

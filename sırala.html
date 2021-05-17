@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script defer src="http://104.248.207.133:5000/socket.io/socket.io.js"></script>
+		<script defer src="script.js"></script>
+		
+		<link rel="stylesheet" href="style.css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script>
+			if(!localStorage.getItem("token")){
+				window.location.replace("Login.html");
+			}
+
+		</script>
+	</head>
+	<body>
+		<div class="topnav">
+			<a  href="ekleme.html">Create a Restaurants</a>
+			<a href="signUp.html">Sign Up</a>
+			<a href="Login.html">Login</a>
+			
+			<a href="sırala.html" >Orders</a> 
+			<a href="index.html" >List Of Restaurants</a> 
+            <a href="index2.html" >List of Menus</a>
+			<a href="menuekleme.html" >menu ekleme</a>
+	
+	
+		</div>
+		<!-- Here a loader is created which
+			loads till response comes -->
+		<div class="d-flex justify-content-center">
+			<div class="spinner-border"
+				role="status" id="loading">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<h1>ORDERS</h1>
+		<!-- table for showing data -->
+		<table id="employees">
+			
+			
+		</table>
+		
+	</body>
+</html>
+
+<script>
+
+
+    // api url
+const api_url =
+`http://104.248.207.133:5000/api/v1/menus/?restaurant=${localStorage.getItem("seciliRestaurant")}`;
+let orders;
+// Defining async function
+async function getapi(url) {
+	
+	// Storing response
+	const response = await fetch(url);
+	
+	// Storing data in form of JSON
+	var data = await response.json();
+	console.log(data);
+	if (response) {
+		hideloader();
+	}
+	orders=data;
+	show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+// Function to hide the loader
+function hideloader() {
+	document.getElementById('loading').style.display = 'none';
+}
+// Function to define innerHTML for HTML table
+ function onayla (id){
+
+	socket.emit('pc-send', id);
+	orders.data=orders.data.filter(function(x){
+		return x._id!== id;
+	})
+	show(orders);
+	//console.log(orders);
+	
+	//console.log(id);
+ }
+function show(data) {
+	
+	let tab =
+		`<tr>
+		
+		<th>Name</th>
+		<th>Menu</th>
+		<th>Description</th>
+		<th>Created Time</th>
+		
+
+		</tr>`;
+	
+	
+	// Loop to access all rows
+	for (let r of data.data) {
+		tab += `<tr>
+	<td>${r.name} </td>
+	<td>${r.menuItem.name}</td>
+	<td>${r.menuItem.description}</td>
+	<td>${r.menuItem.createdAt}</td>
+	<td><input type="button" value="onayla" onClick="onayla('${r._id}')" /></td>
+	
+	
+		
+</tr>`;}
+	// Setting innerHTML as tab variable
+	document.getElementById("employees").innerHTML = tab;
+	
+	
+}
+
+
+
+
+</script>

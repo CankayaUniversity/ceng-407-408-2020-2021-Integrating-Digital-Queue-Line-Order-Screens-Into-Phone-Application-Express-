@@ -13,7 +13,14 @@
 
 <body>
    
+    <div class="topnav">
+       
         
+        <a href="signUp.html">Sign Up</a>
+			
+        
+        
+
 
     </div>
     <section>
@@ -78,18 +85,32 @@
         .then(res => res.json())
         .then((data)=>{
 
-            if(data.success=true){
-            localStorage.setItem("token", data.token);
+            if(data.success===true){
+            localStorage.setItem("token" , data.token);
+            
+            
             console.log(localStorage.getItem("token"));
             window.location.replace("ekleme.html");
             }
+            else if(data.success===false){
+                console.log("error");
+                window.location.replace("Login.html");
+            }
+            
             
 
 
         })
         .catch(error => console.log("ERROR"))
 
-       
+        fetch("http://104.248.207.133:5000/api/v1/auth/me", {
+                'method': 'GET',
+                    'headers':{
+                    'Authorization': "Bearer "+localStorage.getItem("token"),
+  }
+})
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
 
     }); 
 

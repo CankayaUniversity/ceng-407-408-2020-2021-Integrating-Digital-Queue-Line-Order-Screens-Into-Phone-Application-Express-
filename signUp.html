@@ -18,7 +18,8 @@
 			<a href="Login.html">Login</a>
 			
 			<a href="sırala.html" >Orders</a> 
-
+            <a href="index.html" >List of Restaurants</a>
+            <a href="index2.html" >List of Menus</a>
 
     </div>
     <section>
@@ -54,12 +55,17 @@
         e.preventDefault();
 
         let name = $('#name').val();
+
         let password = $('#password').val();
         
         
         
         
         let email = $('#email').val();
+
+       // if(name && password && email){
+        //jquery boşluk kontrolu 
+       // }
         
         
 
@@ -82,9 +88,12 @@
         })
         .then(res => res.json())
         .then((data)=>{
-            if(data.success=true)
+            if(data.success===true){
+            localStorage.setItem("token" , data.token);
+            
+            console.log(localStorage.getItem("token"));
             window.location.replace("ekleme.html");
-
+            }
         })
         .catch(error => console.log("ERROR"))
 

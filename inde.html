@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sing in & Sign Up Form </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+    
+    
+  
+
+</head>
+
+<body>
+    
+    <div class="topnav">
+        <!-- <a  href="ekleme.html">Create a Restaurants</a>
+        <a href="index.html#">Sign Up</a>
+       
+        <a href="sırala.html" >Orders</a>  -->
+
+
+    </div>
+    
+    <section>
+    <div class="container">
+        <div class="user signinBx">
+            <div class="imgBx"><img src="logo.png" height="15%" width="15%"></div>
+            <div class=formBx>
+                <form action="./index.html" method="POST">
+                    <h2>Sign In</h2>
+                    <input id="name" type="text" name="username" placeholder="Username">
+                    <input id="password" type="password" name="pasword" placeholder="Password">
+                    <input type="submit"  value="Login" onclick="window.open('ekleme.html')">
+                     
+                    <button type="button" id="myBtn">Show Value</button>
+                    <p class="signup">Dont have an account?<a href="#" onclick="toggleForm1();">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="user signupBx">
+            <div class="imgBx"><img src="logo.png" height="15%" width="15%"></div>
+            <div class=formBx>
+                <form  action="./index.html" method="POST" >
+                    <h2>Create an account</h2>
+                    <input id="username" type="text" name="username" placeholder="Username">
+                    <input id="email" type="text" name="email" placeholder="Email Address">
+                    <input id="password" type="password" name="password" placeholder="Create Password">
+                    <input type="password" placeholder="Confirm Password">
+                    <input type="submit" value="Sign Up"> 
+                     <p class="signup">Already have an account?<a href="#" onclick="toggleForm();">Sign in</a></p>*
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+   
+</section>
+<script>
+       function toggleForm(){
+           section =document.querySelector('section');
+           container =document.querySelector('.container');
+           container.classList.toggle('active');
+           section.classList.toggle('active');
+
+       }
+</script> 
+<script>
+    function toggleForm1(){
+        section =document.querySelector('section');
+        container =document.querySelector('.container');
+        container.classList.toggle('active');
+        section.classList.toggle('active');
+
+    }
+</script> 
+<!-- <script>
+    $(document).ready(function(){
+    $("#myBtn").click(function(){
+        var ad = $("#name").val();
+        var password = $("#Password").val();
+
+        
+    });
+    console.log("ad ve şifre:"+name+" "+Password);
+});
+</script> -->
+
+
+
+
+<!-- <script>
+    console.log(window.location.search);
+    var patlak = window.location.search.split("&");
+    console.log(patlak[0]);
+    console.log(patlak[1]);
+    console.log($.post("index.html"));
+    console.log(document.getElementById("Username").value);
+    console.log(document.getElementById("Password").value);
+   
+    
+    fetch('http://104.248.207.133:5000/api/v1/project-info', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name : patlak[0],
+                password : patlak[1],
+                
+                
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log("ERROR"))
+</script> -->
+
+    
+<!-- <script>
+    console.log(window.location.search)
+    var patlak = window.location.search.split("&");
+    console.log(patlak[0]);
+    console.log(patlak[1]);
+    console.log($.get("index.html"));
+    console.log(document.getElementById("Username").value);
+    console.log(document.getElementById("Password").value);
+    fetch('http://104.248.207.133:5000/api/v1/project-info', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+            
+                
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log("ERROR"))
+</script> -->
+<script>
+$("form").submit(function(e){
+    e.preventDefault();
+
+    let name = $('#name').val();
+    let password = $('#password').val();
+    let email = $('#email').val();
+   
+    
+
+
+    fetch('http://104.248.207.133:5000/api/v1/restaurants', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+
+            name: name,
+            password: password,           
+            email: email
+           
+
+        })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.log("ERROR"))
+
+   
+
+}); 
+
+fetch('http://104.248.207.133:5000/api/v1/restaurants', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+       
+    })
+    .then(res => res.json())
+    .then(data => { 
+        
+    })
+    
+    .catch(error => console.log("ERROR"))
+
+
+
+</script>
+</body>
+</html>

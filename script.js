@@ -5,15 +5,18 @@ const socket = io('http://104.248.207.133:5000', {
 });
 
 //let div = document.getElementById('income-message');
+let b =document.getElementById('onayla');
+socket.emit('pc-send', 'r._id');
 
-//socket.emit('pc-send', 'can ozzzal');
-
-socket.on('phone-receive', (data) => {
+// socket.on('phone-receive', (data) => {
   
-  console.log(data);
-});
+//   console.log(data);
+// });
 
 socket.on('pc-receive', (data) => {
+  console.log(data);
+  //user_id == rstar_id aynı ise 
+  //orders da onları bas
   
 });
 
@@ -22,9 +25,9 @@ socket.on('user', (data) => {
 });
 
 socket.on('success', (data) => {
-  console.log(data.message);
+ // console.log(data.message);
   //console.log('user info: ' + data.user);
-  console.log('logged in: ' + data.user.name);
+ // console.log('logged in: ' + data.user.name);
  
   //alert(Object.keys(data.user));
 });

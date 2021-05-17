@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sing in & Sign Up Form </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+  
+
+</head>
+
+<body>
+    <div class="topnav">
+        <a  href="ekleme.html">Create a Restaurants</a>
+        
+        <a href="signUp.html">Sign Up</a>
+			<a href="Login.html">Login</a>
+        
+        <a href="sırala.html" >Orders</a> 
+        <a href="index.html" >List Of Restaurants</a> 
+            <a href="index2.html" >List Of Menus</a>
+
+
+    </div>
+    <section>
+    
+
+        <div class="user signupBx">
+            <div class="imgBx"><img src="logo.png" height="15%" width="15%"></div>
+            <div class=formBx>
+                <form action="" method="POST">
+                    <h2>Create an Menu</h2>
+                    <input id="name" type="text" name="name" placeholder="name" value="değer">
+                    <input id="description" type="text" name="description" placeholder="description">
+                   <input id="type" type="text" name="type" placeholder="type">
+                    
+            
+                    <input type="submit"  value="Submit">
+                    <a href="index2.html" onClick='menu("${user._id}")' class="btn btn-danger">MenuList</a>
+                    
+                    
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+   
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    $("form").submit(function(e){
+        e.preventDefault();
+
+        let name = $('#name').val();
+        let description = $('#description').val();
+        //let restaurant = $('').val();
+        let type = $('#type').val();
+        
+        
+
+
+        fetch('http://104.248.207.133:5000/api/v1/menus/', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                
+                'Authorization': 'Bearer ' +localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+
+                name: name,
+                restaurant : localStorage.getItem("seciliRestaurant"),
+                description: description,
+                type: type
+               
+
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log("ERROR"))
+
+       
+
+    }); 
+
+    // fetch('http://104.248.207.133:5000/api/v1/restaurants', {
+    //         method: 'GET',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         }
+           
+    //     })
+    //     .then(res => res.json())
+        
+    //     .then(data => console.log(data))
+        
+        
+    //     .catch(error => console.log("ERROR"))
+    function listele(){
+    fetch("http://104.248.207.133:5000/api/v1/menus/?&restaurant=", {
+  "method": "GET",
+  "headers": {
+    'Authorization': 'Bearer ' +localStorage.getItem("token"),
+  }
+})
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+    }
+
+</script>
+
+
+</body>
+</html>
