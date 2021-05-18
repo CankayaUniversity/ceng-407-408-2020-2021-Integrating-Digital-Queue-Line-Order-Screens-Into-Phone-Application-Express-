@@ -9,7 +9,7 @@ let order = document.getElementById('send-order');
 order.addEventListener('click', () => {
   socket.emit('phone-send', {
     name: 'burger menu',
-    menuItem: '606eb96d70a4c309609d1e30',
+    menuItem: '609f9e08ebb63ae5a0acb386',
   });
 });
 

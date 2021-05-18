@@ -44,7 +44,24 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
-  sendTokenResponse(user, 200, res);
+  const token = user.getSignedJwtToken();
+
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  //   if (process.env.NODE_ENV === 'production') {
+  //     options.secure = true;
+  //   }
+
+  res.status(200).cookie('token', token, options).json({
+    success: true,
+    token,
+    id: user._id,
+  });
 });
 
 // Get token from model, create cookie and send response

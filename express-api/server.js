@@ -146,7 +146,7 @@ io.on('connection', (socket) => {
           runValidators: true,
         }
       );
-      io.to(order.user).emit('phone-receive', order);
+      io.to(clients[order.user]).emit('phone-receive', order);
       //io.emit('phone-receive', order);
       //  socket.broadcast.to(order.user).emit('phone-receive', order);
     })
@@ -170,8 +170,8 @@ io.on('connection', (socket) => {
       //   data: orders,
       // });
 
-      console.log(order.restaurant.user);
-      io.to(order.restaurant.user).emit('pc-receive', order);
+      console.log(order);
+      io.to(clients[order.restaurant.user]).emit('pc-receive', order);
       //io.sockets.emit('pc-receive', order);
       //socket.broadcast.to(clients[order.restaurant]).emit('pc-receive', order);
     })

@@ -12,6 +12,10 @@ exports.getMenus = asyncHandler(async (req, res, next) => {
     nQueryStr[key] = queryStr[key];
   });
 
+  if (req.params.restaurantId) {
+    nQueryStr.restaurant = req.params.restaurantId;
+  }
+
   query = Menu.find(nQueryStr);
 
   const menus = await query;

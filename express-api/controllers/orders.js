@@ -14,7 +14,7 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
 
   let orders;
   if (restaurant) {
-    orders = await Order.find({ restaurant: restaurant, isActive: 0 })
+    orders = await Order.find({ restaurant: restaurant, isFinished: 0 })
       .populate('menuItem')
       .populate('user');
   } else if (user) {
