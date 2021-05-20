@@ -5,7 +5,7 @@
     android:id="@+id/editText_RegisterPass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.RegisterActivity">
+    tools:context="orderprojectexpress.prototype.Express.Activity.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView_Copyright"
