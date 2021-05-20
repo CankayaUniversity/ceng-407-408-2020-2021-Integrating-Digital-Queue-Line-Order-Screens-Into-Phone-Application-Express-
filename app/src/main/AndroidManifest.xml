@@ -18,19 +18,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.HistoryActivity"></activity>
-        <activity android:name=".Activity.NotificationActivity" />
-        <activity android:name=".Activity.OrderReceivedActivity" />
-        <activity android:name=".Activity.BasketActivity" />
-        <activity android:name=".Activity.AddActivity" />
-        <activity android:name=".Activity.MenuActivity" />
-        <activity android:name=".Activity.RestaurantsActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.ProfileActivity" />
-        <activity android:name=".Activity.QRActivity" />
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.HistoryActivity"></activity>
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.NotificationActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.OrderReceivedActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.BasketActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.AddActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.MenuActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.RestaurantsActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.LoginActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.RegisterActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.MainActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.ProfileActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.QRActivity" />
+        <activity android:name="orderprojectexpress.prototype.Express.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
