@@ -1,2 +1,3 @@
-# ceng-407-408-2020-2021-Integrating-Digital-Queue-Line-Order-Screens-Into-Phone-Application-Express-
-Integrating Digital Queue Line Order Screens Into Phone Application (Express)
+Login for terminal you can visit  http://104.248.207.133:1235/Login .
+
+
