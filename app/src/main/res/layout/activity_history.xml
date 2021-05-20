@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.prototype.Express.orderprojectexpress.prototype.Express.Activity.HistoryActivity">
+    tools:context="orderprojectexpress.prototype.Express.Activity.HistoryActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+
+<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
