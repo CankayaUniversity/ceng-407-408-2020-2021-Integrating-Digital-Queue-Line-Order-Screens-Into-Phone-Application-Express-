@@ -17,7 +17,7 @@ socket.on('pc-receive', (data) => {
   console.log(data);
   //user_id == rstar_id aynı ise 
   //orders da onları bas
-  
+  location.reload();  
 });
 
 socket.on('user', (data) => {
