@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.prototype.Express.orderprojectexpress.prototype.Express.Activity.NotificationActivity">
+    tools:context="orderprojectexpress.prototype.Express.Activity.NotificationActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
