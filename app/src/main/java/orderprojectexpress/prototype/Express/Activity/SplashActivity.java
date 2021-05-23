@@ -40,11 +40,4 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
-    // TODO
-    private void open_NotificationActivity()
-    {
-        Intent intent = new Intent(SplashActivity.this, NotificationActivity.class);
-        startActivity(intent);
-    }
 }

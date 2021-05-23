@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="orderprojectexpress.prototype.Express.Activity.HistoryActivity"></activity>
-        <activity android:name="orderprojectexpress.prototype.Express.Activity.NotificationActivity" />
         <activity android:name="orderprojectexpress.prototype.Express.Activity.OrderReceivedActivity" />
         <activity android:name="orderprojectexpress.prototype.Express.Activity.BasketActivity" />
         <activity android:name="orderprojectexpress.prototype.Express.Activity.AddActivity" />

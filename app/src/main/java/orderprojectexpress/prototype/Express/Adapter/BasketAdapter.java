@@ -3,6 +3,7 @@ package orderprojectexpress.prototype.Express.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import orderprojectexpress.prototype.Express.Activity.OrderReceivedActivity;
 import orderprojectexpress.prototype.Express.Class.GlobalVariables;
@@ -22,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import static android.content.Context.MODE_PRIVATE;
@@ -84,8 +88,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
                 @Override
                 public void onClick(View v)
                 {
-                    Toast.makeText(context, "Siparişiniz Alındı!", Toast.LENGTH_SHORT).show();
-
                     // EMIT DATA TO SOCKET SERVER
                     sendOrder();
                 }
@@ -177,6 +179,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.MyViewHold
             System.out.print(e);
         }
 
-        open_OrderReceived();
+
+        // WAIT FOR ASYNC VOLLEY TO FINISH
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable()
+        {
+            public void run()
+            {
+                open_OrderReceived();
+            }
+        }, 2000);   // 2 second
     }
 }

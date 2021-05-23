@@ -1,5 +1,5 @@
-# Express Alpha VA 0.0
+# Express Alpha VA 0.1
 
-This is a alpha version 0.0 for Android Systems
+This is a alpha version 0.1 for Android Systems
 
-- First Release.
+- Update on First Release.
