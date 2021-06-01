@@ -48,8 +48,10 @@ console.log(`${localStorage.getItem("seciliRestaurant2")}`);
              <td><input type="text" id="user_description_${restaurant._id}" class="form-control" value="${restaurant.description}" /></td>
              <td><input type="text" id="user_type_${restaurant._id}" class="form-control" value="${restaurant.type}" /></td>
              <td><input type="text" id="user_price_${restaurant._id}" class="form-control" value="${restaurant.price}" /></td>
-             <td><button onClick='updateUser("${restaurant._id}")' class="btn btn-warning">Güncelle</button>
-            <button onClick='deleteUser("${restaurant._id}")' class="btn btn-danger">Sil</button></td>
+             <td><input type="text" id="user_photo_${restaurant._id}" class="form-control" value="${restaurant.photo}" /></td>
+
+             <td><button onClick='updateUser("${restaurant._id}")' class="btn btn-warning">Güncelle</button></td>
+            <td><button onClick='deleteUser("${restaurant._id}")' class="btn btn-danger">Sil</button></td>
             
             </tr>
              `
@@ -94,8 +96,8 @@ function createUser() {
             <tr><td><input type="text" class="form-control" value="${data.first_name}" /></td>
             <td><input type="text" class="form-control" value="${data.last_name}" /></td>
             <td><input type="text" class="form-control" value="${data.email}" /></td>
-            <td><button onclick='updateUser("${data.id}")' class="btn btn-warning">Güncelle</button>
-            <button onclick='deleteUser("${data.id}")' class="btn btn-danger">Sil</button></td></tr>
+            <td><button onclick='updateUser("${data.id}")' class="btn btn-warning">Güncelle</button></td>
+            <td><button onclick='deleteUser("${data.id}")' class="btn btn-danger">Sil</button></td></tr>
             `;
         // getUserList();
         
@@ -118,7 +120,9 @@ let data={
         user_name: document.getElementById("user_name_"+id).value || "",
         user_description: document.getElementById("user_description_"+id).value || "",
         user_type: document.getElementById("user_type_"+id).value || "",
-        user_price: document.getElementById("user_price_"+id).value || ""
+        user_price: document.getElementById("user_price_"+id).value || "",
+        user_photo: document.getElementById("user_photo_"+id).value || ""
+
     };
     fetch("http://104.248.207.133:5000/api/v1/menuitems/"+id,{
 
@@ -136,8 +140,8 @@ let data={
                 name : data.user_name,
                 description : data.user_description,
                 type: data.user_type,
-                price: data.user_price
-                
+                price: data.user_price,
+                photo: data.user_photo
 
                 
 

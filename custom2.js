@@ -43,12 +43,14 @@ function getUserList(){
             <td><input type="text" id="user_name_${user._id}" class="form-control" value="${user.name}" /></td>
             <td><input type="text" id="user_description_${user._id}" class="form-control" value="${user.description}" /></td>
             <td><input type="text" id="user_type_${user._id}" class="form-control" value="${user.type}" /></td>
+            <td><input type="text" id="user_photo_${user._id}" class="form-control" value="${user.photo}" /></td>
+
             <td>
-            <button onClick='updateUser("${user._id}")' class="btn btn-warning">Güncelle</button>
-            <button onClick='deleteUser("${user._id}")' class="btn btn-danger">Sil</button>
-            <a href="index3.html" onClick='gotoitemekleme("${user._id}")' class="btn btn-danger">MenuItemList</a></td>
-            <a href="menuitemekeleme.html" onClick='gotoitemekleme("${user._id}")'   class="btn btn-danger">MenuItemekleme</a></td>
-            </td></tr>
+            <button onClick='updateUser("${user._id}")' class="btn btn-warning">Güncelle</button></td>
+            <td><button onClick='deleteUser("${user._id}")' class="btn btn-danger">Sil</button></td>
+            <td><a href="index3.html" onClick='gotoitemekleme("${user._id}")' class="btn btn-danger">MenuItemList</a></td>
+            <td><a href="menuitemekeleme.html" onClick='gotoitemekleme("${user._id}")'   class="btn btn-danger">MenuItemekleme</a></td>
+            </tr>
             `
         }
     })
@@ -121,7 +123,9 @@ let data={
         user_name: document.getElementById("user_name_"+id).value || "",
         
         user_description: document.getElementById("user_description_"+id).value || "",
-        user_type: document.getElementById("user_type_"+id).value || ""
+        user_type: document.getElementById("user_type_"+id).value || "",
+        user_photo: document.getElementById("user_photo_"+id).value || ""
+
     };
     fetch("http://104.248.207.133:5000/api/v1/menus/"+id,{
         
@@ -139,7 +143,8 @@ let data={
                 
                 name : data.user_name,
                 description : data.user_description,
-                type : data.user_type
+                type : data.user_type,
+                photo: data.user_photo
                 
 
                 

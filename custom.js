@@ -48,11 +48,12 @@ function getUserList(){
              <td><input type="text" id="user_website_${restaurant._id}" class="form-control" value="${restaurant.website}" /></td>
              <td><input type="text" id="user_phone_${restaurant._id}" class="form-control" value="${restaurant.phone}" /></td>
              <td><input type="text" id="user_email_${restaurant._id}" class="form-control" value="${restaurant.email}" /></td>
+             <td><input type="text" id="user_photo_${restaurant._id}" class="form-control" value="${restaurant.photo}" /></td>
              <td><button onClick='updateUser("${restaurant._id}")' class="btn btn-warning">Güncelle</button>
-            <button onClick='deleteUser("${restaurant._id}")' class="btn btn-danger">Sil</button></td>
-            <a href="index2.html" onClick='gotomenuekleme("${restaurant._id}")' class="btn btn-danger">MenuList</a></td>
-            <a href="menuekleme.html" onClick='gotomenuekleme("${restaurant._id}")'   class="btn btn-danger">Menuekleme</a></td>
-            <a href="listele.html" onClick='gotomenuekleme("${restaurant._id}")'   class="btn btn-danger">Order List</a></td>
+            <td><button onClick='deleteUser("${restaurant._id}")' class="btn btn-danger">Sil</button></td>
+            <td><a href="index2.html" onClick='gotomenuekleme("${restaurant._id}")' class="btn btn-danger">Menu List</a></td>
+            <td><a href="menuekleme.html" onClick='gotomenuekleme("${restaurant._id}")'   class="btn btn-danger">Menu Ekleme</a></td>
+            <td><a href="listele.html" onClick='gotomenuekleme("${restaurant._id}")'   class="btn btn-danger">Order List</a></td>
             </tr>
              `
          }
@@ -122,7 +123,8 @@ let data={
         user_adress: document.getElementById("user_address_"+id).value || "",
         user_website: document.getElementById("user_website_"+id).value || "",
         user_phone: document.getElementById("user_phone_"+id).value || "",
-        user_email: document.getElementById("user_email_"+id).value || ""
+        user_email: document.getElementById("user_email_"+id).value || "",
+        user_photo: document.getElementById("user_photo_"+id).value || ""
 
     };
     fetch("http://104.248.207.133:5000/api/v1/restaurants/"+id,{
@@ -143,7 +145,8 @@ let data={
                 adress : data.user_address,
                 website: data.user_website,
                 phone: data.user_phone,
-                email: data.user_email
+                email: data.user_email,
+                photo: data.user_photo
                 
 
                 

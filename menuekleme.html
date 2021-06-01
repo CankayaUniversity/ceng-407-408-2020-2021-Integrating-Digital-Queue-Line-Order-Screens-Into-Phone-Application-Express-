@@ -35,10 +35,10 @@
                     <input id="name" type="text" name="name" placeholder="name" value="değer">
                     <input id="description" type="text" name="description" placeholder="description">
                    <input id="type" type="text" name="type" placeholder="type">
-                    
+                   <input id="photo" type="text" name="photo" placeholder="Photo">
             
                     <input type="submit"  value="Submit">
-                    <a href="index2.html" onClick='menu("${user._id}")' class="btn btn-danger">MenuList</a>
+                    <!-- <a href="index2.html" onClick='menu("${user._id}")' class="btn btn-danger">MenuList</a> -->
                     
                     
                 </form>
@@ -60,6 +60,7 @@
         let description = $('#description').val();
         //let restaurant = $('').val();
         let type = $('#type').val();
+        let photo =$('photo').val();
         
         
 
@@ -76,7 +77,8 @@
                 name: name,
                 restaurant : localStorage.getItem("seciliRestaurant"),
                 description: description,
-                type: type
+                type: type,
+                photo: photo
                
 
             })

@@ -36,10 +36,11 @@
                     <input id="description" type="text" name="description" placeholder="description">
                    <input id="type" type="text" name="type" placeholder="type">
                    <input id="price" type="text" name="price" placeholder="price">
-                    
+                   <input id="photo" type="text" name="photo" placeholder="photo">
+
             
                     <input type="submit"  value="Submit">
-                    <a href="index2.html" onClick='menu("${user._id}")' class="btn btn-danger">MenuList</a>
+                    <!-- <a href="index2.html" onClick='menu("${user._id}")' class="btn btn-danger">MenuList</a> -->
                     
                     
                 </form>
@@ -61,8 +62,9 @@
         let description = $('#description').val();
         //let restaurant = $('').val();
         let type = $('#type').val();
-       // let type = $('#price').val();
        let price = $('#price').val();
+       let photo =$('photo').val();
+        
         
 
 
@@ -81,6 +83,7 @@
                 description: description,
                 type: type,
                 price: price,
+                photo: photo
                
 
             })
