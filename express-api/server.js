@@ -3,8 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
+
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
@@ -38,33 +37,6 @@ dotenv.config({
 
 // Connect to database
 connectDB();
-
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Express API',
-      version: '1.0.0',
-      description:
-        'Documentation for front-end and mobile developers who will use the Express API',
-      contact: {
-        //name: "Can Özal",
-        url: 'https://github.com/CankayaUniversity/ceng-407-408-2020-2021-Integrating-Digital-Queue-Line-Order-Screens-Into-Phone-Application-Express-/wiki',
-        email: 'cannozall@gmail.com',
-      },
-    },
-    servers: [
-      {
-        url: 'http://104.248.207.133:5000',
-      },
-    ],
-  },
-  apis: ['./controllers/*.js'],
-};
-
-const specs = swaggerJsDoc(options);
-
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 // Route files
 const restaurants = require('./routes/restaurants');
@@ -126,8 +98,6 @@ io.use(
 let clients = {};
 
 io.on('connection', (socket) => {
-  //io.sockets.emit('user', { data: socket.id });
-
   clients[socket.request.user._id] = socket.id;
 
   io.sockets.emit('success', {
@@ -147,8 +117,6 @@ io.on('connection', (socket) => {
         }
       );
       io.to(clients[order.user]).emit('phone-receive', order);
-      //io.emit('phone-receive', order);
-      //  socket.broadcast.to(order.user).emit('phone-receive', order);
     })
   );
 
@@ -165,27 +133,16 @@ io.on('connection', (socket) => {
         .populate('user')
         .populate('restaurant');
 
-      // res.status(200).json({
-      //   success: true,
-      //   data: orders,
-      // });
-
       console.log(order);
       io.to(clients[order.restaurant.user]).emit('pc-receive', order);
-      //io.sockets.emit('pc-receive', order);
-      //socket.broadcast.to(clients[order.restaurant]).emit('pc-receive', order);
     })
   );
 
   socket.on('disconnect', () => {
     delete clients[socket.request.user._id];
-    io.sockets.emit('phone-receive', clients);
   });
 });
 
 app.use(errorHandler);
-
-// global.clients = clients;
-// exports.io = io;
 
 server.listen(5000);
